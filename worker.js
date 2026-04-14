@@ -40,7 +40,7 @@ async function handleWebhook(request, env) {
         },
         body: JSON.stringify({
           email: email,
-          password: Math.random().toString(36).slice(-12),
+          password: 'Trocarsenha123',
           email_confirm: true,
           user_metadata: { full_name }
         })
