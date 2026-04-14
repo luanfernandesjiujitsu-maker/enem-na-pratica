@@ -173,6 +173,11 @@ body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;backgroun
 .f-input::placeholder{color:rgba(255,255,255,.25);}
 .f-input:focus{border-color:var(--neon-purple);background:rgba(147,51,234,.06);box-shadow:0 0 0 4px rgba(147,51,234,.1);}
 
+.pwd-wrapper{position:relative;display:flex;align-items:center;}
+.pwd-toggle{position:absolute;right:16px;background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:16px;padding:0;transition:.2s;display:flex;}
+.pwd-toggle:hover{color:var(--neon-pink);}
+.f-input.pr-10{padding-right:45px;}
+
 .forgot{text-align:right;margin-top:-10px;margin-bottom:20px;}
 .forgot a{font-size:12px;font-weight:600;color:var(--neon-purple);text-decoration:none;transition:.2s;}
 .forgot a:hover{color:var(--neon-pink);}
@@ -355,9 +360,15 @@ body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;backgroun
         <label class="f-label">📧 E-mail</label>
         <input type="email" class="f-input" id="email" placeholder="seu@email.com" autocomplete="email"/>
       </div>
-      <div class="f-group">
+      <div class="f-group" style="margin-bottom:8px;">
         <label class="f-label">🔒 Senha</label>
-        <input type="password" class="f-input" id="senha" placeholder="••••••••" autocomplete="current-password"/>
+        <div class="pwd-wrapper">
+          <input type="password" class="f-input pr-10" id="senha" placeholder="••••••••" autocomplete="current-password"/>
+          <button type="button" class="pwd-toggle" id="togglePwd" title="Ver senha">👁️</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;padding-left:4px;">
+        💡 <b>Primeiro acesso?</b> Sua senha padrão é <b>Trocarsenha123</b>
       </div>
       <div class="forgot"><a href="#">Esqueci minha senha</a></div>
 
@@ -419,6 +430,20 @@ body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;backgroun
     c.appendChild(p);
   }
 })();
+
+// Password Toggle
+document.getElementById('togglePwd').addEventListener('click', function() {
+  var pwdInput = document.getElementById('senha');
+  if(pwdInput.type === 'password') {
+    pwdInput.type = 'text';
+    this.textContent = '🙈';
+    this.title = 'Ocultar senha';
+  } else {
+    pwdInput.type = 'password';
+    this.textContent = '👁️';
+    this.title = 'Ver senha';
+  }
+});
 </script>
 
 <!-- ═══ AUTH ═══ -->
