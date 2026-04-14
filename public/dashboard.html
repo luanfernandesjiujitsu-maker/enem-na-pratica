@@ -305,6 +305,7 @@ img{display:block;max-width:100%;}
       <img src="https://i.pravatar.cc/150?img=45" alt="Avatar" class="nav-av" id="navAvatar"/>
       <div class="av-edit">✏</div>
     </div>
+    <button onclick="doLogout()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;" onmouseover="this.style.background='rgba(255,45,139,.3)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">Sair</button>
   </div>
 </nav>
 
@@ -589,6 +590,24 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 renderSims();
 renderRanking();
 setTimeout(calcStats, 300);
+</script>
+
+<!-- Auth: Session check + logout -->
+<script type="module">
+  import { checkSession, logout } from './src/js/auth.js';
+
+  // Check session on load
+  const session = await checkSession();
+  if (session) {
+    const uname = session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Estudante';
+    const el = document.getElementById('userName');
+    if (el) el.textContent = uname;
+  }
+
+  // Logout button
+  window.doLogout = async function() {
+    await logout();
+  };
 </script>
 </body>
 </html>

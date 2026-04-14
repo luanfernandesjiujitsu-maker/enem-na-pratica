@@ -456,5 +456,11 @@ function resetSimulado(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
+
+<!-- Auth: Session check -->
+<script type="module">
+  import { checkSession } from './src/js/auth.js';
+  await checkSession();
+</script>
 </body>
 </html>

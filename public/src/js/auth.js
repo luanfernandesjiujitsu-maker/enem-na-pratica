@@ -23,7 +23,7 @@ export const checkSession = async () => {
   const { data: { session } } = await supabase.auth.getSession()
   if (!session) {
     if (window.location.pathname.includes('dashboard.html') || window.location.pathname.includes('simulado.html')) {
-      window.location.href = 'login.html'
+      window.location.href = 'index.html'
     }
     return null
   }
