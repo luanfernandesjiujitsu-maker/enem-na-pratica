@@ -405,23 +405,20 @@ img{display:block;max-width:100%;}
   </div>
 </div>
 
-<script src="simulados-data.js"></script>
+<script src="../src/js/data.js"></script>
+<script src="../src/js/simulados-extra.js"></script>
 <script>
 /* ── DATA ── */
-var simulados = [
-  {id:0,num:"01",mat:"port",matLabel:"Linguagens",title:"Interpretação de Texto e Literatura",qs:45,time:"3h30",status:"done",score:72,prog:100},
-  {id:1,num:"02",mat:"mat",matLabel:"Matemática",title:"Funções, Geometria e Probabilidade",qs:45,time:"3h30",status:"wip",score:0,prog:40},
-  {id:2,num:"03",mat:"cn",matLabel:"Ciências da Natureza",title:"Física, Química e Biologia",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:3,num:"04",mat:"ch",matLabel:"Ciências Humanas",title:"História, Geografia, Fil. e Sociologia",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:4,num:"05",mat:"red",matLabel:"Redação",title:"Tema Inédito + Correção Comentada",qs:1,time:"1h",status:"done",score:880,prog:100},
-  {id:5,num:"06",mat:"mat",matLabel:"Matemática",title:"Estatística, Trigonometria e Álgebra",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:6,num:"07",mat:"port",matLabel:"Linguagens",title:"Língua Estrangeira + Artes",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:7,num:"08",mat:"cn",matLabel:"Ciências da Natureza",title:"Ecologia, Evolução e Genética",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:8,num:"09",mat:"ch",matLabel:"Ciências Humanas",title:"Brasil Republicano e Geopolítica",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:9,num:"10",mat:"mat",matLabel:"Matemática",title:"Análise Combinatória e Financeira",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:10,num:"11",mat:"port",matLabel:"Linguagens",title:"Semiótica, Publicidade e Mídia",qs:45,time:"3h30",status:"new",score:0,prog:0},
-  {id:11,num:"12",mat:"cn",matLabel:"Ciências da Natureza",title:"Termodinâmica e Eletricidade",qs:45,time:"3h30",status:"new",score:0,prog:0},
-];
+var mockProgress = {
+  1: {status:"done",score:72,prog:100},
+  2: {status:"wip",score:0,prog:40},
+  5: {status:"done",score:880,prog:100}
+};
+
+var simulados = typeof SIMULADOS !== 'undefined' ? SIMULADOS.map(function(s) {
+  var mock = mockProgress[s.id];
+  return mock ? Object.assign({}, s, mock) : Object.assign({}, s, {score:0, prog:0});
+}) : [];
 
 var statusLabel = {done:"✓ Feito",wip:"Em andamento",new:"Novo"};
 var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
