@@ -193,16 +193,25 @@ img{display:block;max-width:100%;}
 }
 .rank-item:hover{border-color:var(--purple);transform:translateX(4px);}
 .rank-item.me{border-color:var(--yellow);background:#FFFBEB;box-shadow:4px 4px 0 var(--yellow);}
+.rank-item.winner{border:3px solid var(--yellow);background:linear-gradient(135deg,#FFFBEB,#FEF3C7);box-shadow:6px 6px 0 #F59E0B;position:relative;overflow:hidden;}
+.rank-item.winner::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,214,0,.15),transparent 70%);pointer-events:none;}
 .rank-pos{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);min-width:32px;}
-.rank-pos.gold{color:#F59E0B;}
+.rank-pos.gold{color:#F59E0B;font-size:26px;}
 .rank-pos.silver{color:#6B7280;}
 .rank-pos.bronze{color:#B45309;}
-.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;flex-shrink:0;}
+.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;flex-shrink:0;overflow:hidden;}
+.rank-av img{width:100%;height:100%;object-fit:cover;}
 .rank-info{flex:1;}
 .rank-name{font-size:14px;font-weight:800;color:var(--dark);}
 .rank-sims{font-size:12px;color:var(--gray);font-weight:600;}
 .rank-score{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);}
 .me-badge{font-size:10px;font-weight:800;background:var(--yellow);color:var(--dark);padding:2px 8px;border-radius:99px;margin-left:6px;}
+.prize-badge{font-size:10px;font-weight:900;background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;padding:3px 10px;border-radius:99px;margin-left:6px;animation:pulse 2s ease infinite;}
+.winner-banner{background:linear-gradient(135deg,var(--yellow),#F59E0B);border:3px solid var(--dark);border-radius:18px;padding:18px 24px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.winner-banner-img{width:56px;height:56px;border-radius:50%;border:3px solid var(--dark);object-fit:cover;box-shadow:3px 3px 0 rgba(0,0,0,.2);}
+.winner-banner-txt{flex:1;}
+.winner-banner-title{font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--dark);}
+.winner-banner-sub{font-size:13px;font-weight:700;color:rgba(0,0,0,.6);}
 
 /* MODAL SIMULADO */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
@@ -342,7 +351,14 @@ img{display:block;max-width:100%;}
 <section class="section section-white" id="ranking">
   <div class="container">
     <div class="sec-head reveal">
-      <div><div class="sec-tag">Competição saudável</div><h2 class="sec-title">🏆 Ranking dos Alunos</h2></div>
+      <div><div class="sec-tag">🏆 Ranking Mensal — Abril 2026</div><h2 class="sec-title">🏆 Ranking dos Alunos</h2></div>
+    </div>
+    <div class="winner-banner reveal">
+      <img src="img/estudante.jpg" alt="Lucas Oliveira" class="winner-banner-img"/>
+      <div class="winner-banner-txt">
+        <div class="winner-banner-title">🎉 Lucas Oliveira ganhou um iPhone 17 Pro Max Laranja!</div>
+        <div class="winner-banner-sub">Top 1 do Ranking de Março — 50 simulados feitos, 940 pontos médios. Parabéns! 📱🔥</div>
+      </div>
     </div>
     <div class="ranking-list" id="rankList"></div>
   </div>
@@ -476,20 +492,24 @@ function animCount(id, target, suffix){
 
 /* ── RANKING ── */
 var ranking = [
-  {pos:1,name:"Julia Martins",sims:12,score:820,me:false},
-  {pos:2,name:"Carlos Eduardo",sims:10,score:785,me:false},
-  {pos:3,name:"Você",sims:8,score:720,me:true},
-  {pos:4,name:"Fernanda Lima",sims:7,score:698,me:false},
-  {pos:5,name:"Rafael Costa",sims:6,score:651,me:false},
+  {pos:1,name:"Lucas Oliveira",sims:50,score:940,me:false,photo:"img/estudante.jpg",prize:"📱 iPhone 17 Pro Max"},
+  {pos:2,name:"Julia Martins",sims:42,score:820,me:false},
+  {pos:3,name:"Carlos Eduardo",sims:38,score:785,me:false},
+  {pos:4,name:"Você",sims:8,score:720,me:true},
+  {pos:5,name:"Fernanda Lima",sims:28,score:698,me:false},
+  {pos:6,name:"Rafael Costa",sims:25,score:651,me:false},
 ];
 var posClass={1:"gold",2:"silver",3:"bronze"};
 function renderRanking(){
   document.getElementById('rankList').innerHTML = ranking.map(function(r){
     var initials = r.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('');
-    return '<div class="rank-item reveal '+(r.me?"me":"")+'">'
-      +'<div class="rank-pos '+(posClass[r.pos]||'')+'">'+r.pos+'</div>'
-      +'<div class="rank-av">'+initials+'</div>'
-      +'<div class="rank-info"><div class="rank-name">'+r.name+(r.me?'<span class="me-badge">Você</span>':'')+'</div>'
+    var avHtml = r.photo ? '<img src="'+r.photo+'" alt="'+r.name+'"/>' : initials;
+    var extraClass = r.me ? 'me' : (r.pos===1 ? 'winner' : '');
+    var prizeBadge = r.prize ? '<span class="prize-badge">'+r.prize+'</span>' : '';
+    return '<div class="rank-item reveal '+extraClass+'">'
+      +'<div class="rank-pos '+(posClass[r.pos]||'')+'">'+( r.pos===1 ? '👑' : r.pos)+'</div>'
+      +'<div class="rank-av">'+avHtml+'</div>'
+      +'<div class="rank-info"><div class="rank-name">'+r.name+(r.me?'<span class="me-badge">Você</span>':'')+ prizeBadge+'</div>'
       +'<div class="rank-sims">'+r.sims+' simulados feitos</div></div>'
       +'<div class="rank-score">'+r.score+' pts</div>'
       +'</div>';
