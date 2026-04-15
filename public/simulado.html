@@ -177,10 +177,41 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;min-height
 .btn-start-sim:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--dark);}
 
 @media(max-width:600px){
-  .main{padding:20px 16px 60px;}
   .q-card{padding:22px 18px;}
   .result-pct{font-size:64px;}
 }
+
+/* QUESTÃO DISCURSIVA */
+.discursive-textarea {
+  width: 100%;
+  min-height: 200px;
+  background: #F9F5FF;
+  border: 2px solid #DDD6FE;
+  border-radius: 16px;
+  padding: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 20px;
+  outline: none;
+  resize: vertical;
+}
+.discursive-textarea:focus { border-color: var(--purple); background: #fff; }
+.btn-submit-discursive {
+  background: var(--purple);
+  color: #fff;
+  border: 3px solid var(--dark);
+  padding: 14px 28px;
+  border-radius: 99px;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--dark);
+  transition: .2s;
+  width: 100%;
+}
+.btn-submit-discursive:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--dark); }
 </style>
 </head>
 <body>
@@ -243,7 +274,7 @@ if(!sim){
   };
 }
 
-var matClass = {port:"mat-port",mat:"mat-mat",cn:"mat-cn",ch:"mat-ch",red:"mat-red",direito:"mat-direito"};
+var matClass = {port:"mat-port",mat:"mat-mat",cn:"mat-cn",ch:"mat-ch",red:"mat-red",direito:"mat-direito",discursiva:"mat-red"};
 var questoes = sim.questoes;
 var currentQ = 0;
 var respostas = {};
@@ -321,22 +352,28 @@ function goTo(i){
 function renderQuestion(){
   var q = questoes[currentQ];
   var answered = respostas[currentQ] !== undefined;
-  var letters = ['A','B','C','D','E'];
-
-  var altsHtml = q.alternativas.map(function(alt,i){
-    var letter = letters[i];
-    var cls = 'alt-btn';
-    if(answered){
-      if(letter === q.gabarito) cls += ' correct show-correct';
-      else if(respostas[currentQ] === letter) cls += ' wrong';
+  var altsHtml = "";
+  if(q.tipo === 'discursiva') {
+    altsHtml = '<textarea class="discursive-textarea" id="discursiveInput" placeholder="Digite sua resposta técnica aqui..." '+(answered?'disabled':'')+'>'+(respostas[currentQ]||'')+'</textarea>';
+    if(!answered) {
+      altsHtml += '<button class="btn-submit-discursive" onclick="responderDiscursiva()">📤 Enviar Resposta para o Prof. Alberto</button>';
     }
-    return '<button class="'+cls+'" onclick="responder(\''+letter+'\')" '+(answered?'disabled':'')+'>'+
-      '<div class="alt-letter">'+letter+'</div>'+
-      '<span>'+alt.substring(3)+'</span></button>';
-  }).join('');
+  } else {
+    altsHtml = '<div class="alts">' + q.alternativas.map(function(alt,i){
+      var letter = letters[i];
+      var cls = 'alt-btn';
+      if(answered){
+        if(letter === q.gabarito) cls += ' correct show-correct';
+        else if(respostas[currentQ] === letter) cls += ' wrong';
+      }
+      return '<button class="'+cls+'" onclick="responder(\''+letter+'\')" '+(answered?'disabled':'')+'>'+
+        '<div class="alt-letter">'+letter+'</div>'+
+        '<span>'+alt.substring(3)+'</span></button>';
+    }).join('') + '</div>';
+  }
 
   var expHtml = answered ?
-    '<div class="explicacao-box show"><div class="exp-title">✅ Gabarito: '+q.gabarito+' — Explicação</div>'+q.explicacao+'</div>' : '';
+    '<div class="explicacao-box show"><div class="exp-title">✅ Resposta Esperada / Explicação</div>'+q.x+'</div>' : '';
 
   // Progress
   var pct = Math.round((currentQ+1)/questoes.length*100);
@@ -368,6 +405,14 @@ function responder(letter){
   if(letter === questoes[currentQ].gabarito && currentQ < questoes.length-1){
     setTimeout(function(){ nextQ(); }, 1800);
   }
+}
+
+function responderDiscursiva(){
+  var val = document.getElementById('discursiveInput').value.trim();
+  if(val.length < 10) { alert("Sua resposta está muito curta!"); return; }
+  respostas[currentQ] = val;
+  renderMap();
+  renderQuestion();
 }
 
 function nextQ(){
