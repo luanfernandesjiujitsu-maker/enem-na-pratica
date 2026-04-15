@@ -154,32 +154,45 @@ img{display:block;max-width:100%;}
 /* CONFIGURAÇÃO DA SEÇÃO DE MATÉRIA */
 .cat-section {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
-/* GRID DE ITENS (PADRÃO: LADO A LADO) */
+/* GRID DE ITENS (PADRÃO: Múltiplas colunas lado a lado) */
 .sim-grid {
-  display: flex !important;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
   width: 100%;
 }
-.sim-grid .sim-card {
-  flex: 0 0 calc(25% - 15px); /* 4 por linha em telas grandes */
-  min-width: 250px;
-}
 
-/* AJUSTES PARA A ABA "TODOS" (CATEGORIAS EM COLUNAS) */
+/* AJUSTES PARA A ABA "TODOS" (Layout Profissional Estilo Masonry) */
 #simGrid.all-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  align-items: flex-start;
+  display: block !important;
+  column-width: 300px;
+  column-count: auto;
+  column-gap: 30px;
+  width: 100%;
 }
 #simGrid.all-grid .cat-section {
-  flex: 1 1 280px;
-  max-width: 310px;
-  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 20px;
+  border-radius: 24px;
+  border: 1px solid rgba(123, 47, 190, 0.1);
+  margin-bottom: 30px;
+}
+#simGrid.all-grid .sim-grid {
+  display: flex !important;
+  flex-direction: column;
+  gap: 14px;
+}
+#simGrid.all-grid .sim-card {
+  flex: 1 1 100%;
+  min-width: 100%;
+  padding: 18px;
+  border-radius: 18px;
 }
 #simGrid.all-grid .sim-grid {
   display: flex !important;
@@ -215,8 +228,8 @@ img{display:block;max-width:100%;}
 }
 
 .sim-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0 var(--purple);
+  transform: translateY(-5px);
+  box-shadow: 10px 10px 0 var(--purple);
   border-color: var(--purple);
 }
 
