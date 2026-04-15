@@ -408,12 +408,34 @@ function responder(letter){
   }
 }
 
-function responderDiscursiva(){
+async function responderDiscursiva(){
   var val = document.getElementById('discursiveInput').value.trim();
-  if(val.length < 10) { alert("Sua resposta está muito curta!"); return; }
-  respostas[currentQ] = val;
-  renderMap();
-  renderQuestion();
+  if(val.length < 20) { alert("Sua resposta está muito curta para uma análise técnica!"); return; }
+  
+  const btn = document.querySelector('.btn-submit-discursive');
+  btn.disabled = true;
+  btn.textContent = "⏳ Prof. Alberto Silva analisando...";
+
+  try {
+    const response = await fetch('/api/ai-correction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: val, type: 'law' })
+    });
+    const data = await response.json();
+    
+    // Mostrar feedback imediato
+    alert("👨‍🏫 PARECER DO PROF. ALBERTO SILVA:\n\n" + data.general + "\n\nNota Técnica: " + data.total);
+    
+    respostas[currentQ] = val;
+    renderMap();
+    renderQuestion();
+  } catch (err) {
+    alert("Erro ao contatar o Professor. Salvando resposta localmente.");
+    respostas[currentQ] = val;
+    renderMap();
+    renderQuestion();
+  }
 }
 
 function nextQ(){

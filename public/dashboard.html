@@ -453,9 +453,8 @@ img{display:block;max-width:100%;}
       <div class="hero-stats">
         <div class="stat-box"><div class="stat-val" id="st-sims">0</div><div class="stat-label">Simulados feitos</div></div>
         <div class="stat-box"><div class="stat-val" id="st-score">0</div><div class="stat-label">Pontos médios</div></div>
-        <div class="stat-box"><div class="stat-val" id="st-streak">5</div><div class="stat-label">Dias seguidos</div></div>
-      </div>
-      <button class="btn-continue" onclick="openSim(1)">
+        <div class="stat-box"><div class="stat-val" id="st-total">90</div><div class="stat-label">Simulados totais</div></div>
+</div>
         Iniciar Próximo Simulado
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
@@ -739,7 +738,7 @@ if(activeTab === 'all') {
       else s.status = s.status || "new"; 
 
       s.prog = s.prog || 0;
-      var isLocked = s.status === "new" && s.id > 80;
+      var isLocked = s.status === "new" && s.id > 80 && (s.mat !== 'direito' && s.mat !== 'discursiva');
       
       // Lógica de numeração:
       // Se "Todos", usa globalIdx (1, 2, 3...)
