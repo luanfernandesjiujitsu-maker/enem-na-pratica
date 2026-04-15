@@ -375,7 +375,7 @@ function renderQuestion(){
   }
 
   var expHtml = answered ?
-    '<div class="explicacao-box show"><div class="exp-title">✅ Resposta Esperada / Explicação</div>'+q.x+'</div>' : '';
+    '<div class="explicacao-box show"><div class="exp-title">✅ Resposta Esperada / Explicação</div>'+q.explicacao+'</div>' : '';
 
   // Progress
   var pct = Math.round((currentQ+1)/questoes.length*100);
