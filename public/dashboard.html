@@ -160,16 +160,17 @@ img{display:block;max-width:100%;}
 .cat-count{font-size:12px;font-weight:800;background:#eee;color:var(--gray);padding:4px 12px;border-radius:99px;}
 
 /* SIMULADOS GRID */
-.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
 .sim-card{
   background:var(--bg2);border:3px solid var(--dark);
-  border-radius:16px;padding:18px 16px;
-  box-shadow:4px 4px 0 var(--dark);
-  transition:.2s;cursor:pointer;
-  display:flex;flex-direction:column;gap:10px;
+  border-radius:20px;padding:24px 20px;
+  box-shadow:5px 5px 0 var(--dark);
+  transition:.3s cubic-bezier(0.4, 0, 0.2, 1);cursor:pointer;
+  display:flex;flex-direction:column;gap:12px;
   text-decoration:none;
+  position:relative;overflow:hidden;
 }
-.sim-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--purple);border-color:var(--purple);}
+.sim-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--purple);border-color:var(--purple);}
 .sim-card.locked{opacity:.6;cursor:not-allowed;filter:grayscale(.5);}
 .sim-header{display:flex;align-items:center;justify-content:space-between;}
 .sim-num{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--purple);line-height:1;}
@@ -621,13 +622,22 @@ function renderSims(){
   ];
 
   var html = '';
+  var globalIdx = 0;
   
   categories.forEach(function(cat){
-    if(activeTab !== 'all' && activeTab !== cat.key) return;
+    if(activeTab !== 'all' && activeTab !== cat.key) {
+      // Mesmo que a tab não esteja ativa, se "Todos" estiver ligado, 
+      // precisamos contar os itens das categorias anteriores para o numbering global
+      if(activeTab === 'all') {
+         globalIdx += simulados.filter(function(s){ return s.mat === cat.key; }).length;
+      } else {
+         // Se não for "Todos" e não for a categoria ativa, apenas pula
+      }
+      return;
+    }
 
     var items = simulados.filter(function(s){ return s.mat === cat.key; });
     if(items.length === 0) return;
-
 
     html += '<div class="cat-section reveal">'
       + '<div class="cat-header">'
@@ -639,17 +649,24 @@ function renderSims(){
       + '</div>'
       + '<div class="sim-grid">';
 
-    html += items.map(function(s){
+    html += items.map(function(s, idx){
+      globalIdx++;
       s.status = s.status || "new"; 
       s.prog = s.prog || 0;
       var isLocked = s.status === "new" && s.id > 80;
       
+      // Lógica de numeração:
+      // Se "Todos", usa globalIdx (1, 2, 3...)
+      // Se aba específica, usa idx + 1 (1, 2, 3...)
+      var displayNum = (activeTab === 'all') ? globalIdx : (idx + 1);
+      if(displayNum < 10) displayNum = '0' + displayNum;
+
       return '<a href="simulado.html?id='+s.id+'" class="sim-card '+(isLocked?"locked":"")+'">'
         +'<div class="sim-header">'
-        +'<div class="sim-num">'+s.num+'</div>'
+        +'<div class="sim-num">'+displayNum+'</div>'
         +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'
         +'</div>'
-        +'<span class="sim-mat-tag mat-'+s.mat+'">'+s.matLabel+'</span>'
+        +'<span class="sim-mat-tag mat-'+s.mat+'">'+(activeTab === 'all' ? s.matLabel : s.matLabel + ' ' + (idx+1))+'</span>'
         +'<h4>'+s.title+'</h4>'
         +(s.prog>0 ? '<div class="sim-prog"><div class="sim-prog-fill" style="width:'+s.prog+'%"></div></div>' : '')
         +'<div class="sim-card-footer">'
@@ -659,7 +676,7 @@ function renderSims(){
         +'</a>';
     }).join('');
 
-    html += '</div></div>'; // fecha sim-grid e cat-section
+    html += '</div></div>';
   });
 
   document.getElementById('simGrid').innerHTML = html;
