@@ -19,12 +19,13 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;min-height
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
 /* NAV */
-.navbar{background:var(--purple);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 3px 16px rgba(0,0,0,.2);}
-.nav-brand{font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--yellow);display:flex;align-items:center;gap:6px;}
-.nav-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.8);font-size:13px;font-weight:800;cursor:pointer;transition:.2s;}
-.nav-back:hover{color:#fff;}
-.nav-timer{background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.2);border-radius:99px;padding:6px 18px;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--yellow);letter-spacing:.05em;}
-.nav-timer.warning{color:#FC8181;border-color:rgba(252,129,129,.4);}
+.navbar{background:var(--purple);padding:0 24px;height:65px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 3px 20px rgba(0,0,0,.3);border-bottom:2px solid rgba(255,214,0,.3);}
+.nav-brand{font-family:'Black Han Sans',sans-serif;font-size:20px;color:var(--yellow);display:flex;align-items:center;gap:10px;}
+.nav-back{display:flex;align-items:center;gap:6px;color:#fff;background:rgba(255,255,255,.15);padding:8px 16px;border-radius:99px;font-size:13px;font-weight:800;cursor:pointer;transition:.2s;text-decoration:none;}
+.nav-back:hover{background:rgba(255,255,255,.25);transform:translateX(-3px);}
+.nav-timer{background:var(--dark);border:2px solid var(--yellow);border-radius:99px;padding:6px 20px;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--yellow);letter-spacing:.05em;box-shadow:0 0 15px rgba(255,214,0,.2);}
+.nav-timer.warning{color:#FC8181;border-color:#FC8181;}
+
 
 /* PROGRESS BAR */
 .progress-bar-top{height:4px;background:rgba(255,255,255,.15);position:relative;}
@@ -169,10 +170,13 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;min-height
 <body>
 
 <nav class="navbar">
-  <a href="dashboard.html" class="nav-back">← Voltar</a>
-  <div class="nav-brand">📝 ENEM na Prática</div>
+  <div style="display:flex;align-items:center;gap:15px">
+    <a href="dashboard.html" class="nav-back">← Sair</a>
+    <div class="nav-brand">📝 ENEM na Prática</div>
+  </div>
   <div class="nav-timer" id="timerDisplay">00:00</div>
 </nav>
+
 <div class="progress-bar-top">
   <div class="progress-fill" id="progressFill" style="width:0%"></div>
 </div>

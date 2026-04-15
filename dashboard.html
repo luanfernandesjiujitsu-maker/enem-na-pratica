@@ -316,6 +316,39 @@ img{display:block;max-width:100%;}
   .sim-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:480px){.sim-grid{grid-template-columns:1fr;}}
+
+/* TABS SYSTEM */
+.tabs-wrapper {
+  margin-bottom: 24px;
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.tabs-wrapper::-webkit-scrollbar { display: none; }
+.tab-item {
+  padding: 10px 22px;
+  background: #fff;
+  border: 2px solid #DDD6FE;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;gap: 8px;
+}
+.tab-item:hover { border-color: var(--purple); background: #F5F3FF; transform: translateY(-2px); }
+.tab-item.active { background: var(--purple); color: #fff; border-color: var(--purple); box-shadow: 0 4px 12px rgba(123, 47, 190, 0.3); }
+.tab-icon { font-size: 16px; }
+
+/* PROFESSOR WAITING UI */
+.waiting-pulse { width: 10px; height: 10px; background: #9CA3AF; border-radius: 50%; animation: pulse-waiting 1.5s infinite; }
+@keyframes pulse-waiting { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
 </style>
 </head>
 <body>
@@ -377,7 +410,9 @@ img{display:block;max-width:100%;}
       <div><div class="sec-tag">Seus simulados</div><h2 class="sec-title">+80 Simulados Completos</h2></div>
       <a href="#" class="sec-link">Ver todos →</a>
     </div>
+    <div class="tabs-wrapper reveal" id="tabsBox"></div>
     <div class="sim-grid" id="simGrid"></div>
+
   </div>
 </section>
 
@@ -544,9 +579,36 @@ img{display:block;max-width:100%;}
 <script>
 /* ── DATA ── */
 var simulados = window.SIMULADOS || [];
+var activeTab = 'all';
 
 var statusLabel = {done:"✓ Feito",wip:"Em andamento",new:"Novo"};
+
 var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
+
+/* ── RENDER TABS ── */
+function renderTabs(){
+  var categories = [
+    { key: 'all', label: 'Todos', icon: '🌟' },
+    { key: 'red', label: 'Redação', icon: '✍️' },
+    { key: 'port', label: 'Linguagens', icon: '📚' },
+    { key: 'ch', label: 'C. Humanas', icon: '🌍' },
+    { key: 'cn', label: 'C. Natureza', icon: '🧬' },
+    { key: 'mat', label: 'Matemática', icon: '🔢' }
+  ];
+
+  var html = categories.map(function(cat){
+    return '<div class="tab-item '+(activeTab===cat.key?'active':'')+'" onclick="setTab(\''+cat.key+'\')">'
+      +'<span class="tab-icon">'+cat.icon+'</span>'+cat.label+'</div>';
+  }).join('');
+  var box = document.getElementById('tabsBox');
+  if(box) box.innerHTML = html;
+}
+
+function setTab(key){
+  activeTab = key;
+  renderTabs();
+  renderSims();
+}
 
 /* ── RENDER SIMULADOS (AGRUPADO POR MATÉRIA) ── */
 function renderSims(){
@@ -561,8 +623,11 @@ function renderSims(){
   var html = '';
   
   categories.forEach(function(cat){
+    if(activeTab !== 'all' && activeTab !== cat.key) return;
+
     var items = simulados.filter(function(s){ return s.mat === cat.key; });
     if(items.length === 0) return;
+
 
     html += '<div class="cat-section reveal">'
       + '<div class="cat-header">'
@@ -1028,20 +1093,45 @@ function openModal(id){
 }
 
 /* ── CORREÇÃO IA ── */
+/* ── CORREÇÃO HUMANIZADA ── */
+var timerRedacao = null;
+
+function updateRedCountdown(){
+  var start = localStorage.getItem('red_time');
+  if(!start) return;
+  
+  var elapsed = Math.floor((Date.now() - parseInt(start)) / 1000);
+  var remaining = (45 * 60) - elapsed;
+  var btn = document.getElementById('btnAI');
+
+  if(remaining <= 0){
+    btn.innerHTML = "✨ Ver Avaliação do Professor";
+    btn.disabled = false;
+    btn.style.background = "var(--yellow)";
+    btn.onclick = revealCorrection;
+    clearInterval(timerRedacao);
+    return;
+  }
+
+  var mins = Math.floor(remaining / 60);
+  var secs = remaining % 60;
+  btn.innerHTML = `⏳ Prof. Alberto corrigindo... (${mins}:${String(secs).padStart(2,'0')})`;
+  btn.disabled = true;
+}
+
 async function corrigirIA(){
   const inputs = document.querySelectorAll('#redacaoBox .red-line-input');
   let texto = "";
   inputs.forEach(inp => { if(inp.value.trim()) texto += inp.value.trim() + " "; });
 
   if(texto.split(' ').length < 100){
-    alert("⚠️ Seu texto está muito curto para uma avaliação do ENEM. Tente escrever pelo menos 7 ou 8 linhas para uma análise precisa.");
+    alert("⚠️ Seu texto está muito curto para uma avaliação do ENEM. Tente escrever ao menos 7 linhas.");
     return;
   }
 
   const btn = document.getElementById('btnAI');
-  const original = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = "⏳ Analisando...";
+  btn.innerHTML = "⏳ Enviando para o Professor...";
 
   try {
     const response = await fetch('/api/ai-correction', {
@@ -1050,40 +1140,68 @@ async function corrigirIA(){
       body: JSON.stringify({ text: texto })
     });
 
-    if(!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Erro na comunicação com a IA");
-    }
-
+    if(!response.ok) throw new Error("Erro na comunicação");
     const data = await response.json();
 
-    // Preencher Modal
-    document.getElementById('aiTotal').textContent = data.total;
-    document.getElementById('aiC1').textContent = data.c1.score;
-    document.getElementById('aiC2').textContent = data.c2.score;
-    document.getElementById('aiC3').textContent = data.c3.score;
-    document.getElementById('aiC4').textContent = data.c4.score;
-    document.getElementById('aiC5').textContent = data.c5.score;
-    document.getElementById('aiGeneral').textContent = data.general;
+    // Guardar resultado escondido
+    localStorage.setItem('red_result', JSON.stringify(data));
+    localStorage.setItem('red_time', Date.now());
+    
+    timerRedacao = setInterval(updateRedCountdown, 1000);
+    updateRedCountdown();
 
-    let details = "";
-    [1,2,3,4,5].forEach(i => {
-      const c = data['c'+i];
-      details += `<div class="ai-feedback-section">
-        <div class="ai-feedback-title">📌 Competência ${i} (${c.score}/200)</div>
-        <div class="ai-feedback-text">${c.text}</div>
-      </div>`;
-    });
-    document.getElementById('aiDetails').innerHTML = details;
-
-    openModal('aiModal');
   } catch (err) {
-    alert("❌ Erro ao corrigir: " + err.message);
-  } finally {
+    alert("❌ Erro ao enviar para correção: " + err.message);
     btn.disabled = false;
-    btn.innerHTML = original;
+    btn.innerHTML = "✨ Corrigir com IA";
   }
 }
+
+function revealCorrection(){
+  const dataRaw = localStorage.getItem('red_result');
+  if(!dataRaw) return;
+  const data = JSON.parse(dataRaw);
+  
+  // Customizar Modal para parecer Professor
+  document.getElementById('aiTitle').innerHTML = "👨‍🏫 Avaliação do Prof. Alberto Silva";
+  document.getElementById('aiSubtitle').textContent = "Feedback pedagógico detalhado seguindo os critérios do ENEM.";
+  
+  document.getElementById('aiTotal').textContent = data.total;
+  document.getElementById('aiC1').textContent = data.c1.score;
+  document.getElementById('aiC2').textContent = data.c2.score;
+  document.getElementById('aiC3').textContent = data.c3.score;
+  document.getElementById('aiC4').textContent = data.c4.score;
+  document.getElementById('aiC5').textContent = data.c5.score;
+  
+  // Tornar o texto mais "humano" removendo qualquer bit de 'IA' que o backend mande
+  let comment = data.general.replace(/IA|modelo|algoritmo/gi, 'minha análise');
+  document.getElementById('aiGeneral').textContent = "Comentário Geral do Professor: " + comment;
+
+  let details = "";
+  [1,2,3,4,5].forEach(i => {
+    const c = data['c'+i];
+    details += `<div class="ai-feedback-section">
+      <div class="ai-feedback-title">📌 Competência ${i} (${c.score}/200)</div>
+      <div class="ai-feedback-text">${c.text}</div>
+    </div>`;
+  });
+  document.getElementById('aiDetails').innerHTML = details;
+
+  openModal('aiModal');
+  
+  // Limpar timer para permitir novas correções depois
+  localStorage.removeItem('red_time');
+  const btn = document.getElementById('btnAI');
+  btn.innerHTML = "✨ Nova Correção";
+  btn.onclick = corrigirIA;
+}
+
+// Checar se já tem timer ativo ao carregar
+if(localStorage.getItem('red_time')){
+  timerRedacao = setInterval(updateRedCountdown, 1000);
+  updateRedCountdown();
+}
+
 
 renderLimiteBadge();
 renderMinhasRedacoes();
@@ -1118,7 +1236,10 @@ renderMinhasRedacoes();
   }
 
   init();
+  renderTabs();
+  renderSims();
 </script>
+
 
 </body>
 </html>
