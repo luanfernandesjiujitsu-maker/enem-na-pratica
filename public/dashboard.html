@@ -151,67 +151,102 @@ img{display:block;max-width:100%;}
 .sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(22px,3.5vw,32px);color:var(--dark);letter-spacing:.3px;}
 .sec-link{font-size:13px;font-weight:800;color:var(--purple);}
 
-/* CATEGORIAS E ÁLBUNS */
-.cat-section{margin-bottom:48px;animation:fadeUp .6s ease both;}
-.cat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #eee;}
-.cat-title-group{display:flex;align-items:center;gap:12px;}
-.cat-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#F3E8FF;border:2px solid var(--dark);box-shadow:3px 3px 0 var(--dark);}
-.cat-name{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--dark);}
-.cat-count{font-size:12px;font-weight:800;background:#eee;color:var(--gray);padding:4px 12px;border-radius:99px;}
-
-/* SIMULADOS GRID */
-.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
-.sim-card{
-  background:var(--bg2);border:3px solid var(--dark);
-  border-radius:20px;padding:24px 20px;
-  box-shadow:5px 5px 0 var(--dark);
-  transition:.3s cubic-bezier(0.4, 0, 0.2, 1);cursor:pointer;
-  display:flex;flex-direction:column;gap:12px;
-  text-decoration:none;
-  position:relative;overflow:hidden;
+/* CONTAINER DE CATEGORIAS (USADO NA ABA TODOS) */
+#simGrid.all-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
 }
-.sim-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--purple);border-color:var(--purple);}
-.sim-card.locked{opacity:.6;cursor:not-allowed;filter:grayscale(.5);}
-.sim-header{display:flex;align-items:center;justify-content:space-between;}
-.sim-num{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--purple);line-height:1;}
-.sim-status{font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;}
-.s-done{background:#DCFCE7;color:#15803D;}
-.s-new{background:#EDE9FE;color:#7C3AED;}
-.s-wip{background:#FEF3C7;color:#B45309;}
-.sim-mat-tag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:99px;width:fit-content;}
-.mat-port{background:#FFE4E6;color:#BE123C;}
-.mat-mat{background:#DBEAFE;color:#1D4ED8;}
-.mat-cn{background:#DCFCE7;color:#15803D;}
-.mat-ch{background:#FEF3C7;color:#B45309;}
-.mat-red{background:#F3E8FF;color:#7C3AED;}
-.sim-card h4{font-size:14px;font-weight:800;color:var(--dark);line-height:1.35;}
-.sim-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
-.sim-qs{font-size:12px;font-weight:700;color:var(--gray);}
-.sim-score{font-size:12px;font-weight:800;color:var(--green);background:#DCFCE7;padding:3px 8px;border-radius:6px;}
+#simGrid.all-grid .cat-section {
+  flex: 1 1 280px;
+  max-width: 350px;
+  margin-bottom: 20px;
+}
+#simGrid.all-grid .sim-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#simGrid.all-grid .sim-card {
+  padding: 16px;
+  border-radius: 16px;
+}
+
+/* GRID DE ITENS (PADRÃO PARA ABAS ESPECÍFICAS) */
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.sim-card {
+  background: var(--bg2);
+  border: 3px solid var(--dark);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 5px 5px 0 var(--dark);
+  transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.sim-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0 var(--purple);
+  border-color: var(--purple);
+}
+
+.sim-card.locked { opacity: .6; cursor: not-allowed; filter: grayscale(.5); }
+.sim-header { display: flex; align-items: center; justify-content: space-between; }
+.sim-num { font-family: 'Black Han Sans', sans-serif; font-size: 28px; color: var(--purple); line-height: 1; }
+.sim-status { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 99px; }
+.s-done { background: #DCFCE7; color: #15803D; }
+.s-new { background: #EDE9FE; color: #7C3AED; }
+.s-wip { background: #FEF3C7; color: #B45309; }
+.sim-mat-tag { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; width: fit-content; }
+.mat-port { background: #FFE4E6; color: #BE123C; }
+.mat-mat { background: #DBEAFE; color: #1D4ED8; }
+.mat-cn { background: #DCFCE7; color: #15803D; }
+.mat-ch { background: #FEF3C7; color: #B45309; }
+.mat-red { background: #F3E8FF; color: #7C3AED; }
+.sim-card h4 { font-size: 14px; font-weight: 800; color: var(--dark); line-height: 1.35; }
+.sim-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.sim-qs { font-size: 12px; font-weight: 700; color: var(--gray); }
+.sim-score { font-size: 12px; font-weight: 800; color: var(--green); background: #DCFCE7; padding: 3px 8px; border-radius: 6px; }
 /* Progress na sim card */
-.sim-prog{height:4px;background:#eee;border-radius:99px;overflow:hidden;}
-.sim-prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--pink));border-radius:99px;}
+.sim-prog { height: 4px; background: #eee; border-radius: 99px; overflow: hidden; }
+.sim-prog-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--pink)); border-radius: 99px; }
 
 /* RANKING */
-.ranking-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
-.rank-item{
-  background:var(--bg2);border:2px solid #eee;
-  border-radius:14px;padding:14px 18px;
-  display:flex;align-items:center;gap:14px;
-  transition:.2s;
+.ranking-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.rank-item {
+  background: var(--bg2);
+  border: 2px solid #eee;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: .2s;
 }
-.rank-item:hover{border-color:var(--purple);transform:translateX(4px);}
-.rank-item.me{border-color:var(--yellow);background:#FFFBEB;box-shadow:4px 4px 0 var(--yellow);}
-.rank-pos{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);min-width:32px;}
-.rank-pos.gold{color:#F59E0B;}
-.rank-pos.silver{color:#6B7280;}
-.rank-pos.bronze{color:#B45309;}
-.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;flex-shrink:0;}
-.rank-info{flex:1;}
-.rank-name{font-size:14px;font-weight:800;color:var(--dark);}
-.rank-sims{font-size:12px;color:var(--gray);font-weight:600;}
-.rank-score{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);}
-.me-badge{font-size:10px;font-weight:800;background:var(--yellow);color:var(--dark);padding:2px 8px;border-radius:99px;margin-left:6px;}
+.rank-item:hover { border-color: var(--purple); transform: translateX(4px); }
+.rank-item.me { border-color: var(--yellow); background: #FFFBEB; box-shadow: 4px 4px 0 var(--yellow); }
+.rank-pos { font-family: 'Black Han Sans', sans-serif; font-size: 22px; color: var(--purple); min-width: 32px; }
+.rank-pos.gold { color: #F59E0B; }
+.rank-pos.silver { color: #6B7280; }
+.rank-pos.bronze { color: #B45309; }
+.rank-av { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), var(--pink)); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 14px; flex-shrink: 0; }
+.rank-info { flex: 1; }
+.rank-name { font-size: 14px; font-weight: 800; color: var(--dark); }
+.rank-sims { font-size: 12px; color: var(--gray); font-weight: 600; }
+.rank-score { font-family: 'Black Han Sans', sans-serif; font-size: 22px; color: var(--purple); }
+.me-badge { font-size: 10px; font-weight: 800; background: var(--yellow); color: var(--dark); padding: 2px 8px; border-radius: 99px; margin-left: 6px; }
 
 /* MODAL SIMULADO */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
@@ -412,7 +447,7 @@ img{display:block;max-width:100%;}
       <a href="#" class="sec-link">Ver todos →</a>
     </div>
     <div class="tabs-wrapper reveal" id="tabsBox"></div>
-    <div class="sim-grid" id="simGrid"></div>
+    <div id="simGrid"></div>
 
   </div>
 </section>
@@ -623,6 +658,10 @@ function renderSims(){
 
   var html = '';
   var globalIdx = 0;
+  var gridContainer = document.getElementById('simGrid');
+
+  if(activeTab === 'all') gridContainer.classList.add('all-grid');
+  else gridContainer.classList.remove('all-grid');
   
   categories.forEach(function(cat){
     if(activeTab !== 'all' && activeTab !== cat.key) {
