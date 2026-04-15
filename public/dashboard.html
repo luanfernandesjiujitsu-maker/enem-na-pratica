@@ -642,8 +642,8 @@ img{display:block;max-width:100%;}
 </div>
 
 <script src="src/js/data.js"></script>
-<script src="src/js/simulados-extra.js"></script>
 <script src="src/js/simulados-extra2.js"></script>
+<script src="src/js/provao-data.js"></script>
 <script>
 /* ── DATA ── */
 var simulados = window.SIMULADOS || [];
@@ -660,7 +660,8 @@ function renderTabs(){
     { key: 'port', label: 'Linguagens', icon: '📚' },
     { key: 'ch', label: 'C. Humanas', icon: '🌍' },
     { key: 'cn', label: 'C. Natureza', icon: '🧬' },
-    { key: 'mat', label: 'Matemática', icon: '🔢' }
+    { key: 'mat', label: 'Matemática', icon: '🔢' },
+    { key: 'provao', label: '🏆 Provões', icon: '🌟' }
   ];
 
   var html = categories.map(function(cat){
@@ -684,7 +685,8 @@ function renderSims(){
     { key: 'port', label: 'Linguagens', icon: '📚', color: '#BE123C' },
     { key: 'ch', label: 'Ciências Humanas', icon: '🌍', color: '#B45309' },
     { key: 'cn', label: 'Ciências da Natureza', icon: '🧬', color: '#15803D' },
-    { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' }
+    { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' },
+    { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' }
   ];
 
   var html = '';
