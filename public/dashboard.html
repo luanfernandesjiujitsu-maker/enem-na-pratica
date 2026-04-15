@@ -193,25 +193,16 @@ img{display:block;max-width:100%;}
 }
 .rank-item:hover{border-color:var(--purple);transform:translateX(4px);}
 .rank-item.me{border-color:var(--yellow);background:#FFFBEB;box-shadow:4px 4px 0 var(--yellow);}
-.rank-item.winner{border:3px solid var(--yellow);background:linear-gradient(135deg,#FFFBEB,#FEF3C7);box-shadow:6px 6px 0 #F59E0B;position:relative;overflow:hidden;}
-.rank-item.winner::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,214,0,.15),transparent 70%);pointer-events:none;}
 .rank-pos{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);min-width:32px;}
-.rank-pos.gold{color:#F59E0B;font-size:26px;}
+.rank-pos.gold{color:#F59E0B;}
 .rank-pos.silver{color:#6B7280;}
 .rank-pos.bronze{color:#B45309;}
-.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;flex-shrink:0;overflow:hidden;}
-.rank-av img{width:100%;height:100%;object-fit:cover;}
+.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;flex-shrink:0;}
 .rank-info{flex:1;}
 .rank-name{font-size:14px;font-weight:800;color:var(--dark);}
 .rank-sims{font-size:12px;color:var(--gray);font-weight:600;}
 .rank-score{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);}
 .me-badge{font-size:10px;font-weight:800;background:var(--yellow);color:var(--dark);padding:2px 8px;border-radius:99px;margin-left:6px;}
-.prize-badge{font-size:10px;font-weight:900;background:linear-gradient(135deg,#F59E0B,#EF4444);color:#fff;padding:3px 10px;border-radius:99px;margin-left:6px;animation:pulse 2s ease infinite;}
-.winner-banner{background:linear-gradient(135deg,var(--yellow),#F59E0B);border:3px solid var(--dark);border-radius:18px;padding:18px 24px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.winner-banner-img{width:56px;height:56px;border-radius:50%;border:3px solid var(--dark);object-fit:cover;box-shadow:3px 3px 0 rgba(0,0,0,.2);}
-.winner-banner-txt{flex:1;}
-.winner-banner-title{font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--dark);}
-.winner-banner-sub{font-size:13px;font-weight:700;color:rgba(0,0,0,.6);}
 
 /* MODAL SIMULADO */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
@@ -272,6 +263,26 @@ img{display:block;max-width:100%;}
 .sep::before,.sep::after{content:'';flex:1;height:2px;background:#eee;}
 .sep span{font-size:11px;font-weight:700;color:#aaa;text-transform:uppercase;}
 
+
+/* FOLHA DE REDAÇÃO NO DASHBOARD */
+.red-line-wrap{display:flex;align-items:stretch;border-bottom:1.5px solid #E5E7EB;min-height:38px;}
+.red-line-wrap:hover{background:rgba(123,47,190,.02);}
+.red-line-num{width:42px;flex-shrink:0;background:linear-gradient(to right,#F3E8FF,#fff);border-right:2px solid #DDD6FE;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--purple);user-select:none;}
+.red-line-input{flex:1;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:15px;font-weight:500;color:var(--dark);padding:7px 16px;line-height:1.5;resize:none;height:38px;overflow:hidden;}
+.red-line-input:focus{background:rgba(123,47,190,.03);}
+.rasc-line-wrap{display:flex;align-items:stretch;border-bottom:1px solid #E5E7EB;min-height:34px;}
+.rasc-line-num{width:34px;flex-shrink:0;background:#F3F4F6;border-right:1px solid #E5E7EB;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#9CA3AF;user-select:none;}
+.rasc-line-input{flex:1;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:14px;color:var(--dark);padding:6px 14px;resize:none;height:34px;overflow:hidden;}
+.red-enviada{display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid #DDD6FE;border-radius:14px;margin-bottom:10px;transition:.2s;}
+.red-enviada:hover{border-color:var(--purple);}
+.red-env-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:2px solid var(--dark);}
+.red-env-info{flex:1;}
+.red-env-tema{font-size:14px;font-weight:800;color:var(--dark);margin-bottom:2px;}
+.red-env-data{font-size:12px;font-weight:600;color:#888;}
+.red-env-badge{font-size:11px;font-weight:900;padding:4px 12px;border-radius:99px;}
+.env-ok{background:#DCFCE7;color:#15803D;}
+.env-wait{background:#FEF3C7;color:#B45309;}
+
 /* FOOTER */
 .site-footer{background:var(--dark);color:#fff;padding:36px 24px;text-align:center;border-top:4px solid var(--purple);}
 .footer-brand{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--yellow);margin-bottom:8px;}
@@ -295,6 +306,8 @@ img{display:block;max-width:100%;}
     <a href="dashboard.html" class="nav-link active">🏠 Dashboard</a>
     <a href="#simulados" class="nav-link">📝 Simulados</a>
     <a href="#ranking" class="nav-link">🏆 Ranking</a>
+    <a href="#redacao" class="nav-link">✍️ Redação</a>
+    <a href="#" class="nav-link" id="btnLogout" style="color:#FF2D8B;">👋 Sair</a>
   </div>
   <div class="nav-right">
     <div style="text-align:right">
@@ -305,7 +318,6 @@ img{display:block;max-width:100%;}
       <img src="https://i.pravatar.cc/150?img=45" alt="Avatar" class="nav-av" id="navAvatar"/>
       <div class="av-edit">✏</div>
     </div>
-    <button onclick="doLogout()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:6px 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;" onmouseover="this.style.background='rgba(255,45,139,.3)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">Sair</button>
   </div>
 </nav>
 
@@ -322,7 +334,7 @@ img{display:block;max-width:100%;}
         <div class="stat-box"><div class="stat-val" id="st-score">0</div><div class="stat-label">Pontos médios</div></div>
         <div class="stat-box"><div class="stat-val" id="st-streak">5</div><div class="stat-label">Dias seguidos</div></div>
       </div>
-      <button class="btn-continue" onclick="openSim(0)">
+      <button class="btn-continue" onclick="openSim(1)">
         Iniciar Próximo Simulado
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
@@ -352,16 +364,87 @@ img{display:block;max-width:100%;}
 <section class="section section-white" id="ranking">
   <div class="container">
     <div class="sec-head reveal">
-      <div><div class="sec-tag">🏆 Ranking Mensal — Abril 2026</div><h2 class="sec-title">🏆 Ranking dos Alunos</h2></div>
-    </div>
-    <div class="winner-banner reveal">
-      <img src="https://i.ibb.co/mVqtQnmf/9d2bcede-705d-435c-8428-8ed5b27994ad-1-removebg-preview.png" alt="Lucas Oliveira" class="winner-banner-img"/>
-      <div class="winner-banner-txt">
-        <div class="winner-banner-title">🎉 Lucas Oliveira ganhou um iPhone 17 Pro Max Laranja!</div>
-        <div class="winner-banner-sub">Top 1 do Ranking de Março — 50 simulados feitos, 940 pontos médios. Parabéns! 📱🔥</div>
-      </div>
+      <div><div class="sec-tag">Competição saudável</div><h2 class="sec-title">🏆 Ranking dos Alunos</h2></div>
     </div>
     <div class="ranking-list" id="rankList"></div>
+  </div>
+</section>
+
+
+<!-- REDAÇÃO -->
+<section class="section" id="redacao" style="background:#F8F0FF;">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">✍️ Redação</div>
+        <h2 class="sec-title">Folha de Redação ENEM</h2>
+      </div>
+      <div id="redLimitBadge" style="display:flex;align-items:center;gap:8px;"></div>
+    </div>
+
+    <!-- AVISO LIMITE -->
+    <div id="redLimitWarn" class="reveal" style="display:none;
+      background:#FEF3C7;border:3px solid #F59E0B;border-radius:16px;
+      padding:20px 24px;margin-bottom:24px;
+      box-shadow:4px 4px 0 #F59E0B;">
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:18px;color:#92400E;margin-bottom:6px;">⏳ Limite mensal atingido</div>
+      <p style="font-size:14px;font-weight:600;color:#78350F;line-height:1.7;">
+        Você já enviou <strong>2 redações este mês</strong>. Seu limite se renova no primeiro dia do próximo mês.<br/>
+        Próxima redação disponível: <strong id="proximaData">—</strong>
+      </p>
+    </div>
+
+    <!-- TEMA -->
+    <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px 28px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:4px;">📌 Tema da Redação</div>
+          <p style="font-size:13px;font-weight:600;color:#888;">Preencha o tema do simulado ou escolha um abaixo</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button onclick="sortearTema()" style="background:var(--yellow);color:var(--dark);border:2px solid var(--dark);border-radius:99px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🎲 Sortear tema</button>
+        </div>
+      </div>
+      <textarea id="redTema" rows="2" placeholder="Ex: Os desafios da saúde mental no Brasil contemporâneo..."
+        style="width:100%;background:#F3E8FF;border:2px solid #DDD6FE;border-radius:12px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:600;color:var(--dark);outline:none;resize:vertical;"></textarea>
+    </div>
+
+    <!-- RASCUNHO -->
+    <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px 28px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--dark);">✏️ Rascunho</div>
+        <span style="font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:99px;background:#F3F4F6;color:#6B7280;border:2px solid #E5E7EB;">Não vale nota</span>
+      </div>
+      <div id="rascunhoBox" style="border:2px solid #E5E7EB;border-radius:12px;overflow:hidden;background:#FAFAFA;"></div>
+    </div>
+
+    <!-- REDAÇÃO DEFINITIVA -->
+    <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;overflow:hidden;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
+      <div style="background:linear-gradient(135deg,var(--purple),#9333EA);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:#fff;letter-spacing:.5px;">📄 TEXTO DEFINITIVO</div>
+        <div style="font-size:12px;font-weight:800;color:rgba(255,255,255,.8);" id="redLinhasCount">0 / 30 linhas</div>
+      </div>
+      <div id="redacaoBox"></div>
+      <!-- CONTADOR -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#F9F5FF;border-top:2px solid #DDD6FE;flex-wrap:wrap;gap:10px;">
+        <div style="display:flex;gap:18px;flex-wrap:wrap;">
+          <span style="font-size:13px;font-weight:700;color:#888;">Palavras: <strong id="redWordCount" style="color:var(--purple);">0</strong></span>
+          <span style="font-size:13px;font-weight:700;color:#888;">Linhas: <strong id="redLineUsed" style="color:var(--purple);">0</strong></span>
+          <span style="font-size:13px;font-weight:700;color:#888;">Status: <strong id="redStatus" style="color:#888;">Comece a escrever...</strong></span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;" id="redBotoes">
+          <button onclick="limparRedacao()" style="background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:99px;padding:9px 18px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🗑 Limpar</button>
+          <button onclick="enviarRedacao()" id="btnEnviar" style="background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:3px solid var(--dark);border-radius:99px;padding:10px 22px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 var(--dark);transition:.2s;">📤 Enviar para Correção</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINHAS REDAÇÕES -->
+    <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px 28px;box-shadow:5px 5px 0 var(--dark);">
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--dark);margin-bottom:16px;">📬 Minhas Redações Enviadas</div>
+      <div id="minhasRedacoes"></div>
+    </div>
+
   </div>
 </section>
 
@@ -409,16 +492,7 @@ img{display:block;max-width:100%;}
 <script src="../src/js/simulados-extra.js"></script>
 <script>
 /* ── DATA ── */
-var mockProgress = {
-  1: {status:"done",score:72,prog:100},
-  2: {status:"wip",score:0,prog:40},
-  5: {status:"done",score:880,prog:100}
-};
-
-var simulados = typeof SIMULADOS !== 'undefined' ? SIMULADOS.map(function(s) {
-  var mock = mockProgress[s.id];
-  return mock ? Object.assign({}, s, mock) : Object.assign({}, s, {score:0, prog:0});
-}) : [];
+var simulados = window.SIMULADOS || [];
 
 var statusLabel = {done:"✓ Feito",wip:"Em andamento",new:"Novo"};
 var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
@@ -426,7 +500,10 @@ var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
 /* ── RENDER SIMULADOS ── */
 function renderSims(){
   document.getElementById('simGrid').innerHTML = simulados.map(function(s){
-    return '<div class="sim-card reveal '+(s.status==="new"&&s.id>9?"locked":"")+'" onclick="openSim('+s.id+')">'
+    s.status = s.status || "new"; 
+    s.prog = s.prog || 0;
+    
+    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>9?"locked":"")+'">'
       +'<div class="sim-header">'
       +'<div class="sim-num">'+s.num+'</div>'
       +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'
@@ -438,7 +515,7 @@ function renderSims(){
       +'<span class="sim-qs">⏱ '+s.time+' · '+s.qs+' questões</span>'
       +(s.score>0 ? '<span class="sim-score">'+s.score+(s.mat==="red"?" pts":"%")+'</span>' : '')
       +'</div>'
-      +'</div>';
+      +'</a>';
   }).join('');
   // Re-observe
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
@@ -449,7 +526,7 @@ function calcStats(){
   var done = simulados.filter(function(s){return s.status==="done";}).length;
   var scores = simulados.filter(function(s){return s.score>0&&s.mat!=="red";});
   var avg = scores.length ? Math.round(scores.reduce(function(a,s){return a+s.score;},0)/scores.length) : 0;
-  var totalProg = Math.round(simulados.reduce(function(a,s){return a+s.prog;},0)/simulados.length);
+  var totalProg = simulados.length ? Math.round(simulados.reduce(function(a,s){return a+(s.prog||0);},0)/simulados.length) : 0;
 
   animCount('st-sims', done);
   animCount('st-score', avg, '%');
@@ -466,7 +543,7 @@ function calcStats(){
   ];
   var html = mats.map(function(m){
     var items = simulados.filter(function(s){return s.mat===m.key;});
-    var p = items.length ? Math.round(items.reduce(function(a,s){return a+s.prog;},0)/items.length) : 0;
+    var p = items.length ? Math.round(items.reduce(function(a,s){return a+(s.prog||0);},0)/items.length) : 0;
     return '<div style="display:flex;align-items:center;gap:8px;">'
       +'<span style="font-size:11px;font-weight:800;color:rgba(255,255,255,.6);min-width:80px;">'+m.label+'</span>'
       +'<div style="flex:1;height:5px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden;">'
@@ -480,6 +557,7 @@ function calcStats(){
 
 function animCount(id, target, suffix){
   var el=document.getElementById(id); if(!el)return;
+  if(target===0) { el.textContent="0"+(suffix||''); return; }
   var i=0,step=Math.max(1,Math.ceil(target/40));
   var t=setInterval(function(){
     i=Math.min(i+step,target);
@@ -490,24 +568,20 @@ function animCount(id, target, suffix){
 
 /* ── RANKING ── */
 var ranking = [
-  {pos:1,name:"Lucas Oliveira",sims:50,score:940,me:false,photo:"https://i.pravatar.cc/150?img=60",prize:"📱 iPhone 17 Pro Max"},
-  {pos:2,name:"Julia Martins",sims:42,score:820,me:false,photo:"https://i.pravatar.cc/150?img=32"},
-  {pos:3,name:"Carlos Eduardo",sims:38,score:785,me:false,photo:"https://i.pravatar.cc/150?img=11"},
-  {pos:4,name:"Você",sims:8,score:720,me:true,photo:"https://i.pravatar.cc/150?img=45"},
-  {pos:5,name:"Fernanda Lima",sims:28,score:698,me:false,photo:"https://i.pravatar.cc/150?img=5"},
-  {pos:6,name:"Rafael Costa",sims:25,score:651,me:false,photo:"https://i.pravatar.cc/150?img=12"},
+  {pos:1,name:"Julia Martins",sims:12,score:820,me:false},
+  {pos:2,name:"Carlos Eduardo",sims:10,score:785,me:false},
+  {pos:3,name:"Você",sims:8,score:720,me:true},
+  {pos:4,name:"Fernanda Lima",sims:7,score:698,me:false},
+  {pos:5,name:"Rafael Costa",sims:6,score:651,me:false},
 ];
 var posClass={1:"gold",2:"silver",3:"bronze"};
 function renderRanking(){
   document.getElementById('rankList').innerHTML = ranking.map(function(r){
     var initials = r.name.split(' ').map(function(w){return w[0];}).slice(0,2).join('');
-    var avHtml = r.photo ? '<img src="'+r.photo+'" alt="'+r.name+'"/>' : initials;
-    var extraClass = r.me ? 'me' : (r.pos===1 ? 'winner' : '');
-    var prizeBadge = r.prize ? '<span class="prize-badge">'+r.prize+'</span>' : '';
-    return '<div class="rank-item reveal '+extraClass+'">'
-      +'<div class="rank-pos '+(posClass[r.pos]||'')+'">'+( r.pos===1 ? '👑' : r.pos)+'</div>'
-      +'<div class="rank-av">'+avHtml+'</div>'
-      +'<div class="rank-info"><div class="rank-name">'+r.name+(r.me?'<span class="me-badge">Você</span>':'')+ prizeBadge+'</div>'
+    return '<div class="rank-item reveal '+(r.me?"me":"")+'">'
+      +'<div class="rank-pos '+(posClass[r.pos]||'')+'">'+r.pos+'</div>'
+      +'<div class="rank-av">'+initials+'</div>'
+      +'<div class="rank-info"><div class="rank-name">'+r.name+(r.me?'<span class="me-badge">Você</span>':'')+'</div>'
       +'<div class="rank-sims">'+r.sims+' simulados feitos</div></div>'
       +'<div class="rank-score">'+r.score+' pts</div>'
       +'</div>';
@@ -515,22 +589,8 @@ function renderRanking(){
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 }
 
-/* ── MODAL SIMULADO ── */
 function openSim(id){
   window.location.href = 'simulado.html?id=' + id;
-  return;
-  var s = simulados.find(function(x){return x.id===id;});
-  if(!s) return;
-  document.getElementById('mTag').textContent = '📝 Simulado '+s.num+' — '+s.matLabel;
-  document.getElementById('mTitle').textContent = s.title;
-  document.getElementById('mSub').textContent = s.qs+' questões no estilo ENEM · Gabarito comentado incluso · Resultado imediato após finalizar.';
-  document.getElementById('mInfo').innerHTML =
-    '<div class="minfo">⏱ '+s.time+'</div>'
-    +'<div class="minfo">📋 '+s.qs+' questões</div>'
-    +'<div class="minfo">📊 Gabarito comentado</div>'
-    +(s.score>0?'<div class="minfo" style="background:#DCFCE7;color:#15803D">✓ Sua nota: '+s.score+(s.mat==="red"?" pts":"%")+'</div>':'');
-  document.getElementById('simModal').classList.add('open');
-  document.body.style.overflow='hidden';
 }
 
 function closeModal(id){
@@ -587,24 +647,333 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 renderSims();
 renderRanking();
 setTimeout(calcStats, 300);
+
+/* ══════════════════════════════════════════
+   SEÇÃO DE REDAÇÃO — INTEGRADA NO DASHBOARD
+   ══════════════════════════════════════════ */
+var TOTAL_RED = 30;
+var TOTAL_RASC = 12;
+var EMAIL_DESTINO = 'enemnapratica.lg@gmail.com';
+
+var TEMAS_ENEM = [
+  "Os desafios da saúde mental no Brasil contemporâneo",
+  "A desigualdade racial no acesso à educação no Brasil",
+  "Os impactos das redes sociais na democracia brasileira",
+  "O papel do Estado no combate às fake news",
+  "Violência contra a mulher: causas e soluções no Brasil",
+  "O desafio da inclusão de pessoas com deficiência no mercado de trabalho",
+  "Saneamento básico como direito fundamental no Brasil",
+  "Os efeitos do desmatamento para a soberania nacional",
+  "Juventude e desemprego: perspectivas no Brasil contemporâneo",
+  "O fenômeno da evasão escolar no ensino médio brasileiro",
+  "Crise climática e responsabilidade individual e coletiva",
+  "O papel das universidades públicas no desenvolvimento do Brasil",
+  "Invisibilidade social dos idosos no Brasil",
+  "Os impactos da automação no mercado de trabalho",
+  "Democratização do acesso à internet como direito social",
+  "O movimento antivacina e a saúde coletiva",
+  "Segurança alimentar e o combate à fome no Brasil",
+  "O papel da educação financeira na redução das desigualdades",
+  "Trabalho infantil e o ciclo da pobreza",
+  "A importância da literatura na formação do cidadão brasileiro"
+];
+
+function sortearTema(){
+  var t = TEMAS_ENEM[Math.floor(Math.random()*TEMAS_ENEM.length)];
+  document.getElementById('redTema').value = t;
+}
+
+(function(){
+  var html = '';
+  for(var i=1;i<=TOTAL_RASC;i++){
+    html += '<div class="rasc-line-wrap">'
+      +'<div class="rasc-line-num">'+i+'</div>'
+      +'<textarea class="rasc-line-input" rows="1" '
+      +'placeholder="'+(i===1?'Planeje aqui: ideias, argumentos, proposta...':'')+'" '
+      +'oninput="redAutoResize(this)"></textarea>'
+      +'</div>';
+  }
+  document.getElementById('rascunhoBox').innerHTML = html;
+})();
+
+(function(){
+  var phs = {1:'Introdução — Contextualize e apresente sua tese...',5:'Desenvolvimento I — 1º argumento...',12:'Desenvolvimento II — 2º argumento...',20:'Conclusão — Retome a tese e apresente a proposta de intervenção...'};
+  var html = '';
+  for(var i=1;i<=TOTAL_RED;i++){
+    html += '<div class="red-line-wrap">'
+      +'<div class="red-line-num">'+i+'</div>'
+      +'<textarea class="red-line-input" rows="1" '
+      +'placeholder="'+(phs[i]||'')+'" '
+      +'oninput="redAutoResize(this);redUpdateCounters();redSalvar();"></textarea>'
+      +'</div>';
+  }
+  document.getElementById('redacaoBox').innerHTML = html;
+  redRestaurar();
+})();
+
+function redAutoResize(el){
+  el.style.height = 'auto';
+  el.style.height = Math.max(34, el.scrollHeight)+'px';
+  var wrap = el.closest('.red-line-wrap,.rasc-line-wrap');
+  if(wrap) wrap.style.minHeight = el.style.height;
+}
+
+function redUpdateCounters(){
+  var inputs = document.querySelectorAll('#redacaoBox .red-line-input');
+  var used=0, words=0;
+  inputs.forEach(function(inp){
+    var v=inp.value.trim();
+    if(v.length>0) used++;
+    words += v.split(/\s+/).filter(Boolean).length;
+  });
+  document.getElementById('redLinhasCount').textContent = used+' / '+TOTAL_RED+' linhas';
+  document.getElementById('redWordCount').textContent = words;
+  document.getElementById('redLineUsed').textContent = used;
+  var st=document.getElementById('redStatus');
+  if(words===0){st.textContent='Comece a escrever...';st.style.color='#888';}
+  else if(words<100){st.textContent='⚠️ Muito curto';st.style.color='#D97706';}
+  else if(words<=400){st.textContent='✅ Bom comprimento!';st.style.color='#16A34A';}
+  else{st.textContent='⚠️ Muito longo';st.style.color='#D97706';}
+}
+
+function redSalvar(){
+  try{
+    var vals = Array.from(document.querySelectorAll('#redacaoBox .red-line-input')).map(function(e){return e.value;});
+    var rasc = Array.from(document.querySelectorAll('#rascunhoBox .rasc-line-input')).map(function(e){return e.value;});
+    localStorage.setItem('dash_redacao', JSON.stringify({texto:vals, rascunho:rasc, tema:document.getElementById('redTema').value}));
+  }catch(e){}
+}
+
+function redRestaurar(){
+  try{
+    var raw = localStorage.getItem('dash_redacao');
+    if(!raw) return;
+    var d = JSON.parse(raw);
+    if(d.tema) document.getElementById('redTema').value = d.tema;
+    var ri = document.querySelectorAll('#redacaoBox .red-line-input');
+    (d.texto||[]).forEach(function(v,i){if(ri[i]){ri[i].value=v;redAutoResize(ri[i]);}});
+    var rai = document.querySelectorAll('#rascunhoBox .rasc-line-input');
+    (d.rascunho||[]).forEach(function(v,i){if(rai[i]){rai[i].value=v;redAutoResize(rai[i]);}});
+    redUpdateCounters();
+  }catch(e){}
+}
+
+function limparRedacao(){
+  if(!confirm('Limpar toda a redação? Essa ação não pode ser desfeita.')) return;
+  document.querySelectorAll('#redacaoBox .red-line-input, #rascunhoBox .rasc-line-input').forEach(function(el){el.value='';redAutoResize(el);});
+  document.getElementById('redTema').value='';
+  redUpdateCounters();
+  localStorage.removeItem('dash_redacao');
+}
+
+function getRedacoesDoMes(){
+  try{
+    var raw = localStorage.getItem('redacoes_enviadas');
+    var lista = raw ? JSON.parse(raw) : [];
+    var agora = new Date();
+    return lista.filter(function(r){
+      var d = new Date(r.data);
+      return d.getMonth()===agora.getMonth() && d.getFullYear()===agora.getFullYear();
+    });
+  }catch(e){return [];}
+}
+
+function salvarRedacaoEnviada(obj){
+  try{
+    var raw = localStorage.getItem('redacoes_enviadas');
+    var lista = raw ? JSON.parse(raw) : [];
+    lista.push(obj);
+    localStorage.setItem('redacoes_enviadas', JSON.stringify(lista));
+  }catch(e){}
+}
+
+function renderLimiteBadge(){
+  var mes = getRedacoesDoMes();
+  var restam = Math.max(0, 2 - mes.length);
+  var badge = document.getElementById('redLimitBadge');
+  var warn  = document.getElementById('redLimitWarn');
+  var btn   = document.getElementById('btnEnviar');
+
+  badge.innerHTML = '<div style="display:flex;align-items:center;gap:8px;">'
+    +'<div style="background:'+(restam>0?'#DCFCE7':'#FEF3C7')+';border:2px solid '+(restam>0?'#16A34A':'#F59E0B')+';border-radius:99px;padding:6px 16px;font-size:13px;font-weight:900;color:'+(restam>0?'#15803D':'#92400E')+';">'
+    +(restam>0 ? '✅ '+restam+' envio'+(restam>1?'s':'')+' restante'+(restam>1?'s':'')+' este mês' : '⛔ Limite atingido')
+    +'</div></div>';
+
+  if(restam <= 0){
+    warn.style.display = 'block';
+    btn.disabled = true;
+    btn.style.opacity = '.45';
+    btn.style.cursor = 'not-allowed';
+    btn.style.animation = 'none';
+    var prox = new Date();
+    prox.setMonth(prox.getMonth()+1, 1);
+    document.getElementById('proximaData').textContent = prox.toLocaleDateString('pt-BR');
+  } else {
+    warn.style.display = 'none';
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  }
+}
+
+function renderMinhasRedacoes(){
+  try{
+    var raw = localStorage.getItem('redacoes_enviadas');
+    var lista = raw ? JSON.parse(raw) : [];
+    var el = document.getElementById('minhasRedacoes');
+    if(lista.length===0){
+      el.innerHTML = '<div style="text-align:center;padding:32px;color:#aaa;font-weight:700;font-size:14px;">📭 Nenhuma redação enviada ainda.<br/>Escreva sua redação acima e clique em Enviar para Correção.</div>';
+      return;
+    }
+    var sorted = lista.slice().reverse();
+    el.innerHTML = sorted.map(function(r){
+      return '<div class="red-enviada">'
+        +'<div class="red-env-icon">✍️</div>'
+        +'<div class="red-env-info">'
+        +'<div class="red-env-tema">'+r.tema+'</div>'
+        +'<div class="red-env-data">'+r.data+' · '+r.palavras+' palavras</div>'
+        +'</div>'
+        +'<span class="red-env-badge '+(r.status==='ok'?'env-ok':'env-wait')+'">'+
+        (r.status==='ok'?'✅ Enviado':'⏳ Em correção')+'</span>'
+        +'</div>';
+    }).join('');
+  }catch(e){}
+}
+
+function enviarRedacao(){
+  var tema = document.getElementById('redTema').value.trim();
+  if(!tema){ alert('⚠️ Preencha o tema da redação antes de enviar!'); return; }
+
+  var linhas = Array.from(document.querySelectorAll('#redacaoBox .red-line-input')).map(function(e){return e.value;});
+  var texto = linhas.filter(function(l){return l.trim().length>0;}).join('\n');
+  if(texto.trim().length < 50){ alert('⚠️ Sua redação está muito curta. Escreva pelo menos 7 linhas!'); return; }
+
+  var words = texto.split(/\s+/).filter(Boolean).length;
+  if(words < 50){ alert('⚠️ Redação muito curta. Mínimo de 100 palavras para envio.'); return; }
+
+  var mes = getRedacoesDoMes();
+  if(mes.length >= 2){ alert('⛔ Você já atingiu o limite de 2 redações por mês!'); return; }
+
+  var btn = document.getElementById('btnEnviar');
+  btn.textContent = '⏳ Enviando...';
+  btn.disabled = true;
+
+  var aluno = document.getElementById('userName').textContent || localStorage.getItem('enem_nome') || 'Aluno(a)';
+  var agora = new Date();
+  var dataStr = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR');
+  var mes_ano = agora.toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  
+  var palavras = texto.split(/\s+/).filter(Boolean).length;
+  
+  var rasc = Array.from(document.querySelectorAll('#rascunhoBox .rasc-line-input'))
+    .map(function(e){return e.value.trim();}).filter(Boolean).join('\n');
+
+  var subject = encodeURIComponent('[ENEM na Prática] Nova Redação — ' + tema.substring(0,50) + ' — ' + dataStr);
+
+  var body = encodeURIComponent(
+    '============================\n'
+    +'NOVA REDAÇÃO PARA CORREÇÃO\n'
+    +'============================\n\n'
+    +'Aluno: ' + aluno + '\n'
+    +'Data/Hora: ' + dataStr + '\n'
+    +'Redações enviadas este mês: ' + (mes.length+1) + '/2\n'
+    +'Palavras: ' + palavras + '\n\n'
+    +'TEMA:\n' + tema + '\n\n'
+    +'============================\n'
+    +'REDAÇÃO DEFINITIVA:\n'
+    +'============================\n'
+    + texto + '\n\n'
+    +(rasc ? '============================\nRASCUNHO:\n============================\n'+rasc+'\n' : '')
+    +'============================\n'
+    +'Enviado pelo ENEM na Prática\nenemnapratica.lg@gmail.com\n'
+    +'============================'
+  );
+
+  var mailtoLink = 'mailto:' + EMAIL_DESTINO + '?subject=' + subject + '&body=' + body;
+  
+  var link = document.createElement('a');
+  link.href = mailtoLink;
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  var obj = {
+    tema: tema,
+    texto: texto,
+    palavras: palavras,
+    data: dataStr,
+    mes: mes_ano,
+    status: 'ok'
+  };
+  salvarRedacaoEnviada(obj);
+
+  setTimeout(function(){
+    btn.textContent = '✅ Enviado com sucesso!';
+    btn.style.background = 'linear-gradient(135deg,#16A34A,#15803D)';
+    btn.style.animation = 'none';
+
+    localStorage.removeItem('dash_redacao');
+    document.querySelectorAll('#redacaoBox .red-line-input').forEach(function(el){el.value='';redAutoResize(el);});
+    document.getElementById('redTema').value = '';
+    redUpdateCounters();
+
+    renderLimiteBadge();
+    renderMinhasRedacoes();
+
+    setTimeout(function(){
+      btn.textContent = '📤 Enviar para Correção';
+      btn.style.background = 'linear-gradient(135deg,var(--purple),var(--pink))';
+    }, 4000);
+  }, 1200);
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Tab'){
+    var active = document.activeElement;
+    if(active && (active.classList.contains('red-line-input')||active.classList.contains('rasc-line-input'))){
+      e.preventDefault();
+      var all = Array.from(document.querySelectorAll('.red-line-input, .rasc-line-input'));
+      var idx = all.indexOf(active);
+      if(idx < all.length-1) all[idx+1].focus();
+    }
+  }
+});
+
+renderLimiteBadge();
+renderMinhasRedacoes();
+
 </script>
 
-<!-- Auth: Session check + logout -->
 <script type="module">
-  import { checkSession, logout } from './src/js/auth.js';
+  import { checkSession, logout, getProfile } from './src/js/auth.js';
 
-  // Check session on load
-  const session = await checkSession();
-  if (session) {
-    const uname = session.user.user_metadata?.full_name || session.user.email?.split('@')[0] || 'Estudante';
-    const el = document.getElementById('userName');
-    if (el) el.textContent = uname;
+  async function init() {
+    const session = await checkSession();
+    if (session) {
+      try {
+        const profile = await getProfile(session.user.id);
+        if (profile && profile.full_name) {
+          document.getElementById('userName').textContent = profile.full_name.split(' ')[0].toUpperCase();
+        }
+      } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+      }
+    }
   }
 
-  // Logout button
-  window.doLogout = async function() {
-    await logout();
-  };
+  const btnLogout = document.getElementById('btnLogout');
+  if(btnLogout) {
+    btnLogout.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if(confirm('Deseja realmente sair?')) {
+        await logout();
+      }
+    });
+  }
+
+  init();
 </script>
+
 </body>
 </html>
