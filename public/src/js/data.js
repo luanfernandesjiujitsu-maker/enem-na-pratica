@@ -1,119 +1,33 @@
 // ============================================================
-// ENEM na Prática — 50 Simulados Completos
-// Questões no estilo oficial do ENEM 2026
+// ENEM na Prática — Banco de Dados 01 (Simulados 01 a 12)
 // ============================================================
 
 var SIMULADOS = [
-
-// ─────────────────────────────────────────
-// SIMULADO 01 — LINGUAGENS E CÓDIGOS
-// ─────────────────────────────────────────
 {
-  id: 1, num: "01", mat: "port", matLabel: "Linguagens e Códigos",
-  title: "Interpretação de Texto e Literatura",
-  qs: 10, time: "1h", status: "new",
+  id: 1, num: "01", mat: "port", matLabel: "Linguagens",
+  title: "Interpretação e Literatura",
+  qs: 10, time: "1h", status: "done",
   questoes: [
-    {
-      id: "01q1",
-      enunciado: "Leia o trecho a seguir:\\n\\n\"O Brasil não é para principiantes.\" (Tom Jobim)\\n\\nEssa frase, frequentemente atribuída ao compositor Tom Jobim, pode ser interpretada como uma referência à complexidade cultural e social do país. No contexto da análise do discurso, a expressão funciona como:",
-      alternativas: [
-        "A) Uma crítica direta à incapacidade dos estrangeiros de compreenderem o Brasil.",
-        "B) Um elogio irônico à simplicidade das relações sociais brasileiras.",
-        "C) Uma metáfora que destaca a riqueza e complexidade da identidade nacional brasileira.",
-        "D) Uma afirmação literal sobre a dificuldade de se viver no Brasil.",
-        "E) Um argumento político contra a imigração no país."
-      ],
-      gabarito: "C",
-      explicacao: "A frase de Tom Jobim funciona como uma metáfora. Ao dizer que 'o Brasil não é para principiantes', ele destaca a complexidade e a riqueza cultural, social e humana do país, de forma que seria difícil de ser compreendida sem uma imersão profunda. Não se trata de crítica literal, mas de elogio velado à complexidade nacional."
-    },
-    {
-      id: "01q2",
-      enunciado: "Leia o poema de Carlos Drummond de Andrade:\\n\\n\"No meio do caminho tinha uma pedra\\ntinha uma pedra no meio do caminho\\ntinha uma pedra\\nno meio do caminho tinha uma pedra.\"\\n\\nA repetição dos versos no poema tem como principal função:",
-      alternativas: [
-        "A) Demonstrar a falta de criatividade do poeta.",
-        "B) Criar um efeito de insistência e obstáculo, sugerindo que o problema é recorrente na vida.",
-        "C) Facilitar a memorização do poema pelo leitor.",
-        "D) Representar a simplicidade da linguagem modernista.",
-        "E) Indicar que o poeta tinha dificuldades de expressão."
-      ],
-      gabarito: "B",
-      explicacao: "A repetição é um recurso estilístico deliberado de Drummond. A 'pedra' representa os obstáculos da vida, e a repetição cria um efeito rítmico de insistência — o problema não vai embora, reaparece constantemente. É uma das marcas do Modernismo brasileiro: o cotidiano elevado à reflexão filosófica."
-    },
-    {
-      id: "01q3",
-      enunciado: "Analise a tirinha em que um personagem diz: \"Você precisa aprender a se comunicar melhor\" e o outro responde: \"Mas eu te mandei 47 mensagens de voz hoje!\"\\n\\nO humor da tirinha baseia-se principalmente em:",
-      alternativas: [
-        "A) A crítica ao uso excessivo de tecnologia nas relações pessoais.",
-        "B) O contraste entre a ideia de 'comunicar-se melhor' e a quantidade excessiva de mensagens de voz.",
-        "C) A valorização das mensagens de voz como meio de comunicação eficiente.",
-        "D) O elogio à persistência do personagem que envia mensagens.",
-        "E) A ironia sobre a dificuldade de se usar aplicativos de mensagens."
-      ],
-      gabarito: "B",
-      explicacao: "O humor emerge do contraste: 'comunicar-se melhor' implica qualidade na comunicação, mas o personagem interpreta como quantidade (47 mensagens de voz). Há uma ambiguidade no conceito de 'comunicação', e esse mal-entendido gera o efeito cômico típico das tirinhas que comentam o comportamento digital contemporâneo."
-    },
-    {
-      id: "01q10",
-      enunciado: "O Modernismo brasileiro de 1922 propôs uma ruptura com as tendências anteriores. Marque a alternativa que melhor define as propostas da Semana de Arte Moderna:",
-      alternativas: [
-        "A) Retorno aos valores clássicos greco-romanos e à linguagem erudita.",
-        "B) Valorização exclusiva da arte europeia e rejeição da cultura nacional.",
-        "C) Liberdade de criação, valorização da cultura popular e nacional, e uso da linguagem coloquial.",
-        "D) Defesa do Parnasianismo e do rigor formal na produção artística.",
-        "E) Subordinação da arte à religião e à moral conservadora."
-      ],
-      gabarito: "C",
-      explicacao: "A Semana de Arte Moderna (1922) propôs: liberdade de expressão artística, uso do verso livre, valorização da identidade cultural brasileira (índio, sertanejo, caipira), linguagem coloquial e questionamento dos padrões estéticos europeus importados."
-    }
+    { id: "01q1", enunciado: "O Brasil não é para principiantes (Jobim). Qual a figura de linguagem?", alternativas: ["A) Metonímia", "B) Metáfora", "C) Ironia", "D) Pleonasmo", "E) Antítese"], gabarito: "B", explicacao: "Comparação implícita da complexidade do país." },
+    { id: "01q2", enunciado: "Modernismo de 1922 buscava:", alternativas: ["A) Parnasianismo", "B) Nacionalismo e liberdade", "C) Rigor formal", "D) Arcadismo", "E) Simbolismo"], gabarito: "B", explicacao: "Ruptura com o passado acadêmico." }
   ]
 },
-
-// ─────────────────────────────────────────
-// SIMULADO 02 — MATEMÁTICA
-// ─────────────────────────────────────────
 {
   id: 2, num: "02", mat: "mat", matLabel: "Matemática",
-  title: "Funções, Geometria e Probabilidade",
+  title: "Álgebra e Funções",
   qs: 10, time: "1h", status: "new",
   questoes: [
-    {
-      id: "02q1",
-      enunciado: "Uma função f(x) = 2x² - 8x + 6. O vértice dessa parábola tem coordenadas:",
-      alternativas: [
-        "A) (2, -2)", "B) (2, 2)", "C) (-2, 2)", "D) (4, -2)", "E) (2, 0)"
-      ],
-      gabarito: "A",
-      explicacao: "Para f(x) = ax² + bx + c, o vértice é (xv, yv) onde xv = -b/2a e yv = -Δ/4a.\\nxv = -(-8)/(2×2) = 8/4 = 2\\nf(2) = 2(4) - 8(2) + 6 = 8 - 16 + 6 = -2\\nPortanto o vértice é (2, -2)."
-    },
-    {
-      id: "02q2",
-      enunciado: "Uma urna contém 5 bolas vermelhas e 3 bolas azuis. Retirando-se uma bola ao acaso, qual é a probabilidade de ser vermelha?",
-      alternativas: [
-        "A) 3/8", "B) 5/3", "C) 5/8", "D) 1/2", "E) 2/5"
-      ],
-      gabarito: "C",
-      explicacao: "Total de bolas = 5 + 3 = 8\\nCasos favoráveis (vermelha) = 5\\nP(vermelha) = 5/8"
-    }
+    { id: "02q1", enunciado: "Resolva 2x + 10 = 20:", alternativas: ["A) 5", "B) 10", "C) 15", "D) 0", "E) 2"], gabarito: "A", explicacao: "2x = 10 -> x = 5." }
   ]
-}
+},
+{ id: 3, num: "03", mat: "cn", matLabel: "Natureza", title: "Biologia", qs: 10, time: "1h", status: "new", questoes: [{id:"03q1", enunciado:"Organela da respiração:", alternativas:["A) Núcleo","B) Mitocôndria","C) Ribossomo","D) Lisossomo","E) Golgi"], gabarito:"B", explicacao:"Mitocôndrias geram ATP."}]},
+{ id: 4, num: "04", mat: "ch", matLabel: "Humanas", title: "História", qs: 10, time: "1h", status: "new", questoes: [{id:"04q1", enunciado:"Descobrimento do Brasil:", alternativas:["A) 1492","B) 1500","C) 1822","D) 1889","E) 1930"], gabarito:"B", explicacao:"22 de abril de 1500."}]},
+{ id: 5, num: "05", mat: "port", matLabel: "Linguagens", title: "Gramática", qs: 10, time: "1h", status: "new", questoes: [{id:"05q1", enunciado:"Substantivo abstrato:", alternativas:["A) Casa","B) Amor","C) Mesa","D) Cadeira","E) Livro"], gabarito:"B", explicacao:"Amor depende de um ser para existir."}]},
+{ id: 6, num: "06", mat: "mat", matLabel: "Matemática", title: "Geometria", qs: 10, time: "1h", status: "new", questoes: [{id:"06q1", enunciado:"Soma dos ângulos internos de um triângulo:", alternativas:["A) 90","B) 180","C) 360","D) 270","E) 0"], gabarito:"B", explicacao:"Sempre 180 graus."}]},
+{ id: 7, num: "07", mat: "cn", matLabel: "Natureza", title: "Física", qs: 10, time: "1h", status: "new", questoes: [{id:"07q1", enunciado:"Velocidade da luz aprox (km/s):", alternativas:["A) 100.000","B) 300.000","C) 1.000.000","D) 50.000","E) 10.000"], gabarito:"B", explicacao:"300.000 km/s no vácuo."}]},
+{ id: 8, num: "08", mat: "ch", matLabel: "Humanas", title: "Geografia", qs: 10, time: "1h", status: "new", questoes: [{id:"08q1", enunciado:"Capital do Brasil:", alternativas:["A) Rio","B) Brasília","C) SP","D) Salvador","E) BH"], gabarito:"B", explicacao:"Inaugurada em 1960."}]},
+{ id: 9, num: "09", mat: "port", matLabel: "Linguagens", title: "Artes", qs: 10, time: "1h", status: "new", questoes: [{id:"09q1", enunciado:"Pintou a Guernica:", alternativas:["A) Dali","B) Picasso","C) Monet","D) Renoir","E) Van Gogh"], gabarito:"B", explicacao:"Pablo Picasso, 1937."}]},
+{ id: 10, num: "10", mat: "mat", matLabel: "Matemática", title: "Estatística", qs: 10, time: "1h", status: "new", questoes: [{id:"10q1", enunciado:"Média de 10, 20, 30:", alternativas:["A) 15","B) 20","C) 25","D) 30","E) 10"], gabarito:"B", explicacao:"(10+20+30)/3 = 20."}]},
+{ id: 11, num: "11", mat: "cn", matLabel: "Natureza", title: "Química", qs: 10, time: "1h", status: "new", questoes: [{id:"11q1", enunciado:"H2O é:", alternativas:["A) Oxigênio","B) Água","C) Hidrogênio","D) Sal","E) Açúcar"], gabarito:"B", explicacao:"Fórmula da água."}]},
+{ id: 12, num: "12", mat: "ch", matLabel: "Humanas", title: "Filosofia", qs: 10, time: "1h", status: "new", questoes: [{id:"12q1", enunciado:"'Só sei que nada sei':", alternativas:["A) Platão","B) Sócrates","C) Aristóteles","D) Descartes","E) Kant"], gabarito:"B", explicacao:"Famosa frase de Sócrates."}]}
 ];
-
-// O looping para os demais simulados (03-12)
-(function(){
-  const mats = ["cn","ch","red","mat","port","cn","ch","mat","cn","ch"];
-  const matLabels = ["Ciências da Natureza","Ciências Humanas","Redação","Matemática","Linguagens","Ciências da Natureza","Ciências Humanas","Matemática","Ciências da Natureza","Ciências Humanas"];
-  for(let i=3; i<=12; i++){
-    let mIdx = (i-1) % 10;
-    SIMULADOS.push({
-      id: i, num: String(i).padStart(2,"0"), mat: mats[mIdx], matLabel: matLabels[mIdx],
-      title: "Simulado Completo — " + matLabels[mIdx],
-      qs: 5, time: "40min", status: "new",
-      questoes: [
-        { id: i+"q1", enunciado: "Questão de prática estilo ENEM para o simulado "+i, alternativas:["A) Correta","B) Errada","C) Errada","D) Errada","E) Errada"], gabarito:"A", explicacao: "Revisão do conteúdo chave deste simulado." }
-      ]
-    });
-  }
-})();
-
-if (typeof window !== 'undefined') window.SIMULADOS = SIMULADOS;
-if (typeof module !== 'undefined') module.exports = SIMULADOS;

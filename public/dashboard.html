@@ -27,9 +27,7 @@ img{display:block;max-width:100%;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes countUp{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.btn-continue svg { width: 24px !important; height: 24px !important; flex-shrink: 0; }
 
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
 .reveal.in{opacity:1;transform:translateY(0);}
@@ -454,7 +452,8 @@ img{display:block;max-width:100%;}
         <div class="stat-box"><div class="stat-val" id="st-sims">0</div><div class="stat-label">Simulados feitos</div></div>
         <div class="stat-box"><div class="stat-val" id="st-score">0</div><div class="stat-label">Pontos médios</div></div>
         <div class="stat-box"><div class="stat-val" id="st-total">90</div><div class="stat-label">Simulados totais</div></div>
-</div>
+      </div>
+      <button class="btn-continue" onclick="openSim(1)">
         Iniciar Próximo Simulado
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
@@ -641,15 +640,19 @@ img{display:block;max-width:100%;}
   </div>
 </div>
 
+<!-- ── DATA SCRIPTS (CARGA DAS QUESTÕES) ── -->
 <script src="src/js/data.js"></script>
 <script src="src/js/simulados-extra.js"></script>
 <script src="src/js/simulados-extra2.js"></script>
 <script src="src/js/provao-data.js"></script>
 <script src="src/js/direito-completo.js"></script>
+
 <script>
 /* ── DATA ── */
+// Garante que o array SIMULADOS global seja usado e nunca zerado por engano
 var simulados = window.SIMULADOS || [];
 var activeTab = 'all';
+console.log("Simulados carregados:", simulados.length);
 
 var statusLabel = {done:"✓ Feito",wip:"Em andamento",new:"Novo"};
 var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
