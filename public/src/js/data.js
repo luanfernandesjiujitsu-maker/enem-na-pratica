@@ -3,7 +3,7 @@
 // Questões no estilo oficial do ENEM 2026
 // ============================================================
 
-const SIMULADOS = [
+var SIMULADOS = [
 
 // ─────────────────────────────────────────
 // SIMULADO 01 — LINGUAGENS E CÓDIGOS
