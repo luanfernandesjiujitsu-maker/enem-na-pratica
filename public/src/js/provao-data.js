@@ -1,6 +1,6 @@
 /**
- * DATA PARA 10 PROVÕES COMPLETOS (TRI + GABARITO)
- * Corrigido com as chaves corretas (enunciado, alternativas, gabarito, explicacao).
+ * DATA PARA PROVÕES COMPLETOS (TRI + GABARITO)
+ * Conteúdo expandido para o Provão #1
  */
 
 const PROVOES = [
@@ -8,28 +8,28 @@ const PROVOES = [
     id: 101, num: "01", title: "Provão Geral ENEM #1", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new",
     essayPrompt: "O papel do esporte na inclusão social de jovens brasileiros.",
     questoes: [
-      { id: "p1q1", m: "port", n: 1, enunciado: "O bicho, meu Deus, era um homem. (Manuel Bandeira). O poema critica:", alternativas: ["A) A urbanização", "B) A desumanização pela miséria", "C) O crescimento industrial", "D) A tecnologia moderna", "E) A vanguarda europeia"], gabarito: "B", explicacao: "O poema foca na desumanização do homem em situação de extrema pobreza." },
-      { id: "p1q2", m: "ch", n: 2, enunciado: "O Período Regencial brasileiro (1831-1840) foi marcado por:", alternativas: ["A) Estabilidade política absoluta", "B) Centralização total em Pedro II", "C) Instabilidade e revoltas provinciais", "D) Início da República Velha", "E) Aliança com a Inglaterra"], gabarito: "C", explicacao: "O período teve revoltas como a Farroupilha e Sabinada." },
-      { id: "p1q3", m: "cn", n: 3, enunciado: "A fotossíntese ocorre principalmente nos:", alternativas: ["A) Mitocôndrios", "B) Ribossomos", "C) Cloroplastos", "D) Lisossomos", "E) Complexo de Golgi"], gabarito: "C", explicacao: "Cloroplastos contêm clorofila para capturar luz." },
-      { id: "p1q4", m: "mat", n: 1, enunciado: "Se x + 5 = 12, qual o valor de x²?", alternativas: ["A) 7", "B) 14", "C) 49", "D) 25", "E) 144"], gabarito: "C", explicacao: "x = 7. 7² = 49." },
-      { id: "p1q5", m: "red", n: 1, enunciado: "O tema da redação deste provão é 'Inclusão Social pelo Esporte'. Escreva um texto dissertativo-argumentativo.", alternativas: ["A) Continuar para Redação"], gabarito: "A", explicacao: "Siga as instruções do Alberto Silva." }
+      { id: "p1q1", n: 1, enunciado: "O bicho, meu Deus, era um homem. (Manuel Bandeira). O poema critica:", alternativas: ["A) A urbanização", "B) A desumanização pela miséria", "C) O crescimento industrial", "D) A tecnologia moderna", "E) A vanguarda europeia"], gabarito: "B", explicacao: "O poema foca na desumanização do homem em situação de extrema pobreza." },
+      { id: "p1q2", n: 2, enunciado: "O Período Regencial brasileiro (1831-1840) foi marcado por:", alternativas: ["A) Estabilidade política absoluta", "B) Centralização total em Pedro II", "C) Instabilidade e revoltas provinciais", "D) Início da República Velha", "E) Aliança com a Inglaterra"], gabarito: "C", explicacao: "O período teve revoltas como a Farroupilha e Sabinada." },
+      { id: "p1q3", n: 3, enunciado: "A fotossíntese ocorre principalmente nos:", alternativas: ["A) Mitocôndrios", "B) Ribossomos", "C) Cloroplastos", "D) Lisossomos", "E) Complexo de Golgi"], gabarito: "C", explicacao: "Cloroplastos contêm clorofila para capturar luz." },
+      { id: "p1q4", n: 1, enunciado: "Se x + 5 = 12, qual o valor de x²?", alternativas: ["A) 7", "B) 14", "C) 49", "D) 25", "E) 144"], gabarito: "C", explicacao: "x = 7. 7² = 49." },
+      { id: "p1q5", n: 2, enunciado: "Qual bioma brasileiro é conhecido como Savana brasileira?", alternativas: ["A) Amazônia", "B) Cerrado", "C) Caatinga", "D) Pantanal", "E) Pampa"], gabarito: "B", explicacao: "O Cerrado possui características de savana (arbustos, solo ácido)." },
+      { id: "p1q6", n: 1, enunciado: "O triângulo equilátero possui:", alternativas: ["A) Todos os lados diferentes", "B) Dois lados iguais", "C) Todos os lados e ângulos iguais", "D) Um ângulo de 90 graus", "E) Apenas um lado reto"], gabarito: "C", explicacao: "Equilátero = Lados e ângulos (60°) iguais." },
+      { id: "p1q7", n: 3, enunciado: "A Revolução Industrial inglesa começou no século:", alternativas: ["A) XVI", "B) XVII", "C) XVIII", "D) XIX", "E) XX"], gabarito: "C", explicacao: "Teve início por volta de 1760 (séc XVIII)." },
+      { id: "p1q8", n: 2, enunciado: "Proteínas são polímeros de:", alternativas: ["A) Açúcares", "B) Ácidos graxos", "C) Aminoácidos", "D) Nucleotídeos", "E) Vitaminas"], gabarito: "C", explicacao: "A ligação peptídica une aminoácidos para formar proteínas." },
+      { id: "p1q9", n: 1, enunciado: "O Barroco é um estilo marcado por:", alternativas: ["A) Simplicidade e clareza", "B) Dualismo, contrastes e rebuscamento", "C) Ausência de religiosidade", "D) Uso exclusivo de formas geométricas", "E) Valorização do cotidiano operário"], gabarito: "B", explicacao: "Contraste luz/sombra, sagrado/profano." },
+      { id: "p1q10", n: 2, enunciado: "Se uma pizza custa R$ 40,00 e você tem 15% de desconto, o valor final é:", alternativas: ["A) R$ 34,00", "B) R$ 30,00", "C) R$ 35,00", "D) R$ 38,00", "E) R$ 42,00"], gabarito: "A", explicacao: "15% de 40 = 6. 40 - 6 = 34." },
+      { id: "p1q11", n: 3, enunciado: "A Guerra Fria foi um conflito ideológico entre:", alternativas: ["A) França e Inglaterra", "B) EUA e URSS", "C) Brasil e Argentina", "D) China e Japão", "E) Alemanha e Itália"], gabarito: "B", explicacao: "Capitalismo vs Socialismo pós-1945." },
+      { id: "p1q12", n: 2, enunciado: "O DNA tem o formato de:", alternativas: ["A) Esfera", "B) Cubo", "C) Dupla hélice", "D) Círculo plano", "E) Estrela"], gabarito: "C", explicacao: "Estrutura helicoidal dupla." },
+      { id: "p1q13", n: 1, enunciado: "Quem pintou a 'Monalisa'?", alternativas: ["A) Michelangelo", "B) Leonardo da Vinci", "C) Van Gogh", "D) Picasso", "E) Salvador Dalí"], gabarito: "B", explicacao: "Ícone do Renascimento Italiano." },
+      { id: "p1q14", n: 2, enunciado: "A densidade é a razão entre:", alternativas: ["A) Peso e altura", "B) Massa e volume", "C) Força e área", "D) Tempo e espaço", "E) Calor e luz"], gabarito: "B", explicacao: "d = m/v." },
+      { id: "p1q15", n: 3, enunciado: "A globalização intensificou:", alternativas: ["A) O isolamento dos países", "B) A integração econômica e fluxos de informação", "C) O fim do comércio marítimo", "D) A volta ao sistema de troca (escambo)", "E) A integração de blocos econômicos"], gabarito: "B", explicacao: "Conectividade mundial interdependente." },
+      { id: "p1q16", n: 2, enunciado: "Um neologismo é:", alternativas: ["A) Palavra antiga em desuso", "B) Palavra nova criada na língua", "C) Um erro de ortografia", "D) Uma rima pobre", "E) Uma tradução do latim"], gabarito: "B", explicacao: "Criação de novos termos vocabulares." },
+      { id: "p1q17", n: 1, enunciado: "Quanto é 5! (fatorial de 5)?", alternativas: ["A) 5", "B) 25", "C) 120", "D) 60", "E) 100"], gabarito: "C", explicacao: "5x4x3x2x1 = 120." },
+      { id: "p1q18", n: 2, enunciado: "A Revolução Francesa iniciou em:", alternativas: ["A) 1789", "B) 1889", "C) 1914", "D) 1500", "E) 1822"], gabarito: "A", explicacao: "Queda da Bastilha." },
+      { id: "p1q19", n: 3, enunciado: "O principal gás do efeito estufa é o:", alternativas: ["A) Oxigênio", "B) Nitrogênio", "C) Dióxido de Carbono (CO2)", "D) Hélio", "E) Argônio"], gabarito: "C", explicacao: "Retém calor na atmosfera terrestre." },
+      { id: "p1q20", n: 1, enunciado: "A Constituição Brasileira atual é de:", alternativas: ["A) 1824", "B) 1889", "C) 1964", "D) 1988", "E) 2000"], gabarito: "D", explicacao: "A 'Constituição Cidadã'." }
     ]
-  },
-  {
-    id: 102, num: "02", title: "Provão Geral ENEM #2", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new",
-    essayPrompt: "Os desafios para a democratização do acesso ao cinema no Brasil.",
-    questoes: [
-      { id: "p2q1", m: "port", n: 1, enunciado: "Função metalinguística ocorre quando:", alternativas: ["A) Foco no sentimento", "B) Foco no próprio código", "C) Foco no canal", "D) Foco no receptor", "E) Foco no contexto"], gabarito: "B", explicacao: "Metalinguagem usa o código para falar dele mesmo." }
-    ]
-  },
-  { id: 103, num: "03", title: "Provão Geral ENEM #3", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "Impactos da inteligência artificial no mercado de trabalho.", questoes: [{id:"p3q1",m:"mat",n:2,enunciado:"Qual o volume de um cubo de aresta 3?",alternativas:["A) 9","B) 27","C) 81","D) 3","E) 12"],gabarito:"B",explicacao:"3x3x3=27"}] },
-  { id: 104, num: "04", title: "Provão Geral ENEM #4", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "O combate à evasão escolar no sistema público brasileiro.", questoes: [{id:"p4q1",m:"cn",n:1,enunciado:"H2O é a fórmula de:",alternativas:["A) Ar","B) Solo","C) Água","D) Fogo","E) Ferro"],gabarito:"C",explicacao:"H2O = Água"}] },
-  { id: 105, num: "05", title: "Provão Geral ENEM #5", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "Preservação da cultura indígena no Brasil contemporâneo.", questoes: [{id:"p5q1",m:"ch",n:3,enunciado:"A Revolução Francesa começou em:",alternativas:["A) 1500","B) 1789","C) 1914","D) 1945","E) 1822"],gabarito:"B",explicacao:"14 de Julho de 1789"}] },
-  { id: 106, num: "06", title: "Provão Geral ENEM #6", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "A importância da doação de órgãos no Brasil.", questoes: [{id:"p6q1",m:"port",n:2,enunciado:"Quem escreveu o Quincas Borba?",alternativas:["A) Manuel Bandeira","B) Machado de Assis","C) Clarice Lispector","D) Jorge Amado","E) Guimarães Rosa"],gabarito:"B",explicacao:"Machado de Assis"}] },
-  { id: 107, num: "07", title: "Provão Geral ENEM #7", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "Caminhos para combater a intolerância religiosa.", questoes: [{id:"p7q1",m:"port",n:1,enunciado:"Sinônimo de 'Efêmero':",alternativas:["A) Duradouro","B) Passageiro","C) Grande","D) Triste","E) Forte"],gabarito:"B",explicacao:"Algo que dura pouco."}] },
-  { id: 108, num: "08", title: "Provão Geral ENEM #8", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "O lixo eletrônico e seus impactos ambientais.", questoes: [{id:"p8q1",m:"cn",n:2,enunciado:"O maior órgão do corpo humano é:",alternativas:["A) Fígado","B) Coração","C) Pele","D) Pulmão","E) Cérebro"],gabarito:"C",explicacao:"A pele reveste todo o corpo."}] },
-  { id: 109, num: "09", title: "Provão Geral ENEM #10", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "A ética no uso das redes sociais entre jovens.", questoes: [{id:"p9q1",m:"ch",n:1,enunciado:"O Descobrimento do Brasil foi em:",alternativas:["A) 1501","B) 1492","C) 1500","D) 1822","E) 1889"],gabarito:"C",explicacao:"22 de Abril de 1500."}] },
-  { id: 110, num: "10", title: "Provão Geral ENEM #10", mat: "provao", matLabel: "Provão Geral", time: "4h 30min", qs: 20, status: "new", essayPrompt: "Mobilidade urbana e sustentabilidade nas grandes cidades.", questoes: [{id:"p10q1",m:"mat",n:3,enunciado:"Raiz quadrada de 144:",alternativas:["A) 10","B) 11","C) 12","D) 13","E) 14"],gabarito:"C",explicacao:"12 x 12 = 144"}] }
+  }
 ];
 
 if (typeof SIMULADOS !== 'undefined') {
