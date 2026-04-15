@@ -151,16 +151,17 @@ img{display:block;max-width:100%;}
 .sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(22px,3.5vw,32px);color:var(--dark);letter-spacing:.3px;}
 .sec-link{font-size:13px;font-weight:800;color:var(--purple);}
 
-/* CONTAINER DE CATEGORIAS (USADO NA ABA TODOS) */
+/* CONFIGURAÇÃO DA ABA "TODOS" (CATEGORIAS LADO A LADO EM COLUNAS) */
 #simGrid.all-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   align-items: flex-start;
+  width: 100%;
 }
 #simGrid.all-grid .cat-section {
   flex: 1 1 280px;
-  max-width: 350px;
+  max-width: 320px;
   margin-bottom: 20px;
 }
 #simGrid.all-grid .sim-grid {
@@ -173,11 +174,16 @@ img{display:block;max-width:100%;}
   border-radius: 16px;
 }
 
-/* GRID DE ITENS (PADRÃO PARA ABAS ESPECÍFICAS) */
+/* CONFIGURAÇÃO PADRÃO (ITENS LADO A LADO EM GRID) */
+.cat-section {
+  width: 100%;
+  margin-bottom: 48px;
+}
 .sim-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
+  width: 100%;
 }
 
 .sim-card {
@@ -660,8 +666,8 @@ function renderSims(){
   var globalIdx = 0;
   var gridContainer = document.getElementById('simGrid');
 
-  if(activeTab === 'all') gridContainer.classList.add('all-grid');
-  else gridContainer.classList.remove('all-grid');
+  if(activeTab === 'all') gridContainer.className = 'all-grid';
+  else gridContainer.className = '';
   
   categories.forEach(function(cat){
     if(activeTab !== 'all' && activeTab !== cat.key) {
