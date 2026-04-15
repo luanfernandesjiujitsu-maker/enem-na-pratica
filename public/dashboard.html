@@ -645,6 +645,7 @@ img{display:block;max-width:100%;}
 <script src="src/js/data.js"></script>
 <script src="src/js/simulados-extra2.js"></script>
 <script src="src/js/provao-data.js"></script>
+<script src="src/js/direto-adm.js"></script>
 <script>
 /* ── DATA ── */
 var simulados = window.SIMULADOS || [];
@@ -662,7 +663,8 @@ function renderTabs(){
     { key: 'ch', label: 'C. Humanas', icon: '🌍' },
     { key: 'cn', label: 'C. Natureza', icon: '🧬' },
     { key: 'mat', label: 'Matemática', icon: '🔢' },
-    { key: 'provao', label: '🏆 Provões', icon: '🌟' }
+    { key: 'provao', label: '🏆 Provões', icon: '🌟' },
+    { key: 'direito', label: '⚖️ Direito Adm', icon: '📜' }
   ];
 
   var html = categories.map(function(cat){
@@ -687,7 +689,8 @@ function renderSims(){
     { key: 'ch', label: 'Ciências Humanas', icon: '🌍', color: '#B45309' },
     { key: 'cn', label: 'Ciências da Natureza', icon: '🧬', color: '#15803D' },
     { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' },
-    { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' }
+    { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' },
+    { key: 'direito', label: 'Direito Administrativo', icon: '⚖️', color: '#4B5563' }
   ];
 
   var html = '';
