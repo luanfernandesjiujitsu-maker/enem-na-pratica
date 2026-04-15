@@ -1,10 +1,10 @@
 /**
  * DIREITO ADMINISTRATIVO COMPLETO (OBJETIVAS + DISCURSIVAS)
- * Centralizado para evitar erros de carregamento.
+ * Cada prova discursiva agora possui 3 questões técnicas.
  */
 
 const DATA_DIREITO = [
-  // --- OBJETIVAS (201-205) ---
+  // --- OBJETIVAS (201-205) - 10 Questões cada ---
   {
     id: 201, num: "01", title: "Princípios da Administração Pública", mat: "direito", matLabel: "Direito Adm", time: "20min", qs: 10, status: "new",
     questoes: [
@@ -73,7 +73,7 @@ const DATA_DIREITO = [
       { id: "d5q3", m: "direito", n: 3, enunciado: "Atributos do Poder de Polícia:", alternativas: ["A) Amizade e Caridade", "B) Discricionariedade, Autoexecutoriedade e Coercibilidade", "C) Lentidão e Burocracia", "D) Apenas Multa", "E) Depende do Juiz"], gabarito: "B", explicacao: "DAC: Discricionariedade, Autoexecutoriedade (agir sem ordem judicial) e Coercibilidade." },
       { id: "d5q4", m: "direito", n: 1, enunciado: "Interdição de restaurante com comida estragada é Poder de:", alternativas: ["A) Hierarquia", "B) Polícia", "C) Disciplina", "D) Socorro", "E) Justiça"], gabarito: "B", explicacao: "Ação direta da Adm garantindo a saúde pública." },
       { id: "d5q5", m: "direito", n: 2, enunciado: "O Poder de Polícia pode ser delegado a particulares?", alternativas: ["A) Sim, integralmente", "B) Não, apenas as fases de fiscalização e consentimento (STF)", "C) Apenas se forem amigos do Rei", "D) Sim, para aplicar multas criminais", "E) Não, nunca"], gabarito: "B", explicacao: "Fases de sancionamento já têm restrições, mas fiscalização pode em alguns casos." },
-      { id: "d5q6", m: "direito", n: 3, enunciado: "O ato normativo que cria obrigação nova, não prevista em lei, é:", alternativas: ["A) Válido", "B) Abuso de poder (extrapola o poder regulamentar)", "C) Revolucionário", "D) Normal", "E) Facultativo"], gabarito: "B", explicacao: "O regulamento não pode contrariar ou inovar além da lei." },
+      { id: "d5q6", m: "direito", n: 3, enunciado: "O ato normativo que cria obrigação nova, não prevista em lei, é:", alternativas: ["A) Válido", "B) Abuso de poder (extrapola o poder regulamentar)", "C) Regulamentarista", "D) Normal", "E) Facultativo"], gabarito: "B", explicacao: "O regulamento não pode contrariar ou inovar além da lei." },
       { id: "d5q7", m: "direito", n: 2, enunciado: "Taxa de Polícia é cobrada pelo:", alternativas: ["A) Aumento de salário", "B) Exercício efetivo do poder de polícia", "C) Simples existência da viatura", "D) Amizade", "E) Uso do asfalto"], gabarito: "B", explicacao: "Vinculada a uma atividade estatal (Fiscalização)." },
       { id: "d5q8", m: "direito", n: 1, enunciado: "Multa de trânsito é exemplo de:", alternativas: ["A) Poder Judiciário", "B) Poder de Polícia", "C) Poder Hierárquico", "D) Tributo", "E) Doação"], gabarito: "B", explicacao: "Sanção de polícia pelo descumprimento de normas de ordem pública." },
       { id: "d5q9", m: "direito", n: 2, enunciado: "Autoexecutoriedade permite à Administração:", alternativas: ["A) Agir sem autorização prévia do Judiciário", "B) Criar suas próprias leis penais", "C) Não prestar contas", "D) Ser acima de Deus", "E) Roubar"], gabarito: "A", explicacao: "Pode apreender bens ou multar sem ir ao juiz antes." },
@@ -81,46 +81,46 @@ const DATA_DIREITO = [
     ]
   },
   
-  // --- DISCURSIVAS (301-305) ---
+  // --- DISCURSIVAS EXPANIDAS (301-305) - 3 Questões cada ---
   {
-    id: 301, num: "01", title: "Discursiva: Princípios e Eficiência", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 1, status: "new",
-    questoes: [{ 
-      id: "d301q1", tipo: "discursiva", m: "direito", n: 3, 
-      enunciado: "Com base no Art. 37 da Constituição Federal, explique o princípio da EFICIÊNCIA e diferencie-o do princípio da LEGALIDADE no agir do administrador público.", 
-      explicacao: "A eficiência foi incluída pela EC 19/98 e exige presteza e rendimento funcional." 
-    }]
+    id: 301, num: "01", title: "Discursiva: Princípios Profissionais", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 3, status: "new",
+    questoes: [
+      { id: "d301q1", tipo: "discursiva", m: "direito", n: 3, enunciado: "Com base no Art. 37 da Constituição Federal, explique o princípio da EFICIÊNCIA e diferencie-o do princípio da LEGALIDADE no agir do administrador público.", explicacao: "A eficiência exige presteza e rendimento funcional; Legalidade exige submissão estrita à lei." },
+      { id: "d301q2", tipo: "discursiva", m: "direito", n: 3, enunciado: "Discorra sobre o princípio da IMPESSOALIDADE e como ele se aplica à vedação de promoção pessoal em publicidade de atos oficiais.", explicacao: "A publicidade deve ter caráter educativo/informativo, sem nomes ou símbolos que caracterizem promoção de autoridade." },
+      { id: "d301q3", tipo: "discursiva", m: "direito", n: 3, enunciado: "Explique o conceito de MORALIDADE ADMINISTRATIVA e a sua relação com o combate ao nepotismo no serviço público brasileiro.", explicacao: "A moralidade administrativa exige ética e boa-fé, sendo a base para a Súmula Vinculante 13 do STF." }
+    ]
   },
   {
-    id: 302, num: "02", title: "Discursiva: Organização Administrativa", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 1, status: "new",
-    questoes: [{ 
-      id: "d302q1", tipo: "discursiva", m: "direito", n: 3, 
-      enunciado: "Diferencie, de maneira técnica, a DESCONCENTRAÇÃO da DESCENTRALIZAÇÃO administrativa, citando exemplos de entes da Administração Indireta.", 
-      explicacao: "A desconcentração ocorre na mesma pessoa jurídica; a descentralização envolve pessoas distintas." 
-    }]
+    id: 302, num: "02", title: "Discursiva: Organização e Entidades", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 3, status: "new",
+    questoes: [
+      { id: "d302q1", tipo: "discursiva", m: "direito", n: 3, enunciado: "Diferencie técnicamente a DESCONCENTRAÇÃO da DESCENTRALIZAÇÃO administrativa, exemplificando cada uma dentro do Estado.", explicacao: "Desconcentração cria órgãos (mesma PJ); Descentralização cria novos entes como Autarquias (PJs distintas)." },
+      { id: "d302q2", tipo: "discursiva", m: "direito", n: 3, enunciado: "Quais são as principais características das AUTARQUIAS e por que elas são consideradas pessoas jurídicas de direito público?", explicacao: "Criadas por lei, patrimônio próprio, imunidade tributária e fins típicos de Estado." },
+      { id: "d303q3", tipo: "discursiva", m: "direito", n: 3, enunciado: "Estabeleça a diferença entre uma FUNDAÇÃO PÚBLICA e uma EMPRESA PÚBLICA quanto ao regime jurídico e à forma de criação.", explicacao: "Fundações visam fins sociais; Empresas Públicas têm capital 100% público e regime de direito privado (CLT)." }
+    ]
   },
   {
-    id: 303, num: "03", title: "Discursiva: Autarquias Especiais", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 1, status: "new",
-    questoes: [{ 
-      id: "d303q1", tipo: "discursiva", m: "direito", n: 3, 
-      enunciado: "Explique a 'natureza autárquica especial' mencionada na legislação das Agências Reguladoras (como a AGER-Erechim) e discorra sobre sua autonomia em relação ao Poder Executivo.", 
-      explicacao: "Agências Reguladoras têm mandatos fixos dirigidos à independência técnica." 
-    }]
+    id: 303, num: "03", title: "Discursiva: Casos Especiais (AGER-Erechim)", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 3, status: "new",
+    questoes: [
+      { id: "d303q1", tipo: "discursiva", m: "direito", n: 3, enunciado: "Explique a 'natureza autárquica especial' das Agências Reguladoras e discorra sobre a autonomia técnica de seus dirigentes.", explicacao: "Têm mandatos fixos para garantir independência política nas decisões de regulação." },
+      { id: "d303q2", tipo: "discursiva", m: "direito", n: 3, enunciado: "O que é o CONTROLE FINALÍSTICO (ou Supervisão Ministerial) exercido pela Adm. Direta sobre a Indireta?", explicacao: "O ente central fiscaliza se a entidade está cumprindo a finalidade para a qual foi criada por lei." },
+      { id: "d303q3", tipo: "discursiva", m: "direito", n: 3, enunciado: "Explique o funcionamento dos CONSÓRCIOS PÚBLICOS como forma de gestão associada entre diferentes entes federados.", explicacao: "União de esforços entre estados/municípios para fins comuns, regidos pela Lei 11.107/05." }
+    ]
   },
   {
-    id: 304, num: "04", title: "Discursiva: Poderes Administrativos", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 1, status: "new",
-    questoes: [{ 
-      id: "d304q1", tipo: "discursiva", m: "direito", n: 3, 
-      enunciado: "Defina o Poder de Polícia e explique os seus três atributos principais (Discricionariedade, Autoexecutoriedade e Coercibilidade).", 
-      explicacao: "DAC: Discricionariedade, Autoexecutoriedade e Coercibilidade." 
-    }]
+    id: 304, num: "04", title: "Discursiva: O Exercício dos Poderes", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 3, status: "new",
+    questoes: [
+      { id: "d304q1", tipo: "discursiva", m: "direito", n: 3, enunciado: "Defina o PODER DE POLÍCIA e detalhe os seus atributos de Autoexecutoriedade e Coercibilidade.", explicacao: "Autoexecutoriedade: agir sem ordem judicial prévia; Coercibilidade: uso legítimo da força para cumprimento do ato." },
+      { id: "d304q2", tipo: "discursiva", m: "direito", n: 3, enunciado: "No âmbito do PODER HIERÁRQUICO, explique os institutos da DELEGAÇÃO e da AVOCAÇÃO de competência administrativa.", explicacao: "Delegação: passar tarefa para subordinado ou mesmo nível; Avocação: chamar tarefa do subordinado para si (excepcional)." },
+      { id: "d304q3", tipo: "discursiva", m: "direito", n: 3, enunciado: "Quais são os limites constitucionais do Poder de Polícia no que tange aos direitos e garantias fundamentais do cidadão?", explicacao: "Deve respeitar a legalidade, a proporcionalidade e a razoabilidade, evitando o abuso de poder." }
+    ]
   },
   {
-    id: 305, num: "05", title: "Discursiva: Processo Disciplinar", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 1, status: "new",
-    questoes: [{ 
-      id: "d305q1", tipo: "discursiva", m: "direito", n: 3, 
-      enunciado: "Discorra sobre o Poder Disciplinar e o dever da administração de apurar irregularidades funcionais mediante Sindicância ou Processo Administrativo Disciplinar (PAD).", 
-      explicacao: "Garante o controle interno e a ética no serviço público." 
-    }]
+    id: 305, num: "05", title: "Discursiva: Disciplina e Normas", mat: "discursiva", matLabel: "Discursiva Adm", time: "60min", qs: 3, status: "new",
+    questoes: [
+      { id: "d305q1", tipo: "discursiva", m: "direito", n: 3, enunciado: "Diferencie o PODER DISCIPLINAR do PODER DE POLÍCIA quanto ao público-alvo das sanções aplicadas.", explicacao: "Disciplinar pune quem tem vínculo (servidor/contratado); Polícia restringe direitos da coletividade em geral." },
+      { id: "d305q2", tipo: "discursiva", m: "direito", n: 3, enunciado: "Explique o PODER REGULAMENTAR e a diferença entre o Decreto de Execução e o Decreto Autônomo.", explicacao: "Execução: explica a lei; Autônomo: inova na ordem jurídica em casos restritos da CF (Art. 84, VI)." },
+      { id: "d305q3", tipo: "discursiva", m: "direito", n: 3, enunciado: "Quais os requisitos para a demissão de um servidor público em um Processo Administrativo Disciplinar (PAD)?", explicacao: "Exige contraditório, ampla defesa, proporcionalidade e decisão fundamentada baseada na lei." }
+    ]
   }
 ];
 
