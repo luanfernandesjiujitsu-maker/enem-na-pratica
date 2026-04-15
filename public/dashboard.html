@@ -1328,8 +1328,26 @@ renderMinhasRedacoes();
   }
 
   init();
-  renderTabs();
-  renderSims();
+  
+  // Suporte a parâmetros de URL (ex: ?tab=red)
+  const params = new URLSearchParams(window.location.search);
+  const tabParam = params.get('tab');
+  if(tabParam) {
+    setTimeout(() => {
+      setTab(tabParam);
+      if(tabParam === 'red') {
+        const savedTheme = localStorage.getItem('red_tema_persistido');
+        if(savedTheme) {
+          document.getElementById('redTema').value = savedTheme;
+          localStorage.removeItem('red_tema_persistido');
+          redSalvar();
+        }
+      }
+    }, 100);
+  } else {
+    renderTabs();
+    renderSims();
+  }
 </script>
 
 

@@ -89,7 +89,7 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;min-height
 
 <nav class="navbar">
   <div style="display:flex;align-items:center;gap:15px">
-    <a href="dashboard.html" class="nav-back">← Sair</a>
+    <a href="/dashboard.html" class="nav-back">← Sair</a>
     <div class="nav-brand">📝 ENEM na Prática</div>
   </div>
   <div class="nav-timer" id="timerDisplay">00:00</div>
@@ -154,7 +154,7 @@ function renderHeader(){
   if(sim.mat !== 'provao') meta = '<span>' + sim.matLabel + '</span>' + meta;
   
   document.getElementById('simHeader').innerHTML =
-    '<div class="sim-breadcrumb"><a href="dashboard.html">Dashboard</a> › Simulados › ' + sim.title + '</div>' +
+    '<div class="sim-breadcrumb"><a href="/dashboard.html">Dashboard</a> › Simulados › ' + sim.title + '</div>' +
     '<h1 class="sim-h1">' + sim.title + '</h1>' +
     '<div class="sim-meta">' + meta + '</div>';
 }
@@ -213,12 +213,12 @@ function finalizar(){
   document.getElementById('resultScreen').innerHTML = 
     '<div class="result-score-box"><div class="result-pct">'+score+'</div><p>Sua Nota TRI Estimada</p></div>' +
     essayHtml +
-    '<button class="btn-start-sim" onclick="location.href=\'dashboard.html\'" style="margin-top:20px;background:#fff;color:var(--dark);">Voltar ao Painel</button>';
+    '<button class="btn-start-sim" onclick="location.href=\'/dashboard.html\'" style="margin-top:20px;background:#fff;color:var(--dark);">Voltar ao Painel</button>';
 }
 
 function irParaRedacao(){
   localStorage.setItem('red_tema_persistido', sim.essayPrompt);
-  window.location.href = 'dashboard.html?tab=red';
+  window.location.href = '/dashboard.html?tab=red';
 }
 </script>
 </body>
