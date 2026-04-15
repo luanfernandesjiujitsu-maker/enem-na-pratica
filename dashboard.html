@@ -151,6 +151,14 @@ img{display:block;max-width:100%;}
 .sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(22px,3.5vw,32px);color:var(--dark);letter-spacing:.3px;}
 .sec-link{font-size:13px;font-weight:800;color:var(--purple);}
 
+/* CATEGORIAS E ÁLBUNS */
+.cat-section{margin-bottom:48px;animation:fadeUp .6s ease both;}
+.cat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid #eee;}
+.cat-title-group{display:flex;align-items:center;gap:12px;}
+.cat-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#F3E8FF;border:2px solid var(--dark);box-shadow:3px 3px 0 var(--dark);}
+.cat-name{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--dark);}
+.cat-count{font-size:12px;font-weight:800;background:#eee;color:var(--gray);padding:4px 12px;border-radius:99px;}
+
 /* SIMULADOS GRID */
 .sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
 .sim-card{
@@ -498,26 +506,57 @@ var simulados = window.SIMULADOS || [];
 var statusLabel = {done:"✓ Feito",wip:"Em andamento",new:"Novo"};
 var statusClass = {done:"s-done",wip:"s-wip",new:"s-new"};
 
-/* ── RENDER SIMULADOS ── */
+/* ── RENDER SIMULADOS (AGRUPADO POR MATÉRIA) ── */
 function renderSims(){
-  document.getElementById('simGrid').innerHTML = simulados.map(function(s){
-    s.status = s.status || "new"; 
-    s.prog = s.prog || 0;
-    
-    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>80?"locked":"")+'">'
-      +'<div class="sim-header">'
-      +'<div class="sim-num">'+s.num+'</div>'
-      +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'
-      +'</div>'
-      +'<span class="sim-mat-tag mat-'+s.mat+'">'+s.matLabel+'</span>'
-      +'<h4>'+s.title+'</h4>'
-      +(s.prog>0 ? '<div class="sim-prog"><div class="sim-prog-fill" style="width:'+s.prog+'%"></div></div>' : '')
-      +'<div class="sim-card-footer">'
-      +'<span class="sim-qs">⏱ '+s.time+' · '+s.qs+' questões</span>'
-      +(s.score>0 ? '<span class="sim-score">'+s.score+(s.mat==="red"?" pts":"%")+'</span>' : '')
-      +'</div>'
-      +'</a>';
-  }).join('');
+  var categories = [
+    { key: 'red', label: 'Redação', icon: '✍️', color: 'var(--purple)' },
+    { key: 'port', label: 'Linguagens', icon: '📚', color: '#BE123C' },
+    { key: 'ch', label: 'Ciências Humanas', icon: '🌍', color: '#B45309' },
+    { key: 'cn', label: 'Ciências da Natureza', icon: '🧬', color: '#15803D' },
+    { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' }
+  ];
+
+  var html = '';
+  
+  categories.forEach(function(cat){
+    var items = simulados.filter(function(s){ return s.mat === cat.key; });
+    if(items.length === 0) return;
+
+    html += '<div class="cat-section reveal">'
+      + '<div class="cat-header">'
+      + '<div class="cat-title-group">'
+      + '<div class="cat-icon" style="background:'+cat.color+'20; border-color:'+cat.color+'">'+cat.icon+'</div>'
+      + '<h3 class="cat-name">'+cat.label+'</h3>'
+      + '</div>'
+      + '<span class="cat-count">'+items.length+' simulados</span>'
+      + '</div>'
+      + '<div class="sim-grid">';
+
+    html += items.map(function(s){
+      s.status = s.status || "new"; 
+      s.prog = s.prog || 0;
+      var isLocked = s.status === "new" && s.id > 80;
+      
+      return '<a href="simulado.html?id='+s.id+'" class="sim-card '+(isLocked?"locked":"")+'">'
+        +'<div class="sim-header">'
+        +'<div class="sim-num">'+s.num+'</div>'
+        +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'
+        +'</div>'
+        +'<span class="sim-mat-tag mat-'+s.mat+'">'+s.matLabel+'</span>'
+        +'<h4>'+s.title+'</h4>'
+        +(s.prog>0 ? '<div class="sim-prog"><div class="sim-prog-fill" style="width:'+s.prog+'%"></div></div>' : '')
+        +'<div class="sim-card-footer">'
+        +'<span class="sim-qs">⏱ '+s.time+' · '+s.qs+' questões</span>'
+        +(s.score>0 ? '<span class="sim-score">'+s.score+(s.mat==="red"?" pts":"%")+'</span>' : '')
+        +'</div>'
+        +'</a>';
+    }).join('');
+
+    html += '</div></div>'; // fecha sim-grid e cat-section
+  });
+
+  document.getElementById('simGrid').innerHTML = html;
+  
   // Re-observe
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 }
