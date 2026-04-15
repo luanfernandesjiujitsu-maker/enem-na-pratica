@@ -648,7 +648,6 @@ img{display:block;max-width:100%;}
 <script src="src/js/simulados-extra.js?v=90"></script>
 <script src="src/js/simulados-extra2.js?v=90"></script>
 <script src="src/js/provao-data.js?v=90"></script>
-<script src="src/js/direito-completo.js?v=90"></script>
 
 <script>
 /* ── DATA ── */
@@ -696,31 +695,20 @@ function renderSims(){
     { key: 'ch', label: 'Ciências Humanas', icon: '🌍', color: '#B45309' },
     { key: 'cn', label: 'Ciências da Natureza', icon: '🧬', color: '#15803D' },
     { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' },
-    { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' },
-    { key: 'direito', label: 'Direito Administrativo', icon: '⚖️', color: '#4B5563' },
-    { key: 'discursiva', label: 'Provas Discursivas', icon: '✍️', color: '#7C3AED' }
+    { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' }
   ];
 
   var html = '';
   var globalIdx = 0;
-var gridContainer = document.getElementById('simGrid');
-if(activeTab === 'all') {
-  gridContainer.className = 'all-grid';
-} else {
-  gridContainer.className = 'single-grid';
-}
+  var gridContainer = document.getElementById('simGrid');
+  if(activeTab === 'all') {
+    gridContainer.className = 'all-grid';
+  } else {
+    gridContainer.className = 'single-grid';
+  }
   
   categories.forEach(function(cat){
-    if(activeTab !== 'all' && activeTab !== cat.key) {
-      // Mesmo que a tab não esteja ativa, se "Todos" estiver ligado, 
-      // precisamos contar os itens das categorias anteriores para o numbering global
-      if(activeTab === 'all') {
-         globalIdx += simulados.filter(function(s){ return s.mat === cat.key; }).length;
-      } else {
-         // Se não for "Todos" e não for a categoria ativa, apenas pula
-      }
-      return;
-    }
+    if(activeTab !== 'all' && activeTab !== cat.key) return;
 
     var items = simulados.filter(function(s){ return s.mat === cat.key; });
     if(items.length === 0) return;
@@ -738,16 +726,12 @@ if(activeTab === 'all') {
     html += items.map(function(s, idx){
       globalIdx++;
       
-      // Carregar status manual se existir
       var manualStatus = localStorage.getItem('sim_status_' + s.id);
       if(manualStatus) s.status = manualStatus;
       else s.status = s.status || "new"; 
 
       s.prog = s.prog || 0;
-      var isLocked = s.status === "new" && s.id > 80 && (s.mat !== 'direito' && s.mat !== 'discursiva');
-      
-      // Lógica de numeração:
-      // Se "Todos", usa globalIdx (1, 2, 3...)
+      var isLocked = false; // Removida trava de ID > 80
       // Se aba específica, usa idx + 1 (1, 2, 3...)
       var displayNum = (activeTab === 'all') ? globalIdx : (idx + 1);
       if(displayNum < 10) displayNum = '0' + displayNum;
