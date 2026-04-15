@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Criativo Story — ENEM na Prática</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Nunito',sans-serif;}
+
+/* Story container — 1080x1920 ratio */
+.story{
+  width:540px;height:960px;
+  background:linear-gradient(160deg,#7B2FBE 0%,#FF2D8B 45%,#C4006B 100%);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  padding:48px 36px;
+}
+
+/* BG deco */
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:36px 36px;pointer-events:none;}
+.blob1{position:absolute;top:-80px;right:-120px;width:380px;height:380px;border-radius:50%;background:rgba(255,214,0,.12);filter:blur(80px);pointer-events:none;}
+.blob2{position:absolute;bottom:-60px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(123,47,190,.35);filter:blur(60px);pointer-events:none;}
+
+/* Floating emojis */
+.float-emoji{position:absolute;font-size:32px;opacity:.25;pointer-events:none;}
+.fe1{top:60px;right:40px;animation:fl 4s ease-in-out infinite;}
+.fe2{top:200px;left:20px;animation:fl 3.5s ease-in-out .5s infinite;font-size:24px;}
+.fe3{bottom:320px;right:30px;animation:fl 4.5s ease-in-out 1s infinite;}
+.fe4{bottom:160px;left:35px;animation:fl 3s ease-in-out .3s infinite;font-size:26px;}
+.fe5{top:420px;right:50px;animation:fl 3.8s ease-in-out .7s infinite;font-size:20px;}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(8deg)}}
+
+/* Sparkles */
+.sparkle{position:absolute;width:8px;height:8px;background:#FFD600;border-radius:50%;box-shadow:0 0 12px 4px rgba(255,214,0,.4);pointer-events:none;}
+.sp1{top:140px;left:60px;animation:twinkle 2s ease-in-out infinite;}
+.sp2{top:380px;right:70px;animation:twinkle 2.5s ease-in-out .4s infinite;}
+.sp3{bottom:280px;left:90px;animation:twinkle 1.8s ease-in-out .8s infinite;}
+.sp4{top:520px;left:40px;animation:twinkle 2.2s ease-in-out 1.2s infinite;}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:1;transform:scale(1.3)}}
+
+/* Content */
+.content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;height:100%;width:100%;}
+
+/* Top badge */
+.badge{display:inline-flex;align-items:center;gap:8px;background:#FFD600;color:#1a1a2e;font-size:14px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;padding:10px 24px;border-radius:99px;box-shadow:4px 4px 0 rgba(0,0,0,.25);margin-bottom:32px;}
+
+/* Headline */
+.headline{text-align:center;margin-bottom:20px;}
+.hl-line1{font-family:'Black Han Sans',sans-serif;font-size:42px;color:#fff;line-height:1.05;letter-spacing:.5px;}
+.hl-line2{font-family:'Black Han Sans',sans-serif;font-size:46px;line-height:1.05;display:inline-block;background:#FFD600;color:#1a1a2e;padding:4px 18px;border-radius:12px;margin-top:4px;box-shadow:4px 4px 0 rgba(0,0,0,.2);transform:rotate(-1.5deg);}
+
+/* Sub */
+.sub{font-size:15px;font-weight:700;color:rgba(255,255,255,.8);text-align:center;line-height:1.65;margin-bottom:28px;max-width:380px;}
+.sub strong{color:#FFD600;}
+
+/* Card */
+.card{background:rgba(26,26,46,.92);border:3px solid rgba(255,214,0,.3);border-radius:24px;padding:28px 30px;width:100%;max-width:420px;backdrop-filter:blur(8px);box-shadow:0 16px 48px rgba(0,0,0,.35);margin-bottom:28px;}
+.card-title{font-family:'Black Han Sans',sans-serif;font-size:38px;color:#FFD600;text-align:center;line-height:1.1;text-shadow:3px 3px 0 rgba(0,0,0,.3);margin-bottom:18px;}
+.card-items{display:flex;flex-direction:column;gap:10px;}
+.card-item{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:800;color:#fff;}
+.ci-check{width:28px;height:28px;border-radius:50%;background:#7B2FBE;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;border:2px solid rgba(255,214,0,.4);}
+.ci-emoji{font-size:18px;flex-shrink:0;}
+
+/* Price */
+.price-area{text-align:center;margin-bottom:24px;}
+.price-old{font-size:18px;color:rgba(255,255,255,.45);text-decoration:line-through;font-weight:700;margin-bottom:2px;}
+.price-label{font-size:13px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.price-value{font-family:'Black Han Sans',sans-serif;font-size:80px;color:#FFD600;line-height:1;text-shadow:5px 5px 0 rgba(0,0,0,.3);position:relative;}
+.price-value::after{content:'';position:absolute;inset:-12px -20px;border-radius:20px;border:3px dashed rgba(255,214,0,.25);pointer-events:none;}
+.price-info{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);margin-top:6px;}
+
+/* CTA */
+.cta-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#FFD600;color:#1a1a2e;font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;padding:18px 44px;border-radius:99px;box-shadow:5px 5px 0 rgba(0,0,0,.3);width:100%;max-width:420px;text-align:center;letter-spacing:.02em;animation:pulse 2.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,214,0,.5),5px 5px 0 rgba(0,0,0,.3)}70%{box-shadow:0 0 0 16px rgba(255,214,0,0),5px 5px 0 rgba(0,0,0,.3)}}
+
+.cta-micro{display:flex;gap:18px;justify-content:center;margin-top:12px;}
+.cta-micro span{font-size:12px;font-weight:800;color:rgba(255,255,255,.6);}
+
+/* Swipe up */
+.swipe{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:10px;}
+.swipe-arrow{font-size:24px;color:rgba(255,255,255,.5);animation:bounce 1.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.swipe-txt{font-size:11px;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:.15em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div class="story">
+  <div class="bg-grid"></div>
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  
+  <div class="float-emoji fe1">📝</div>
+  <div class="float-emoji fe2">⭐</div>
+  <div class="float-emoji fe3">🎯</div>
+  <div class="float-emoji fe4">🚀</div>
+  <div class="float-emoji fe5">✅</div>
+  
+  <div class="sparkle sp1"></div>
+  <div class="sparkle sp2"></div>
+  <div class="sparkle sp3"></div>
+  <div class="sparkle sp4"></div>
+
+  <div class="content">
+    <div class="badge">📚 ENEM 2026</div>
+
+    <div class="headline">
+      <div class="hl-line1">PARA DE PERDER</div>
+      <div class="hl-line1">TEMPO</div>
+      <div class="hl-line2">ESTUDANDO ERRADO!</div>
+    </div>
+
+    <p class="sub">Resolva <strong>+100 simulados completos</strong> no estilo real do ENEM com gabarito comentado</p>
+
+    <div class="card">
+      <div class="card-title">+100 SIMULADOS</div>
+      <div class="card-items">
+        <div class="card-item"><div class="ci-check">✓</div><span>Gabarito comentado em tudo</span></div>
+        <div class="card-item"><div class="ci-check">✓</div><span>Ranking com outros alunos</span></div>
+        <div class="card-item"><div class="ci-check">✓</div><span>Acesso vitalício + atualizações</span></div>
+        <div class="card-item"><div class="ci-check">✓</div><span>Funciona no celular 📱</span></div>
+      </div>
+    </div>
+
+    <div class="price-area">
+      <div class="price-old">De R$79,90</div>
+      <div class="price-label">por apenas</div>
+      <div class="price-value">R$19,90</div>
+      <div class="price-info">pagamento único · acesso imediato</div>
+    </div>
+
+    <div class="cta-btn">🚀 QUERO MEU ACESSO!</div>
+    <div class="cta-micro">
+      <span>🔒 Seguro</span>
+      <span>⚡ Imediato</span>
+      <span>🛡 Garantia 7 dias</span>
+    </div>
+
+    <div class="swipe">
+      <div class="swipe-arrow">⌃</div>
+      <div class="swipe-txt">Arraste pra cima</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

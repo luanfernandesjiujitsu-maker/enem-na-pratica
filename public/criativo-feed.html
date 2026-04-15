@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Criativo Feed — ENEM na Prática</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Nunito',sans-serif;}
+
+/* Feed container — 1:1 */
+.feed{
+  width:640px;height:640px;
+  background:#1a1a2e;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+
+/* BG */
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(123,47,190,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(123,47,190,.08) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+.glow1{position:absolute;top:-80px;left:-80px;width:350px;height:350px;border-radius:50%;background:rgba(255,45,139,.15);filter:blur(70px);pointer-events:none;}
+.glow2{position:absolute;bottom:-80px;right:-80px;width:350px;height:350px;border-radius:50%;background:rgba(123,47,190,.2);filter:blur(70px);pointer-events:none;}
+
+/* Top bar */
+.top-bar{background:linear-gradient(135deg,#7B2FBE,#FF2D8B);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;border-bottom:3px solid rgba(255,214,0,.3);}
+.top-brand{font-family:'Black Han Sans',sans-serif;font-size:18px;color:#FFD600;display:flex;align-items:center;gap:8px;}
+.top-brand span{color:#fff;}
+.top-badge{background:#FFD600;color:#1a1a2e;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:99px;box-shadow:3px 3px 0 rgba(0,0,0,.2);}
+
+/* Main content — VS layout */
+.main{flex:1;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:20px 24px;position:relative;z-index:2;}
+
+/* Left — cursinho */
+.side{display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px 16px;border-radius:24px;}
+.side-left{background:rgba(255,45,139,.06);border:2px solid rgba(255,45,139,.15);}
+.side-right{background:rgba(255,214,0,.06);border:2px solid rgba(255,214,0,.2);box-shadow:0 0 40px rgba(255,214,0,.08);}
+
+.side-emoji{font-size:48px;}
+.side-label{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.side-name{font-family:'Black Han Sans',sans-serif;font-size:20px;color:#fff;text-align:center;line-height:1.15;}
+.side-price{font-family:'Black Han Sans',sans-serif;font-size:42px;line-height:1;}
+.sp-red{color:#FC8181;text-decoration:line-through;text-decoration-color:#FF2D8B;text-decoration-thickness:3px;}
+.sp-yellow{color:#FFD600;text-shadow:3px 3px 0 rgba(0,0,0,.3);}
+.side-detail{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);}
+.side-detail-y{color:rgba(255,214,0,.7);}
+
+.side-tags{display:flex;flex-direction:column;gap:6px;width:100%;}
+.stag{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:rgba(255,255,255,.7);padding:6px 12px;border-radius:10px;}
+.stag-bad{background:rgba(255,45,139,.1);border:1px solid rgba(255,45,139,.15);}
+.stag-good{background:rgba(255,214,0,.1);border:1px solid rgba(255,214,0,.2);}
+.stag-icon{font-size:14px;}
+
+/* VS circle */
+.vs-circle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FF2D8B,#7B2FBE);border:3px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:22px;color:#FFD600;box-shadow:0 0 30px rgba(255,45,139,.3);flex-shrink:0;}
+
+/* Bottom CTA */
+.bottom{background:#FFD600;padding:16px 28px;display:flex;align-items:center;justify-content:center;gap:14px;position:relative;z-index:2;border-top:3px solid rgba(0,0,0,.1);}
+.bottom-text{font-family:'Black Han Sans',sans-serif;font-size:20px;color:#1a1a2e;letter-spacing:.3px;}
+.bottom-arrow{font-size:20px;animation:bounceR 1.5s ease-in-out infinite;}
+@keyframes bounceR{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+/* Crown */
+.crown{position:absolute;top:-16px;font-size:28px;z-index:3;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+</style>
+</head>
+<body>
+
+<div class="feed">
+  <div class="bg-grid"></div>
+  <div class="glow1"></div>
+  <div class="glow2"></div>
+
+  <div class="top-bar">
+    <div class="top-brand">📝 <span>ENEM</span> na Prática</div>
+    <div class="top-badge">🔥 ENEM 2026</div>
+  </div>
+
+  <div class="main">
+    <!-- CURSINHO -->
+    <div class="side side-left">
+      <div class="side-emoji">😰</div>
+      <div class="side-label">Cursinho</div>
+      <div class="side-name">Presencial<br/>Tradicional</div>
+      <div class="side-price sp-red">R$500</div>
+      <div class="side-detail">por mês 😱</div>
+      <div class="side-tags">
+        <div class="stag stag-bad"><span class="stag-icon">❌</span> Horário fixo</div>
+        <div class="stag stag-bad"><span class="stag-icon">❌</span> Sem garantia</div>
+        <div class="stag stag-bad"><span class="stag-icon">❌</span> Pouco simulado</div>
+      </div>
+    </div>
+
+    <!-- VS -->
+    <div class="vs-circle">VS</div>
+
+    <!-- ENEM NA PRÁTICA -->
+    <div class="side side-right" style="position:relative;">
+      <div class="crown">👑</div>
+      <div class="side-emoji">🚀</div>
+      <div class="side-label">Enem na Prática</div>
+      <div class="side-name">+100 Simulados<br/>Completos</div>
+      <div class="side-price sp-yellow">R$19,90</div>
+      <div class="side-detail side-detail-y">uma vez só! ✨</div>
+      <div class="side-tags">
+        <div class="stag stag-good"><span class="stag-icon">✅</span> Gabarito comentado</div>
+        <div class="stag stag-good"><span class="stag-icon">✅</span> Garantia 7 dias</div>
+        <div class="stag stag-good"><span class="stag-icon">✅</span> Acesso vitalício</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="bottom-text">👇 CLIQUE EM "SAIBA MAIS" — ACESSO IMEDIATO</div>
+    <div class="bottom-arrow">🚀</div>
+  </div>
+</div>
+
+</body>
+</html>

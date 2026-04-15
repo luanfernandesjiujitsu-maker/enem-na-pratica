@@ -10,7 +10,7 @@ git config --global user.name "Luan"
 
 :: Atualiza arquivos
 git add .
-git commit -m "Migração para Cloudflare Pages + Webhook"
+git commit -m "feat(dashboard): Adicionando nova folha de redação e novo estilo"
 
 :: Envia
 git push origin main
