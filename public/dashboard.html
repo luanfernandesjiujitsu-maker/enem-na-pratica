@@ -151,40 +151,52 @@ img{display:block;max-width:100%;}
 .sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(22px,3.5vw,32px);color:var(--dark);letter-spacing:.3px;}
 .sec-link{font-size:13px;font-weight:800;color:var(--purple);}
 
-/* CONFIGURAÇÃO DA ABA "TODOS" (CATEGORIAS LADO A LADO EM COLUNAS) */
+/* CONFIGURAÇÃO DA SEÇÃO DE MATÉRIA */
+.cat-section {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* GRID DE ITENS (PADRÃO: LADO A LADO) */
+.sim-grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+.sim-grid .sim-card {
+  flex: 0 0 calc(25% - 15px); /* 4 por linha em telas grandes */
+  min-width: 250px;
+}
+
+/* AJUSTES PARA A ABA "TODOS" (CATEGORIAS EM COLUNAS) */
 #simGrid.all-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 25px;
   align-items: flex-start;
-  width: 100%;
 }
 #simGrid.all-grid .cat-section {
   flex: 1 1 280px;
-  max-width: 320px;
+  max-width: 310px;
   margin-bottom: 20px;
 }
 #simGrid.all-grid .sim-grid {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 12px;
 }
-#simGrid.all-grid .sim-card {
+#simGrid.all-grid .sim-grid .sim-card {
+  flex: 1 1 100%;
+  min-width: 100%;
   padding: 16px;
   border-radius: 16px;
 }
 
-/* CONFIGURAÇÃO PADRÃO (ITENS LADO A LADO EM GRID) */
-.cat-section {
-  width: 100%;
-  margin-bottom: 48px;
-}
-.sim-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  width: 100%;
-}
+@media(max-width: 1200px){ .sim-grid .sim-card { flex: 0 0 calc(33.33% - 14px); } }
+@media(max-width: 900px){ .sim-grid .sim-card { flex: 0 0 calc(50% - 10px); } }
+@media(max-width: 600px){ .sim-grid .sim-card { flex: 1 1 100%; } }
 
 .sim-card {
   background: var(--bg2);
@@ -664,10 +676,12 @@ function renderSims(){
 
   var html = '';
   var globalIdx = 0;
-  var gridContainer = document.getElementById('simGrid');
-
-  if(activeTab === 'all') gridContainer.className = 'all-grid';
-  else gridContainer.className = '';
+var gridContainer = document.getElementById('simGrid');
+if(activeTab === 'all') {
+  gridContainer.className = 'all-grid';
+} else {
+  gridContainer.className = 'single-grid';
+}
   
   categories.forEach(function(cat){
     if(activeTab !== 'all' && activeTab !== cat.key) {
