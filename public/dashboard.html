@@ -646,6 +646,7 @@ img{display:block;max-width:100%;}
 <script src="src/js/simulados-extra2.js"></script>
 <script src="src/js/provao-data.js"></script>
 <script src="src/js/direto-adm.js"></script>
+<script src="src/js/direto-adm-discursiva.js"></script>
 <script>
 /* ── DATA ── */
 var simulados = window.SIMULADOS || [];
@@ -664,7 +665,8 @@ function renderTabs(){
     { key: 'cn', label: 'C. Natureza', icon: '🧬' },
     { key: 'mat', label: 'Matemática', icon: '🔢' },
     { key: 'provao', label: '🏆 Provões', icon: '🌟' },
-    { key: 'direito', label: '⚖️ Direito Adm', icon: '📜' }
+    { key: 'direito', label: '⚖️ Direito Adm', icon: '📜' },
+    { key: 'discursiva', label: '✍️ Discursivas', icon: '✏️' }
   ];
 
   var html = categories.map(function(cat){
@@ -690,7 +692,8 @@ function renderSims(){
     { key: 'cn', label: 'Ciências da Natureza', icon: '🧬', color: '#15803D' },
     { key: 'mat', label: 'Matemática', icon: '🔢', color: '#1D4ED8' },
     { key: 'provao', label: 'Provão Geral ENEM', icon: '🏆', color: '#d97706' },
-    { key: 'direito', label: 'Direito Administrativo', icon: '⚖️', color: '#4B5563' }
+    { key: 'direito', label: 'Direito Administrativo', icon: '⚖️', color: '#4B5563' },
+    { key: 'discursiva', label: 'Provas Discursivas', icon: '✍️', color: '#7C3AED' }
   ];
 
   var html = '';
