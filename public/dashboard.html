@@ -353,7 +353,7 @@ img{display:block;max-width:100%;}
 <section class="section" id="simulados">
   <div class="container">
     <div class="sec-head reveal">
-      <div><div class="sec-tag">Seus simulados</div><h2 class="sec-title">+50 Simulados Completos</h2></div>
+      <div><div class="sec-tag">Seus simulados</div><h2 class="sec-title">+80 Simulados Completos</h2></div>
       <a href="#" class="sec-link">Ver todos →</a>
     </div>
     <div class="sim-grid" id="simGrid"></div>
@@ -504,7 +504,7 @@ function renderSims(){
     s.status = s.status || "new"; 
     s.prog = s.prog || 0;
     
-    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>9?"locked":"")+'">'
+    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>80?"locked":"")+'">'
       +'<div class="sim-header">'
       +'<div class="sim-num">'+s.num+'</div>'
       +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'

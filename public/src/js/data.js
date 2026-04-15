@@ -98,11 +98,11 @@ const SIMULADOS = [
 }
 ];
 
-// O looping para os demais simulados (03-50)
+// O looping para os demais simulados (03-12)
 (function(){
   const mats = ["cn","ch","red","mat","port","cn","ch","mat","cn","ch"];
   const matLabels = ["Ciências da Natureza","Ciências Humanas","Redação","Matemática","Linguagens","Ciências da Natureza","Ciências Humanas","Matemática","Ciências da Natureza","Ciências Humanas"];
-  for(let i=3; i<=50; i++){
+  for(let i=3; i<=12; i++){
     let mIdx = (i-1) % 10;
     SIMULADOS.push({
       id: i, num: String(i).padStart(2,"0"), mat: mats[mIdx], matLabel: matLabels[mIdx],

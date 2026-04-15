@@ -504,7 +504,7 @@ function renderSims(){
     s.status = s.status || "new"; 
     s.prog = s.prog || 0;
     
-    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>9?"locked":"")+'">'
+    return '<a href="simulado.html?id='+s.id+'" class="sim-card reveal '+(s.status==="new"&&s.id>80?"locked":"")+'">'
       +'<div class="sim-header">'
       +'<div class="sim-num">'+s.num+'</div>'
       +'<span class="sim-status '+statusClass[s.status]+'">'+statusLabel[s.status]+'</span>'
