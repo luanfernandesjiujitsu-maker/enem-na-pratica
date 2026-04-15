@@ -587,6 +587,7 @@ img{display:block;max-width:100%;}
     <p class="modal-sim-sub" id="mSub">Descrição</p>
     <div class="modal-info-row" id="mInfo"></div>
     <button class="btn-start" onclick="closeModal('simModal')">🚀 Iniciar Simulado</button>
+    <button class="btn-gabarito" id="btnMarkDone" style="background:#DCFCE7;color:#15803D;border-color:#15803D;margin-top:10px;">✅ Marcar como Concluído</button>
     <button class="btn-gabarito" onclick="closeModal('simModal')">📋 Ver Gabarito Comentado</button>
   </div>
 </div>
@@ -725,7 +726,12 @@ if(activeTab === 'all') {
 
     html += items.map(function(s, idx){
       globalIdx++;
-      s.status = s.status || "new"; 
+      
+      // Carregar status manual se existir
+      var manualStatus = localStorage.getItem('sim_status_' + s.id);
+      if(manualStatus) s.status = manualStatus;
+      else s.status = s.status || "new"; 
+
       s.prog = s.prog || 0;
       var isLocked = s.status === "new" && s.id > 80;
       
