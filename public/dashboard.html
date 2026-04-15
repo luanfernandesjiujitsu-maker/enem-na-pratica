@@ -291,6 +291,19 @@ img{display:block;max-width:100%;}
 .env-ok{background:#DCFCE7;color:#15803D;}
 .env-wait{background:#FEF3C7;color:#B45309;}
 
+/* AI CORRECTION MODAL */
+.ai-modal-box{max-width:700px!important;}
+.ai-score-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:24px;}
+.ai-comp-card{background:#F3E8FF;border:2px solid #DDD6FE;border-radius:12px;padding:12px;text-align:center;}
+.ai-comp-num{font-size:10px;font-weight:900;color:var(--purple);text-transform:uppercase;margin-bottom:4px;}
+.ai-comp-score{font-family:'Black Han Sans',sans-serif;font-size:24px;color:var(--dark);}
+.ai-feedback-section{margin-bottom:20px;padding:16px;background:#FAFAFA;border:1.5px solid #eee;border-radius:14px;}
+.ai-feedback-title{font-size:13px;font-weight:900;color:var(--dark);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.ai-feedback-text{font-size:14px;color:#555;line-height:1.6;font-weight:600;}
+.ai-total-box{background:linear-gradient(135deg,var(--purple),var(--pink));padding:24px;border-radius:18px;text-align:center;color:#fff;margin-bottom:24px;border:3px solid var(--dark);box-shadow:6px 6px 0 var(--dark);}
+.ai-total-val{font-family:'Black Han Sans',sans-serif;font-size:48px;line-height:1;}
+.ai-total-lbl{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:2px;margin-top:4px;}
+
 /* FOOTER */
 .site-footer{background:var(--dark);color:#fff;padding:36px 24px;text-align:center;border-top:4px solid var(--purple);}
 .footer-brand{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--yellow);margin-bottom:8px;}
@@ -442,6 +455,7 @@ img{display:block;max-width:100%;}
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;" id="redBotoes">
           <button onclick="limparRedacao()" style="background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:99px;padding:9px 18px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🗑 Limpar</button>
+          <button onclick="corrigirIA()" id="btnAI" style="background:#F3E8FF;color:var(--purple);border:2px solid var(--dark);border-radius:99px;padding:9px 18px;font-size:13px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--dark);display:flex;align-items:center;gap:6px;">✨ Corrigir com IA</button>
           <button onclick="enviarRedacao()" id="btnEnviar" style="background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:3px solid var(--dark);border-radius:99px;padding:10px 22px;font-size:14px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 var(--dark);transition:.2s;">📤 Enviar para Correção</button>
         </div>
       </div>
@@ -493,6 +507,34 @@ img{display:block;max-width:100%;}
       <button class="url-btn" onclick="loadUrl()">OK</button>
     </div>
     <button class="save-photo-btn" onclick="savePhoto()">✓ Salvar Foto</button>
+  </div>
+</div>
+
+<!-- MODAL IA REDAÇÃO -->
+<div class="modal-overlay" id="aiModal">
+  <div class="modal-box ai-modal-box">
+    <button class="modal-close" onclick="closeModal('aiModal')">✕</button>
+    <div class="ai-total-box">
+      <div class="ai-total-val" id="aiTotal">880</div>
+      <div class="ai-total-lbl">Nota Estimada pela IA</div>
+    </div>
+    
+    <div class="ai-score-row">
+      <div class="ai-comp-card"><div class="ai-comp-num">Comp 1</div><div class="ai-comp-score" id="aiC1">160</div></div>
+      <div class="ai-comp-card"><div class="ai-comp-num">Comp 2</div><div class="ai-comp-score" id="aiC2">200</div></div>
+      <div class="ai-comp-card"><div class="ai-comp-num">Comp 3</div><div class="ai-comp-score" id="aiC3">160</div></div>
+      <div class="ai-comp-card"><div class="ai-comp-num">Comp 4</div><div class="ai-comp-score" id="aiC4">200</div></div>
+      <div class="ai-comp-card"><div class="ai-comp-num">Comp 5</div><div class="ai-comp-score" id="aiC5">160</div></div>
+    </div>
+
+    <div class="ai-feedback-section">
+      <div class="ai-feedback-title">💡 Análise Geral e Sugestões</div>
+      <div class="ai-feedback-text" id="aiGeneral">Sua redação apresenta uma boa estrutura...</div>
+    </div>
+
+    <div id="aiDetails"></div>
+
+    <button class="btn-start" onclick="closeModal('aiModal')">Entendido!</button>
   </div>
 </div>
 
@@ -979,6 +1021,69 @@ document.addEventListener('keydown', function(e){
     }
   }
 });
+
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+/* ── CORREÇÃO IA ── */
+async function corrigirIA(){
+  const inputs = document.querySelectorAll('#redacaoBox .red-line-input');
+  let texto = "";
+  inputs.forEach(inp => { if(inp.value.trim()) texto += inp.value.trim() + " "; });
+
+  if(texto.split(' ').length < 100){
+    alert("⚠️ Seu texto está muito curto para uma avaliação do ENEM. Tente escrever pelo menos 7 ou 8 linhas para uma análise precisa.");
+    return;
+  }
+
+  const btn = document.getElementById('btnAI');
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = "⏳ Analisando...";
+
+  try {
+    const response = await fetch('/api/ai-correction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: texto })
+    });
+
+    if(!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Erro na comunicação com a IA");
+    }
+
+    const data = await response.json();
+
+    // Preencher Modal
+    document.getElementById('aiTotal').textContent = data.total;
+    document.getElementById('aiC1').textContent = data.c1.score;
+    document.getElementById('aiC2').textContent = data.c2.score;
+    document.getElementById('aiC3').textContent = data.c3.score;
+    document.getElementById('aiC4').textContent = data.c4.score;
+    document.getElementById('aiC5').textContent = data.c5.score;
+    document.getElementById('aiGeneral').textContent = data.general;
+
+    let details = "";
+    [1,2,3,4,5].forEach(i => {
+      const c = data['c'+i];
+      details += `<div class="ai-feedback-section">
+        <div class="ai-feedback-title">📌 Competência ${i} (${c.score}/200)</div>
+        <div class="ai-feedback-text">${c.text}</div>
+      </div>`;
+    });
+    document.getElementById('aiDetails').innerHTML = details;
+
+    openModal('aiModal');
+  } catch (err) {
+    alert("❌ Erro ao corrigir: " + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = original;
+  }
+}
 
 renderLimiteBadge();
 renderMinhasRedacoes();
