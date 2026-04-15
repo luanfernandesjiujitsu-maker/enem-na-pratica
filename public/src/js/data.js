@@ -10,7 +10,7 @@ var SIMULADOS = [
   qs: 10, time: "1h", status: "new",
   questoes: [
     { n: 1, enunciado: "Leia o texto: 'A internet democratizou o acesso à informação, mas criou bolhas de confirmação onde o usuário só consome o que já concorda.' O fenômeno descrito no texto refere-se a:", alternativas: ["A) Algoritmos de recomendação e filtros-bolha.", "B) Democratização plena da rede social.", "C) Inexistência de censura digital.", "D) Ausência de diversidade cultural no Brasil.", "E) Simplicidade técnica das plataformas."], gabarito: "A", explicacao: "Filtros-bolha são criados por algoritmos que isolam o usuário em conteúdos de seu interesse prévio." },
-    { n: 2, enunciado: "No Modernismo brasileiro, a antropofagia de Oswald de Andrade propunha:", alternativas: ["A) Copiar fielmente a cultura europeia.", "B) Rejeitar qualquer influência estrangeira.", "C) Devorar a cultura estrangeira para criar uma arte brasileira original.", "D) Priorizar o rigor métrico do Parnasianismo.", "E) Abandonar a literatura e focar na pintura."], gabarito: "C", explicacao: "A antropofagia sugere a assimilação crítica da influência externa." },
+    { n: 2, enunciado: "No Modernismo brasileiro, a antropofagia de Oswald de Andrade propunha:", alternativas: ["A) Copiar fielmente a cultura europeia.", "B) Rejeitar qualquer influência estrangeira.", "C) Devorar a cultura estrangeira para criar uma arte brasileira original.", "D) Priorizar o rigor métrico do Parnasianismo.", "E) Abandonar a literatura e focar na painting."], gabarito: "C", explicacao: "A antropofagia sugere a assimilação crítica da influência externa." },
     { n: 3, enunciado: "Analise a função da linguagem em um manual de instruções:", alternativas: ["A) Função poética.", "B) Função metalinguística.", "C) Função apelativa ou conativa.", "D) Função referencial ou informativa.", "E) Função fática."], gabarito: "D", explicacao: "Manuais visam informar objetivamente o receptor." },
     { n: 1, enunciado: "Um neologismo é:", alternativas: ["A) Uma palavra antiga em desuso.", "B) Uma palavra criada recentemente.", "C) Um erro de concordância.", "D) Uma rima rica.", "E) Um vício de linguagem."], gabarito: "B", explicacao: "Criação de novos termos na língua." },
     { n: 2, enunciado: "Intertextualidade ocorre quando:", alternativas: ["A) Um texto dialoga com outro pré-existente.", "B) O autor escreve sem pontuação.", "C) O texto é exclusivamente informativo.", "D) Não há rimas no poema.", "E) O texto é traduzido do inglês."], gabarito: "A", explicacao: "Relação entre textos de diferentes autores ou épocas." },
@@ -54,7 +54,7 @@ var SIMULADOS = [
     { n: 1, enunciado: "A água ferve ao nível do mar a quanto graus Celsius?", alternativas: ["A) 50", "B) 80", "C) 100", "D) 120", "E) 200"], gabarito: "C", explicacao: "Ponto de ebulição padrão." },
     { n: 2, enunciado: "Darwin propôs a teoria da:", alternativas: ["A) Geração espontânea", "B) Seleção natural", "C) Criação divina exclusiva", "D) Fixidez das espécies", "E) Herança de caracteres adquiridos (Lamarck)"], gabarito: "B", explicacao: "Sobrevivência dos mais aptos ao meio." }
   ]
-}
+},
 {
   id: 4, num: "04", mat: "ch", matLabel: "Humanas",
   title: "Ciências Humanas e suas Tecnologias",
@@ -86,7 +86,7 @@ var SIMULADOS = [
     { n: 2, enunciado: "O Romantismo brasileiro buscava criar uma identidade nacional através do:", alternativas: ["A) Robô", "B) Índio idealizado", "C) Operário de fábrica", "D) Imigrante europeu", "E) Político"], gabarito: "B", explicacao: "O indianismo foi o mito fundacional da nação brasileira." },
     { n: 3, enunciado: "Modernismo de 1922 criticava o:", alternativas: ["A) Parnasianismo acadêmico", "B) Cinema", "C) Futebol", "D) Rádio", "E) Carnaval"], gabarito: "A", explicacao: "Buscava liberdade contra as regras rígidas do passado." },
     { n: 1, enunciado: "Metonímia ocorre quando:", alternativas: ["A) Substituímos termos por proximidade (ex: ler Machado).", "B) Comparamos explicitamente.", "C) Exageramos propositalmente.", "D) Repetimos sons no início.", "E) Personificamos objetos."], gabarito: "A", explicacao: "Troca da obra pelo autor, continente pelo conteúdo, etc." },
-    { n: 2, enunciado: "A coesão textual refere-se à:", alternativas: ["A) Lógica das ideias.", "B) Ligação harmônica entre as partes do texto (conectivos).", "C) Beleze da capa do livro.", "D) Velocidade da leitura.", "E) Fonte utilizada no texto."], gabarito: "B", explicacao: "Uso de conjunções, pronomes para ligar frases." }
+    { n: 2, enunciado: "A coesão textual refere-se à:", alternativas: ["A) Lógica das ideias.", "B) Ligação harmônica entre as partes do texto (conectivos).", "C) Beleza da capa do livro.", "D) Velocidade da leitura.", "E) Fonte utilizada no texto."], gabarito: "B", explicacao: "Uso de conjunções, pronomes para ligar frases." }
   ]
 },
 {
