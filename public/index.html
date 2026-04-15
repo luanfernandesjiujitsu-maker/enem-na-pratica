@@ -182,6 +182,25 @@ body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;backgroun
 .forgot a{font-size:12px;font-weight:600;color:var(--neon-purple);text-decoration:none;transition:.2s;}
 .forgot a:hover{color:var(--neon-pink);}
 
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.remember-me input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--neon-purple);
+  cursor: pointer;
+}
+.remember-me span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
 .btn-login{
   width:100%;position:relative;overflow:hidden;
   background:linear-gradient(135deg,var(--neon-pink),var(--neon-purple));
@@ -370,7 +389,14 @@ body{font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;backgroun
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;padding-left:4px;">
         💡 <b>Primeiro acesso?</b> Sua senha padrão é <b>Trocarsenha123</b>
       </div>
-      <div class="forgot"><a href="#">Esqueci minha senha</a></div>
+      
+      <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberMe">
+          <span>Lembrar de mim</span>
+        </label>
+        <div class="forgot"><a href="#" style="margin:0;">Esqueci a senha</a></div>
+      </div>
 
       <button class="btn-login" id="btnLogin">ENTRAR AGORA →</button>
 
@@ -453,7 +479,15 @@ document.getElementById('togglePwd').addEventListener('click', function() {
   const btn = document.getElementById('btnLogin');
   const emailEl = document.getElementById('email');
   const senhaEl = document.getElementById('senha');
+  const rememberEl = document.getElementById('rememberMe');
   const errMsg = document.getElementById('errMsg');
+
+  // Load remembered email
+  const savedEmail = localStorage.getItem('enem_remembered_email');
+  if (savedEmail) {
+    emailEl.value = savedEmail;
+    rememberEl.checked = true;
+  }
 
   btn.addEventListener('click', async () => {
     const email = emailEl.value.trim();
@@ -471,6 +505,14 @@ document.getElementById('togglePwd').addEventListener('click', function() {
       btn.style.opacity = '.7';
       btn.style.pointerEvents = 'none';
       await login(email, password);
+      
+      // Save or remove email
+      if (rememberEl.checked) {
+        localStorage.setItem('enem_remembered_email', email);
+      } else {
+        localStorage.removeItem('enem_remembered_email');
+      }
+
       window.location.href = 'dashboard.html';
     } catch (error) {
       errMsg.style.display = 'block';
