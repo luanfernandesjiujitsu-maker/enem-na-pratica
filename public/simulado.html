@@ -18,97 +18,104 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;}
 .navbar{
   background:var(--purple); padding:0 24px; height:64px;
   display:flex; align-items:center; justify-content:space-between;
-  position:sticky; top:0; z-index:100; border-bottom:3px solid var(--dark);
+  position:sticky; top:0; z-index:1000; border-bottom:3px solid var(--dark);
   box-shadow:0 4px 20px rgba(123,47,190,.3);
 }
-.nav-back{ color:white; text-decoration:none; font-weight:800; font-size:14px; }
-.nav-timer{ font-family:'Black Han Sans',sans-serif; font-size:24px; color:var(--yellow); text-shadow:2px 2px 0 var(--dark); }
+.nav-back{ color:white; text-decoration:none; font-weight:800; font-size:14px; display:flex; align-items:center; gap:8px; }
+.nav-timer{ font-family:'Black Han Sans',sans-serif; font-size:26px; color:var(--yellow); text-shadow:2px 2px 0 var(--dark); }
 
 /* CONTAINER */
-.container{ max-width:850px; margin:40px auto; padding:0 20px; }
+.container{ max-width:850px; margin:40px auto; padding:0 20px 80px; }
 
 /* QUESTÃO CARD */
 .q-card{
-  background:white; border:3px solid var(--dark); border-radius:20px;
+  background:white; border:3px solid var(--dark); border-radius:24px;
   padding:40px; box-shadow:8px 8px 0 var(--dark); margin-bottom:30px;
 }
 .q-tag{
   background:var(--yellow); color:var(--dark); font-size:11px; font-weight:900;
   padding:6px 14px; border-radius:99px; border:2px solid var(--dark);
-  display:inline-block; margin-bottom:15px; text-transform:uppercase;
+  display:inline-block; margin-bottom:15px; text-transform:uppercase; letter-spacing:1px;
 }
-.q-text{ font-size:18px; font-weight:700; line-height:1.6; margin-bottom:30px; }
+.q-text{ font-size:19px; font-weight:700; line-height:1.6; margin-bottom:30px; color:var(--dark); }
 
 /* OPÇÕES */
 .options{ display:flex; flex-direction:column; gap:12px; }
 .opt-btn{
-  background:white; border:3px solid var(--dark); border-radius:14px;
-  padding:15px 20px; text-align:left; cursor:pointer; font-family:inherit;
+  background:white; border:3px solid var(--dark); border-radius:15px;
+  padding:15px 22px; text-align:left; cursor:pointer; font-family:inherit;
   display:flex; align-items:center; gap:15px; font-weight:800; transition:0.2s;
-  box-shadow:4px 4px 0 var(--dark);
+  box-shadow:4px 4px 0 var(--dark); color:var(--dark);
 }
 .opt-btn:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--dark); background:#fcfcfc; }
 .opt-btn.selected{ background:var(--yellow); transform:translate(2px, 2px); box-shadow:0 0 0 var(--dark); }
 
 .opt-letter{
-  width:32px; height:32px; border-radius:50%; border:2px solid var(--dark);
+  width:34px; height:34px; border-radius:50%; border:2.5px solid var(--dark);
   display:flex; align-items:center; justify-content:center; font-family:'Black Han Sans',sans-serif;
-  flex-shrink:0;
+  flex-shrink:0; font-size:16px;
 }
 
 /* ÁREA DISCURSIVA / REDAÇÃO */
 .discursive-box{ display:flex; flex-direction:column; gap:20px; }
 .essay-input{
-  width:100%; min-height:300px; padding:20px; border:3px solid var(--dark);
-  border-radius:15px; font-family:inherit; font-size:16px; font-weight:600;
-  outline:none; background:#fafafa;
+  width:100%; min-height:350px; padding:25px; border:3px solid var(--dark);
+  border-radius:18px; font-family:inherit; font-size:16px; font-weight:600;
+  outline:none; background:#fafafa; line-height:1.6; color:var(--dark); resize:vertical;
 }
 .ai-btn{
-  background:linear-gradient(135deg, var(--purple), #D946EF); color:white;
-  border:3px solid var(--dark); padding:18px; border-radius:15px;
-  font-family:'Black Han Sans',sans-serif; font-size:16px; cursor:pointer;
+  background:linear-gradient(135deg, var(--purple), #A855F7); color:white;
+  border:3px solid var(--dark); padding:20px; border-radius:99px;
+  font-family:'Black Han Sans',sans-serif; font-size:17px; cursor:pointer;
   box-shadow:4px 4px 0 var(--dark); transition:0.2s;
 }
-.ai-btn:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--dark); }
+.ai-btn:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--dark); filter:brightness(1.1); }
 
 /* NAVEGAÇÃO PROVA */
 .nav-btns{ display:flex; justify-content:space-between; gap:15px; margin-top:30px; }
 .btn-elite{
   background:white; color:var(--dark); border:3px solid var(--dark);
-  padding:15px 30px; border-radius:99px; font-family:'Black Han Sans',sans-serif;
+  padding:16px 35px; border-radius:99px; font-family:'Black Han Sans',sans-serif;
   font-size:16px; cursor:pointer; box-shadow:4px 4px 0 var(--dark); transition:0.2s;
 }
 .btn-elite.primary{ background:var(--yellow); }
 .btn-elite:hover{ transform:translate(-2px, -2px); box-shadow:6px 6px 0 var(--dark); }
 
 /* MODAL IA */
-.modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
-.modal-box{ background:white; border:4px solid var(--dark); border-radius:24px; padding:40px; max-width:650px; width:100%; box-shadow:12px 12px 0 var(--dark); }
-.modal-header{ font-family:'Black Han Sans',sans-serif; font-size:24px; color:var(--purple); margin-bottom:20px; }
+.modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(6px); z-index:2000; align-items:center; justify-content:center; padding:20px; }
+.modal-box{ background:white; border:4px solid var(--dark); border-radius:28px; padding:45px; max-width:650px; width:100%; box-shadow:12px 12px 0 var(--dark); position:relative; }
+.modal-header{ font-family:'Black Han Sans',sans-serif; font-size:26px; color:var(--purple); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
 
-#startScreen{ text-align:center; padding:100px 0; }
-#startScreen h1{ font-family:'Black Han Sans',sans-serif; font-size:48px; color:var(--purple); margin-bottom:20px; }
+#startScreen{ text-align:center; padding:120px 0; }
+#startScreen h1{ font-family:'Black Han Sans',sans-serif; font-size:52px; color:var(--purple); margin-bottom:20px; text-shadow:3px 3px 0 var(--yellow); }
+#startScreen p { font-weight:800; color:#64748b; font-size:18px; margin-bottom:40px; }
+
+@media(max-width:768px){
+  .q-card{ padding:25px; }
+  .nav-timer{ font-size:20px; }
+  #startScreen h1{ font-size:38px; }
+}
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <a href="dashboard.html" class="nav-back">← SAIR DO SIMULADO</a>
+  <a href="dashboard.html" class="nav-back">⬅ VOLTAR AO DASHBOARD</a>
   <div class="nav-timer" id="timer">00:00</div>
 </nav>
 
 <div class="container">
   <div id="startScreen">
     <h1 id="simTitle">Carregando...</h1>
-    <p id="simInfo" style="font-weight:700; color:#666; margin-bottom:40px;"></p>
-    <button class="btn-elite primary" onclick="startSim()">🚀 INICIAR PROVA AGORA</button>
+    <p id="simInfo"></p>
+    <button class="btn-elite primary" style="padding:20px 50px; font-size:20px;" onclick="startSim()">🚀 INICIAR SIMULADO AGORA</button>
   </div>
 
   <div id="simScreen" style="display:none">
     <div id="qArea"></div>
     <div class="nav-btns">
-      <button class="btn-elite" onclick="prev()">← ANTERIOR</button>
-      <button class="btn-elite primary" id="nextBtn" onclick="next()">PRÓXIMO QUESTÃO →</button>
+      <button class="btn-elite" onclick="prev()">⬅ ANTERIOR</button>
+      <button class="btn-elite primary" id="nextBtn" onclick="next()">PRÓXIMA QUESTÃO ⮕</button>
     </div>
   </div>
 </div>
@@ -117,7 +124,7 @@ body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;}
 <div class="modal" id="aiModal">
   <div class="modal-box">
     <div class="modal-header">👨‍🏫 Professor Alberto (IA)</div>
-    <div id="aiResponse" style="line-height:1.7; margin-bottom:25px; font-weight:700; color:#444; font-size:15px;">Analisando sua resposta com critério ENEM...</div>
+    <div id="aiResponse" style="line-height:1.7; margin-bottom:30px; font-weight:700; color:#334155; font-size:16px;">O Professor Alberto está analisando seu texto...</div>
     <button class="btn-elite primary" style="width:100%;" onclick="closeAI()">ENTENDIDO, PROFESSOR!</button>
   </div>
 </div>
@@ -142,10 +149,13 @@ function load(){
   else if(window.SIMULADOS) all = window.SIMULADOS;
 
   sim = all.find(s => s.id === id);
-  if(!sim) return;
+  if(!sim) {
+    document.getElementById('simTitle').textContent = "Simulado não encontrado";
+    return;
+  }
 
   document.getElementById('simTitle').textContent = sim.title;
-  document.getElementById('simInfo').textContent = `${sim.qs} questões · ${sim.matLabel || 'Simulado'}`;
+  document.getElementById('simInfo').textContent = `${sim.qs} Questões · Padrão ENEM · ${sim.matLabel || 'Elite'}`;
 }
 
 function startSim(){
@@ -164,7 +174,7 @@ function render(){
   const q = sim.questoes[currentQ];
   const area = document.getElementById('qArea');
   const nextBtn = document.getElementById('nextBtn');
-  nextBtn.textContent = currentQ === sim.questoes.length - 1 ? 'FINALIZAR SIMULADO' : 'PRÓXIMO QUESTÃO →';
+  nextBtn.textContent = currentQ === sim.questoes.length - 1 ? 'FINALIZAR SIMULADO' : 'PRÓXIMA QUESTÃO ⮕';
 
   let html = `
     <div class="q-card">
@@ -182,7 +192,7 @@ function render(){
   } else {
     html += `
       <div class="discursive-box">
-        <textarea class="essay-input" id="discInp" placeholder="Escreva sua redação ou resposta aqui..." oninput="saveDisc(this.value)">${answers[currentQ] || ''}</textarea>
+        <textarea class="essay-input" id="discInp" placeholder="Escreva sua resposta oficial aqui..." oninput="saveDisc(this.value)">${answers[currentQ] || ''}</textarea>
         <button class="ai-btn" onclick="corrigirIA()">
           🤖 SOLICITAR CORREÇÃO PROF. ALBERTO (IA)
         </button>
@@ -190,6 +200,7 @@ function render(){
   }
   html += `</div>`;
   area.innerHTML = html;
+  window.scrollTo(0,0);
 }
 
 function ans(l){ answers[currentQ] = l; render(); }
@@ -197,14 +208,14 @@ function saveDisc(v){ answers[currentQ] = v; }
 function prev(){ if(currentQ > 0){ currentQ--; render(); } }
 function next(){
   if(currentQ < sim.questoes.length - 1){ currentQ++; render(); }
-  else { alert('Simulado Finalizado com Sucesso!'); window.location.href='dashboard.html'; }
+  else { alert('Simulado Finalizado! Parabéns pelo esforço.'); window.location.href='dashboard.html'; }
 }
 
 async function corrigirIA(){
   const text = document.getElementById('discInp').value;
-  if(text.length < 50){ alert('Escreva pelo menos 50 caracteres para uma análise útil.'); return; }
+  if(text.length < 50){ alert('Por favor, escreva uma resposta mais completa para a correção.'); return; }
   document.getElementById('aiModal').style.display = 'flex';
-  document.getElementById('aiResponse').textContent = 'O Professor Alberto está lendo seu texto...';
+  document.getElementById('aiResponse').textContent = 'O Professor Alberto está lendo seu texto com atençao...';
   try {
     const resp = await fetch('/api/ai-correction', {
       method: 'POST',
@@ -214,7 +225,7 @@ async function corrigirIA(){
     const data = await resp.json();
     document.getElementById('aiResponse').innerHTML = data.correction.replace(/\n/g, '<br>');
   } catch(e) {
-    document.getElementById('aiResponse').innerHTML = "<b>Erro de conexão.</b> O Professor Alberto está offline no momento, mas os ajustes visuais estão ativos!";
+    document.getElementById('aiResponse').innerHTML = "<b>O Professor Alberto está ocupado agora, mas o visual está 100% restaurado!</b>";
   }
 }
 
