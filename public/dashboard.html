@@ -122,7 +122,7 @@ img{display:block;max-width:100%;}
 .prog-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--yellow));border-radius:99px;transition:width 1s ease;}
 
 /* TABS DE MATÉRIAS */
-.mat-tabs{display:flex;gap:10px;margin-bottom:25px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;}
+.mat-tabs{display:flex;gap:10px;margin-bottom:25px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none;justify-content:center;}
 .mat-tabs::-webkit-scrollbar{display:none;}
 .mat-tab{
   flex-shrink:0;padding:10px 22px;border-radius:99px;border:2.5px solid var(--dark);
@@ -184,6 +184,13 @@ img{display:block;max-width:100%;}
 .rank-score-val{font-family:'Black Han Sans',sans-serif;font-size:24px;color:var(--purple);line-height:1;}
 .rank-score-label{font-size:10px;font-weight:800;color:var(--gray);text-transform:uppercase;margin-top:2px;}
 .medal{font-size:24px;}
+
+/* CENTRALIZAÇÃO DE CABEÇALHOS */
+.container{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;flex-direction:column;}
+.sec-head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:36px;gap:12px;}
+.sec-tag{background:var(--bg3);color:var(--purple);padding:4px 14px;border-radius:99px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:1px;border:1.5px solid var(--purple2);}
+.sec-title{font-family:'Black Han Sans',sans-serif;font-size:32px;color:var(--dark);line-height:1.2;}
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;justify-content:center;}
 
 /* REDAÇÃO */
 .red-line-wrap{display:flex;align-items:stretch;border-bottom:1.5px solid #E5E7EB;min-height:38px;}
