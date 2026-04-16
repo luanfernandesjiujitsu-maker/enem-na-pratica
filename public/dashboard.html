@@ -6,10 +6,7 @@
 <title>Dashboard | ENEM na Prática</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet"/>
 <style>
-/* ============================================================
-   DESIGN ORIGINAL RESTAURADO (MODO ANTIGO)
-   Fidelidade 100% ao dashboard_15.html
-   ============================================================ */
+/* CSS MODERNO E ORGANIZADO (VERSÃO PREMIUM) */
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Nunito',sans-serif;background:#F8F0FF;color:#1a1a2e;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
@@ -31,10 +28,6 @@ img{display:block;max-width:100%;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
-.reveal.in{opacity:1;transform:translateY(0);}
 
 /* NAV */
 .navbar{
@@ -60,7 +53,6 @@ img{display:block;max-width:100%;}
 .nav-right{display:flex;align-items:center;gap:10px;}
 .nav-uname{font-size:13px;font-weight:800;color:#fff;}
 .nav-urole{font-size:11px;color:rgba(255,255,255,.6);font-weight:600;}
-.nav-av-wrap{position:relative;cursor:pointer;}
 .nav-av{
   width:38px;height:38px;border-radius:50%;
   border:2px solid var(--yellow);object-fit:cover;
@@ -71,26 +63,10 @@ img{display:block;max-width:100%;}
   background:linear-gradient(135deg,var(--purple) 0%,#5B21B6 100%);
   padding:52px 24px 64px;position:relative;overflow:hidden;
 }
-.hero::after{
-  content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.02) 20px,rgba(255,255,255,.02) 21px);
-}
-.hero-bg-txt{
-  position:absolute;bottom:-30px;right:-20px;
-  font-family:'Black Han Sans',sans-serif;font-size:180px;
-  color:rgba(255,255,255,.04);line-height:1;
-}
 .hero-inner{
   max-width:1100px;margin:0 auto;
   display:flex;align-items:center;justify-content:space-between;
   gap:40px;flex-wrap:wrap;position:relative;z-index:2;
-}
-.hero-greeting{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,214,0,.15);border:2px solid rgba(255,214,0,.3);
-  border-radius:99px;padding:5px 16px;
-  font-size:12px;font-weight:800;color:var(--yellow);
-  letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;
 }
 .hero h1{
   font-family:'Black Han Sans',sans-serif;
@@ -99,16 +75,8 @@ img{display:block;max-width:100%;}
 }
 .hero h1 span{color:var(--yellow);}
 .hero-sub{font-size:15px;color:rgba(255,255,255,.75);font-weight:600;margin-bottom:24px;max-width:420px;line-height:1.65;}
-.btn-continue{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--yellow);color:var(--dark);
-  font-size:15px;font-weight:900;
-  padding:13px 28px;border-radius:99px;
-  box-shadow:4px 4px 0 rgba(0,0,0,.2);
-  transition:.2s;border:none;cursor:pointer;
-}
 
-.hero-stats{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.hero-stats{display:flex;flex-wrap:wrap;gap:12px;}
 .stat-box{
   background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.15);
   border-radius:14px;padding:12px 18px;min-width:100px;text-align:center;
@@ -116,68 +84,61 @@ img{display:block;max-width:100%;}
 .stat-val{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--yellow);line-height:1;}
 .stat-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;}
 
-.progress-card{
-  background:rgba(255,255,255,.1);
-  border:2px solid rgba(255,255,255,.15);
-  border-radius:18px;padding:20px;
-  min-width:240px;max-width:280px;
+/* TABS (MATÉRIAS ORGANIZADAS) */
+.tabs-container {
+  max-width: 1100px; margin: -30px auto 30px; padding: 0 24px; position: relative; z-index: 10;
 }
-.prog-card-label{font-size:11px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px;}
-.prog-bar-wrap{height:8px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden;margin-bottom:6px;}
-.prog-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--yellow));border-radius:99px;}
+.tabs-wrapper {
+  display: flex; gap: 12px; overflow-x: auto; padding: 12px;
+  background: #fff; border: 3px solid var(--dark); border-radius: 99px;
+  box-shadow: 6px 6px 0 var(--dark);
+  scrollbar-width: none;
+}
+.tabs-wrapper::-webkit-scrollbar { display: none; }
+.tab-item {
+  padding: 10px 24px; border-radius: 99px; font-weight: 800; font-size: 14px;
+  cursor: pointer; white-space: nowrap; transition: .2s; border: 2px solid transparent;
+  display: flex; align-items: center; gap: 8px; color: var(--dark);
+}
+.tab-item:hover { background: var(--bg3); }
+.tab-item.active { background: var(--purple); color: #fff; border-color: var(--dark); }
 
 /* SECTIONS */
-.section{padding:64px 24px;}
+.section{padding:40px 24px;}
 .container{max-width:1100px;margin:0 auto;}
-.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.sec-head{margin-bottom:24px;}
 .sec-tag{font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
-.sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(22px,3.5vw,32px);color:var(--dark);}
+.sec-title{font-family:'Black Han Sans',sans-serif;font-size:32px;color:var(--dark);}
 
 /* SIMULADOS GRID */
-.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+.sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
 .sim-card{
   background:var(--bg2);border:3px solid var(--dark);
-  border-radius:16px;padding:20px;
-  box-shadow:4px 4px 0 var(--dark);
+  border-radius:20px;padding:24px;
+  box-shadow:6px 6px 0 var(--dark);
   transition:.2s;cursor:pointer;
-  display:flex;flex-direction:column;gap:10px;
+  display:flex;flex-direction:column;gap:14px;
+  animation: fadeUp .5s ease both;
 }
-.sim-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--purple);border-color:var(--purple);}
-.sim-num{font-family:'Black Han Sans',sans-serif;font-size:30px;color:var(--purple);line-height:1;}
-.sim-status{font-size:10px;font-weight:900;padding:4px 10px;border-radius:99px;background:#EDE9FE;color:var(--purple2);}
-.sim-mat-tag{font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 10px;border-radius:99px;width:fit-content;}
+.sim-card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--purple);border-color:var(--purple);}
+.sim-card-header{display:flex;justify-content:space-between;align-items:flex-start;}
+.sim-num{font-family:'Black Han Sans',sans-serif;font-size:36px;color:var(--purple);line-height:1;}
+.sim-mat-tag{font-size:11px;font-weight:900;text-transform:uppercase;padding:5px 12px;border-radius:99px;width:fit-content;border:2px solid var(--dark);}
 .mat-port{background:#FFE4E6;color:#BE123C;}
 .mat-mat{background:#DBEAFE;color:#1D4ED8;}
 .mat-cn{background:#DCFCE7;color:#15803D;}
 .mat-ch{background:#FEF3C7;color:#B45309;}
 .mat-red{background:#F3E8FF;color:#7C3AED;}
-.mat-provao{background:var(--yellow);color:var(--dark);border:1px solid var(--dark);}
+.mat-provao{background:var(--yellow);color:var(--dark);}
 
-.sim-card h4{font-size:14px;font-weight:800;color:var(--dark);line-height:1.4;}
-.sim-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;}
-.sim-qs{font-size:12px;font-weight:700;color:var(--gray);}
+.sim-card h4{font-size:16px;font-weight:800;color:var(--dark);line-height:1.4;margin-top:4px;}
+.sim-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:2px dashed #eee;}
+.sim-qs{font-size:12px;font-weight:700;color:var(--gray2);}
 
-/* RANKING */
-.ranking-list{display:flex;flex-direction:column;gap:10px;}
-.rank-item{background:var(--bg2);border:2px solid #eee;border-radius:14px;padding:16px;display:flex;align-items:center;gap:14px;}
-.rank-item.me{border-color:var(--yellow);background:#FFFBEB;box-shadow:4px 4px 0 var(--yellow);}
-.rank-pos{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);min-width:32px;}
-.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;}
+/* RANKING SIMPLIFICADO NO SITE */
+.ranking-section { background: #fff; border-top: 4px solid var(--purple); }
 
-/* REDACAO */
-.red-field{background:#fff;border:3px solid var(--dark);border-radius:20px;padding:32px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);}
-.red-line-wrap{display:flex;border-bottom:1.5px solid #eee;min-height:38px;}
-.red-line-num{width:40px;border-right:2px solid #eee;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--purple);}
-.red-line-input{flex:1;border:none;outline:none;padding:8px 16px;font-family:'Nunito',sans-serif;font-size:15px;resize:none;}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.open{display:flex;}
-.modal-box{background:#fff;border:4px solid var(--dark);border-radius:24px;max-width:540px;width:100%;padding:32px;position:relative;box-shadow:8px 8px 0 var(--dark);}
-.modal-close{position:absolute;top:15px;right:15px;width:30px;height:30px;border-radius:50%;background:#eee;border:none;cursor:pointer;font-weight:900;}
-
-@media(max-width:768px){ .sim-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:480px){ .sim-grid{grid-template-columns:1fr;} }
+@media(max-width:768px){ .sim-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -186,9 +147,7 @@ img{display:block;max-width:100%;}
   <div class="nav-brand">📝 ENEM na Prática</div>
   <div class="nav-links">
     <a href="dashboard.html" class="nav-link active">🏠 Dashboard</a>
-    <a href="#simulados" class="nav-link">📝 Simulados</a>
-    <a href="#ranking" class="nav-link">🏆 Ranking</a>
-    <a href="#redacao" class="nav-link">✍️ Redação</a>
+    <a href="index.html" class="nav-link">👋 Sair</a>
   </div>
   <div class="nav-right">
     <div style="text-align:right">
@@ -200,66 +159,27 @@ img{display:block;max-width:100%;}
 </nav>
 
 <header class="hero">
-  <div class="hero-bg-txt">2026</div>
   <div class="hero-inner">
     <div>
-      <div class="hero-greeting" id="greetingBox">Boa noite ✌️ Bora estudar!</div>
-      <h1>Continue de onde<br/>você <span>parou!</span></h1>
-      <p class="hero-sub">Cada simulado aproxima você do seu sonho universitário.</p>
+      <h1>Potencialize seus <span>Estudos!</span></h1>
+      <p class="hero-sub">Matérias organizadas e simulados com correção por Inteligência Artificial.</p>
       <div class="hero-stats">
-        <div class="stat-box"><div class="stat-val" id="st-sims">85</div><div class="stat-label">Disponíveis</div></div>
-        <div class="stat-box"><div class="stat-val" id="st-score">720</div><div class="stat-label">Média TRI</div></div>
+        <div class="stat-box"><div class="stat-val" id="st-total">85</div><div class="stat-label">Simulados</div></div>
+        <div class="stat-box"><div class="stat-val">TRI</div><div class="stat-label">Correção IA</div></div>
       </div>
-      <button class="btn-continue" onclick="openSim(1)">Iniciar Próximo Simulado</button>
-    </div>
-    <div class="progress-card">
-      <div class="prog-card-label">📊 Progresso Geral</div>
-      <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:15%"></div></div>
-      <div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700;">12 de 85 simulados concluídos</div>
     </div>
   </div>
 </header>
 
+<div class="tabs-container">
+  <div class="tabs-wrapper" id="tabsBox"></div>
+</div>
+
 <section class="section" id="simulados">
   <div class="container">
-    <div class="sec-head">
-      <div><div class="sec-tag">ENEM 2026</div><h2 class="sec-title">+50 Simulados Completos</h2></div>
-    </div>
     <div class="sim-grid" id="simGrid"></div>
   </div>
 </section>
-
-<section class="section" id="ranking" style="background:#fff;">
-  <div class="container">
-    <div class="sec-head"><div><div class="sec-tag">Social</div><h2 class="sec-title">🏆 Ranking de Alunos</h2></div></div>
-    <div class="ranking-list" id="rankList"></div>
-  </div>
-</section>
-
-<section class="section" id="redacao">
-  <div class="container">
-    <div class="sec-head"><div><div class="sec-tag">Escrita</div><h2 class="sec-title">✍️ Laboratório de Redação</h2></div></div>
-    <div class="red-field">
-      <input type="text" id="redTema" style="width:100%;border:none;font-size:20px;font-weight:900;margin-bottom:20px;outline:none;" placeholder="Título ou Tema da Redação..."/>
-      <div id="redLines"></div>
-      <div style="margin-top:20px;display:flex;justify-content:flex-end;gap:12px;">
-        <button style="background:#eee;border:none;padding:12px 25px;border-radius:99px;font-weight:800;cursor:pointer;">Limpar</button>
-        <button style="background:var(--purple);color:#fff;border:none;padding:12px 25px;border-radius:99px;font-weight:800;cursor:pointer;">Enviar para Correção</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="modal-overlay" id="simModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div style="font-size:11px;font-weight:900;color:var(--purple);text-transform:uppercase;margin-bottom:10px;">Simulado Selecionado</div>
-    <h2 id="mTitle" style="font-family:'Black Han Sans',sans-serif;margin-bottom:15px;">Título do Simulado</h2>
-    <p style="font-size:14px;color:#666;line-height:1.6;margin-bottom:20px;">Este simulado contém questões no estilo oficial do ENEM 2026. Ao finalizar, você terá acesso ao gabarito comentado.</p>
-    <div style="display:flex;gap:10px;margin-bottom:25px;" id="mStats"></div>
-    <button id="mBtnStart" style="width:100%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:none;padding:16px;border-radius:99px;font-weight:900;cursor:pointer;box-shadow:4px 4px 0 var(--dark);">🚀 COMEÇAR SIMULADO</button>
-  </div>
-</div>
 
 <script src="simulados-data.js"></script>
 <script src="src/js/simulados-extra.js"></script>
@@ -267,74 +187,58 @@ img{display:block;max-width:100%;}
 <script src="src/js/provao-data.js"></script>
 
 <script>
+var activeTab = 'all';
+
+function renderTabs(){
+  const categories = [
+    { key: 'all', label: 'Todos', icon: '🌟' },
+    { key: 'red', label: 'Redação', icon: '✍️' },
+    { key: 'port', label: 'Linguagens', icon: '📚' },
+    { key: 'mat', label: 'Matemática', icon: '🔢' },
+    { key: 'provao', label: 'Provões', icon: '🏆' }
+  ];
+  document.getElementById('tabsBox').innerHTML = categories.map(cat => `
+    <div class="tab-item ${activeTab === cat.key ? 'active' : ''}" onclick="setTab('${cat.key}')">
+      <span>${cat.icon}</span> ${cat.label}
+    </div>`).join('');
+}
+
+function setTab(key){ activeTab = key; renderTabs(); renderSims(); }
+
 function renderSims(){
-  var all = [];
+  let all = [];
+  // Usa o array global SIMULADOS que foi populado pelos scripts
   if (typeof SIMULADOS !== 'undefined') all = SIMULADOS;
   else if (window.SIMULADOS) all = window.SIMULADOS;
 
-  if (all.length === 0) {
-    document.getElementById('simGrid').innerHTML = '<p>Erro ao carregar simulados.</p>';
+  const filtered = all.filter(s => activeTab === 'all' || s.mat === activeTab);
+  const grid = document.getElementById('simGrid');
+  
+  if(filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:100px;color:#aaa;font-weight:800;">Nenhum simulado encontrado nesta categoria.</div>';
     return;
   }
 
-  document.getElementById('simGrid').innerHTML = all.map(s => `
-    <div class="sim-card" onclick="openSim(${s.id})">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
+  grid.innerHTML = filtered.map(s => `
+    <div class="sim-card" onclick="window.location.href='simulado.html?id=${s.id}'">
+      <div class="sim-card-header">
         <div class="sim-num">${s.num}</div>
-        <span class="sim-status">NOVO</span>
+        <span class="sim-mat-tag mat-${s.mat}">${s.matLabel || 'Simulado'}</span>
       </div>
-      <span class="sim-mat-tag mat-${s.mat}">${s.matLabel || 'Simulado'}</span>
       <h4>${s.title}</h4>
       <div class="sim-card-footer">
         <span class="sim-qs">⏱ ${s.time} · ${s.qs} questões</span>
+        <span style="font-size:10px;font-weight:900;color:var(--green);">✓ CORREÇÃO IA PRONTA</span>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
+    
+  document.getElementById('st-total').textContent = all.length;
 }
 
-function openSim(id){
-  var all = typeof SIMULADOS !== 'undefined' ? SIMULADOS : window.SIMULADOS;
-  var s = all.find(x => x.id === id);
-  if(!s) return;
-  document.getElementById('mTitle').textContent = s.title;
-  document.getElementById('mStats').innerHTML = `<div style="background:#F3E8FF;padding:8px 15px;border-radius:10px;font-weight:800;font-size:12px;color:var(--purple);">⏱ ${s.time}</div><div style="background:#F3E8FF;padding:8px 15px;border-radius:10px;font-weight:800;font-size:12px;color:var(--purple);">📋 ${s.qs} questões</div>`;
-  document.getElementById('mBtnStart').onclick = () => window.location.href = `simulado.html?id=${id}`;
-  document.getElementById('simModal').classList.add('open');
-}
-
-function closeModal(){ document.getElementById('simModal').classList.remove('open'); }
-
-function buildRanking(){
-  var ranking = [
-    {n:"Julia Martins",s:940,me:false},
-    {n:"Você",s:820,me:true},
-    {n:"Carlos Eduardo",s:780,me:false},
-    {n:"Ana Souza",s:750,me:false}
-  ];
-  document.getElementById('rankList').innerHTML = ranking.map((r,i) => `
-    <div class="rank-item ${r.me?'me':''}">
-      <div class="rank-pos">${i+1}</div>
-      <div class="rank-av">${r.n[0]}</div>
-      <div style="font-weight:800;font-size:14px;">${r.n}</div>
-      <div style="font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--purple);margin-left:auto;">${r.s} pts</div>
-    </div>
-  `).join('');
-}
-
-function buildRedacao(){
-  var html = '';
-  for(var i=1;i<=30;i++){
-    html += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea></div>`;
-  }
-  document.getElementById('redLines').innerHTML = html;
-}
-
-window.onload = () => {
+window.onload = function() {
+  renderTabs();
   renderSims();
-  buildRanking();
-  buildRedacao();
 };
 </script>
-
 </body>
 </html>
