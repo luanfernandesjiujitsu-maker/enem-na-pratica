@@ -151,18 +151,32 @@ img{display:block;max-width:100%;}
 .mat-ch{background:#FEF3C7;color:#B45309;}
 .sim-card h4{font-size:14px;font-weight:800;color:var(--dark);line-height:1.35;}
 
-/* RANKING */
-.ranking-list{display:flex;flex-direction:column;gap:10px;margin-top:20px;}
+/* RANKING PREMIUM - DESIGN TOP */
+.ranking-wrap{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);border:3px solid var(--dark);border-radius:24px;padding:30px;box-shadow:8px 8px 0 var(--dark);}
+.ranking-list{display:flex;flex-direction:column;gap:12px;}
 .rank-item{
-  background:var(--bg2);border:2px solid #eee;border-radius:14px;padding:14px 18px;
-  display:flex;align-items:center;gap:14px;transition:.2s;
+  background:#fff;border:2.5px solid var(--dark);border-radius:16px;padding:16px 20px;
+  display:flex;align-items:center;gap:18px;transition:.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position:relative;overflow:hidden;
 }
-.rank-item.me{border-color:var(--yellow);background:#FFFBEB;box-shadow:4px 4px 0 var(--yellow);}
-.rank-pos{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);min-width:32px;}
-.rank-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:14px;}
+.rank-item:hover{transform:translateX(10px);border-color:var(--purple);box-shadow:4px 4px 0 var(--purple);}
+.rank-item.top-1{background:linear-gradient(90deg,#FFFBEB,#fff);border-color:#F59E0B;box-shadow:4px 4px 0 #F59E0B;}
+.rank-item.top-1 .rank-pos{color:#F59E0B;font-size:32px;}
+.rank-item.me{border-color:var(--yellow);background:#FFFDF0;box-shadow:6px 6px 0 var(--yellow);z-index:2;}
+.rank-pos{font-family:'Black Han Sans',sans-serif;font-size:24px;color:var(--purple);min-width:40px;text-align:center;}
+.rank-av{
+  width:48px;height:48px;border-radius:12px;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Black Han Sans',sans-serif;color:#fff;font-size:18px;border:2px solid var(--dark);
+}
 .rank-info{flex:1;}
-.rank-name{font-size:14px;font-weight:800;color:var(--dark);}
-.rank-score{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);}
+.rank-name{font-size:16px;font-weight:900;color:var(--dark);display:flex;align-items:center;gap:8px;}
+.me-badge{background:var(--yellow);color:var(--dark);font-size:10px;padding:2px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:1px;}
+.rank-score{text-align:right;}
+.rank-score-val{font-family:'Black Han Sans',sans-serif;font-size:24px;color:var(--purple);line-height:1;}
+.rank-score-label{font-size:10px;font-weight:800;color:var(--gray);text-transform:uppercase;margin-top:2px;}
+.medal{font-size:24px;}
 
 /* REDAÇÃO */
 .red-line-wrap{display:flex;align-items:stretch;border-bottom:1.5px solid #E5E7EB;min-height:38px;}
@@ -224,12 +238,14 @@ img{display:block;max-width:100%;}
   </div>
 </section>
 
-<section class="section section-white" id="ranking">
+<section class="section" id="ranking" style="background:var(--bg3);">
   <div class="container">
     <div class="sec-head reveal">
       <div><div class="sec-tag">Competição saudável</div><h2 class="sec-title">🏆 Ranking dos Alunos</h2></div>
     </div>
-    <div class="ranking-list" id="rankList"></div>
+    <div class="ranking-wrap reveal">
+      <div class="ranking-list" id="rankList"></div>
+    </div>
   </div>
 </section>
 
@@ -304,11 +320,35 @@ function buildRed(){
   for(let i=1; i<=30; i++) tHtml += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" placeholder="${phs[i]||''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateCount();"></textarea></div>`;
   document.getElementById('redacaoBox').innerHTML = tHtml;
 }
-function updateCount(){ document.getElementById('redLinhasCount').textContent = Array.from(document.querySelectorAll('.red-line-input')).filter(i=>i.value.trim().length>0).length + ' / 30 linhas'; }
+function updateCount(){ document.getElementById('redLinhasCount').textContent = Array.from(document.querySelectorAll('.red-line-input')).filter(i=>i.value.trim().length>0).length + ' / 30 linhas';}
 
-var ranking = [{pos:1,name:"Julia Martins",score:820},{pos:2,name:"Carlos Eduardo",score:785},{pos:3,name:"Você (Luan)",score:720,me:true},{pos:4,name:"Fernanda Lima",score:698},{pos:5,name:"Rafael Costa",score:651}];
+/* RANKING */
+var ranking = [
+  {pos:1,name:"Julia Martins",score:882,med:"🥇"},
+  {pos:2,name:"Carlos Eduardo",score:845,med:"🥈"},
+  {pos:3,name:"Você (Luan Fernandes)",score:820,me:true,med:"🥉"},
+  {pos:4,name:"Fernanda Lima",score:798},
+  {pos:5,name:"Rafael Costa",score:761},
+  {pos:6,name:"Beatriz Oliveira",score:740}
+];
 function renderRanking(){
-  document.getElementById('rankList').innerHTML = ranking.map(r => `<div class="rank-item reveal ${r.me?'me':''}"><div class="rank-pos">${r.pos}</div><div class="rank-av">${r.name[0]}</div><div class="rank-info"><div class="rank-name">${r.name}</div></div><div class="rank-score">${r.score} pts</div></div>`).join('');
+  document.getElementById('rankList').innerHTML = ranking.map(r => `
+    <div class="rank-item reveal ${r.me?'me':''} ${r.pos===1?'top-1':''}">
+      <div class="rank-pos">${r.med || r.pos}</div>
+      <div class="rank-av" style="${r.pos===1?'background:linear-gradient(135deg,#F59E0B,#FFD600);':''}">${r.name[0]}</div>
+      <div class="rank-info">
+        <div class="rank-name">
+          ${r.name} 
+          ${r.me?'<span class="me-badge">VOCÊ</span>':''}
+          ${r.pos<=3?'<span style="font-size:10px;font-weight:bold;color:var(--purple);margin-left:5px;">TOP '+r.pos+'</span>':''}
+        </div>
+      </div>
+      <div class="rank-score">
+        <div class="rank-score-val">${r.score}</div>
+        <div class="rank-score-label">pontos</div>
+      </div>
+    </div>
+  `).join('');
 }
 
 const io = new IntersectionObserver(es => es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}));
