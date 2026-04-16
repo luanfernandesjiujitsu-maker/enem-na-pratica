@@ -63,7 +63,8 @@ img{display:block;max-width:100%;}
 }
 .hero::after{
   content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.02) 20px,rgba(255,255,255,.02) 21px);
+  background-image:linear-gradient(45deg,rgba(255,255,255,.05) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.05) 50%,rgba(255,255,255,.05) 75%,transparent 75%,transparent);
+  background-size:40px 40px;opacity:0.3;
 }
 .hero-bg-txt{
   position:absolute;bottom:-30px;right:-20px;
@@ -139,7 +140,8 @@ img{display:block;max-width:100%;}
   transition:.2s;cursor:pointer;
   display:flex;flex-direction:column;gap:10px;
 }
-.sim-card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--purple);border-color:var(--purple);}
+.sim-card:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--purple);border-color:var(--purple);}
+.sim-header{display:flex;align-items:center;justify-content:space-between;}
 .sim-num{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--purple);line-height:1;}
 .sim-status{font-size:11px;font-weight:800;padding:4px 10px;border-radius:99px;}
 .s-done{background:#DCFCE7;color:#15803D;}
@@ -150,6 +152,11 @@ img{display:block;max-width:100%;}
 .mat-cn{background:#DCFCE7;color:#15803D;}
 .mat-ch{background:#FEF3C7;color:#B45309;}
 .sim-card h4{font-size:14px;font-weight:800;color:var(--dark);line-height:1.35;}
+.sim-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;}
+.sim-qs{font-size:11px;font-weight:700;color:var(--gray);}
+.sim-score{font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--green);background:#DCFCE7;padding:2px 8px;border-radius:6px;border:1px solid #16A34A;}
+.sim-prog-box{height:6px;background:#eee;border-radius:99px;overflow:hidden;margin-top:4px;}
+.sim-prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--pink));border-radius:99px;}
 
 /* RANKING PREMIUM - DESIGN TOP */
 .ranking-wrap{background:rgba(255,255,255,.5);backdrop-filter:blur(10px);border:3px solid var(--dark);border-radius:24px;padding:30px;box-shadow:8px 8px 0 var(--dark);}
@@ -293,7 +300,23 @@ for(let i=1; i<=85; i++){
 
 function renderSims(filter = 'todos'){
   let list = filter === 'todos' ? simulados : simulados.filter(s => s.mat === filter);
-  document.getElementById('simGrid').innerHTML = list.map(s => `<div class="sim-card reveal" onclick="location.href='simulado.html?id=${s.id}'"><div class="sim-header"><div class="sim-num">${s.num}</div><span class="sim-status ${s.status==='done'?'s-done':'s-new'}">${s.status==='done'?'✓ Feito':'Novo'}</span></div><span class="sim-mat-tag mat-${s.mat}">${s.matLabel}</span><h4>${s.title}</h4><div class="sim-card-footer"><span class="sim-qs">⏱ ${s.time} · ${s.qs} questões</span>${s.score>0?`<span class="sim-score">${s.score}%</span>`:''}</div></div>`).join('');
+  document.getElementById('simGrid').innerHTML = list.map(s => `
+    <div class="sim-card reveal" onclick="location.href='simulado.html?id=${s.id}'">
+      <div class="sim-header">
+        <div class="sim-num">${s.num}</div>
+        <span class="sim-status ${s.status==='done'?'s-done':'s-new'}">${s.status==='done'?'✓ Feito':'Novo'}</span>
+      </div>
+      <span class="sim-mat-tag mat-${s.mat}">${s.matLabel}</span>
+      <h4>${s.title}</h4>
+      <div class="sim-card-footer">
+        <span class="sim-qs">⏱ ${s.time} · ${s.qs} qts</span>
+        ${s.score > 0 ? `<span class="sim-score">${s.score}%</span>` : ''}
+      </div>
+      <div class="sim-prog-box">
+        <div class="sim-prog-fill" style="width: ${s.prog}%"></div>
+      </div>
+    </div>
+  `).join('');
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
 
