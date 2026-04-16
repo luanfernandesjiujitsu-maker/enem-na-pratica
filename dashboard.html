@@ -197,6 +197,11 @@ img{display:block;max-width:100%;}
 .red-line-num{width:42px;flex-shrink:0;background:linear-gradient(to right,#F3E8FF,#fff);border-right:2px solid #DDD6FE;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--purple);}
 .red-line-input{flex:1;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:15px;color:var(--dark);padding:7px 16px;resize:none;height:38px;overflow:hidden;}
 
+/* RASCUNHO */
+.rasc-line-wrap{display:flex;align-items:stretch;border-bottom:1px solid #E5E7EB;min-height:34px;}
+.rasc-line-num{width:34px;flex-shrink:0;background:#F3F4F6;border-right:1px solid #E5E7EB;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#9CA3AF;user-select:none;}
+.rasc-line-input{flex:1;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:14px;color:var(--dark);padding:6px 14px;resize:none;height:34px;overflow:hidden;}
+
 /* FOOTER */
 .site-footer{background:var(--dark);color:#fff;padding:36px 24px;text-align:center;border-top:4px solid var(--purple);}
 .footer-brand{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--yellow);margin-bottom:8px;}
@@ -277,6 +282,14 @@ img{display:block;max-width:100%;}
       </div>
       <textarea id="redTema" rows="2" placeholder="Escolha um tema..." style="width:100%;background:#F3E8FF;border:2px solid #DDD6FE;border-radius:12px;padding:12px 16px;outline:none;resize:vertical;"></textarea>
     </div>
+    <!-- RASCUNHO -->
+    <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+        <div style="font-weight:900;color:var(--purple);">✏️ RASCUNHO (Não vale nota)</div>
+      </div>
+      <div id="rascunhoBox" style="border:2px solid #E5E7EB;border-radius:12px;overflow:hidden;background:#FAFAFA;"></div>
+    </div>
+
     <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;overflow:hidden;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
       <div style="background:var(--purple);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;"><div style="font-family:'Black Han Sans',sans-serif;color:#fff;">📄 TEXTO DEFINITIVO</div><div id="redLinhasCount" style="color:#fff;font-weight:800;">0 / 30 linhas</div></div>
       <div id="redacaoBox"></div>
@@ -348,6 +361,39 @@ function calcStats(){
 
 /* REDAÇÃO - LÓGICA RESTAURADA */
 var TOTAL_RED = 30; var EMAIL_DESTINO = 'enemnapratica.lg@gmail.com';
+/* RANKING - LÓGICA RESTAURADA */
+var ranking = [
+  {pos:1,name:"Julia Martins",sims:12,score:820,me:false},
+  {pos:2,name:"Carlos Eduardo",sims:10,score:785,me:false},
+  {pos:3,name:"Você",sims:8,score:720,me:true},
+  {pos:4,name:"Fernanda Lima",sims:7,score:698,me:false},
+  {pos:5,name:"Rafael Costa",sims:6,score:651,me:false},
+];
+var posClass={1:"gold",2:"silver",3:"bronze"};
+
+function renderRanking(){
+  let el = document.getElementById('rankList');
+  if(!el) return;
+  el.innerHTML = ranking.map(r => {
+    let initials = r.name.split(' ').map(w=>w[0]).slice(0,2).join('');
+    return `
+      <div class="rank-item reveal ${r.me?'me':''} ${r.pos===1?'top-1':''}">
+        <div class="rank-pos">${r.pos}</div>
+        <div class="rank-av">${initials}</div>
+        <div class="rank-info">
+          <div class="rank-name">${r.name} ${r.me?'<span class="me-badge">Você</span>':''}</div>
+          <div class="rank-score-label">${r.sims} simulados feitos</div>
+        </div>
+        <div class="rank-score">
+          <div class="rank-score-val">${r.score}</div>
+          <div class="rank-score-label">PONTOS</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
 var TEMAS = ["Impactos da IA na Educação","Saúde Mental no Brasil","Desigualdade Racial no ENEM","Segurança Alimentar","Evasão Escolar"];
 
 function sortearTema(){ document.getElementById('redTema').value = TEMAS[Math.floor(Math.random()*TEMAS.length)]; }
@@ -355,8 +401,33 @@ function sortearTema(){ document.getElementById('redTema').value = TEMAS[Math.fl
 function buildRed(){
   let tHtml='';
   let phs = {1:'Introdução — Contextualize sua tese...',7:'Desenvolvimento 1 — 1º argumento...',15:'Desenvolvimento 2 — 2º argumento...',23:'Conclusão — Proposta de intervenção.'};
-  for(let i=1; i<=TOTAL_RED; i++) tHtml += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" placeholder="${phs[i]||''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateCount();"></textarea></div>`;
+  for(let i=1; i<=TOTAL_RED; i++) tHtml += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" placeholder="${phs[i]||''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateCount();redSalvar();"></textarea></div>`;
   document.getElementById('redacaoBox').innerHTML = tHtml;
+  
+  // Build Rascunho
+  let rHtml = '';
+  for(let i=1; i<=12; i++) rHtml += `<div class="rasc-line-wrap"><div class="rasc-line-num">${i}</div><textarea class="rasc-line-input" rows="1" placeholder="${i===1?'Planeje aqui: ideias, argumentos...':''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';redSalvar();"></textarea></div>`;
+  document.getElementById('rascunhoBox').innerHTML = rHtml;
+  
+  redRestaurar();
+}
+
+function redSalvar(){
+  let texto = Array.from(document.querySelectorAll('#redacaoBox .red-line-input')).map(e=>e.value);
+  let rascunho = Array.from(document.querySelectorAll('#rascunhoBox .rasc-line-input')).map(e=>e.value);
+  localStorage.setItem('enem_redacao_draft', JSON.stringify({texto, rascunho, tema: document.getElementById('redTema').value}));
+}
+
+function redRestaurar(){
+  let raw = localStorage.getItem('enem_redacao_draft');
+  if(!raw) return;
+  let data = JSON.parse(raw);
+  if(data.tema) document.getElementById('redTema').value = data.tema;
+  let tInputs = document.querySelectorAll('#redacaoBox .red-line-input');
+  if(data.texto) data.texto.forEach((v,i) => { if(tInputs[i]) { tInputs[i].value = v; tInputs[i].style.height = 'auto'; tInputs[i].style.height = tInputs[i].scrollHeight+'px'; } });
+  let rInputs = document.querySelectorAll('#rascunhoBox .rasc-line-input');
+  if(data.rascunho) data.rascunho.forEach((v,i) => { if (rInputs[i]) { rInputs[i].value = v; rInputs[i].style.height = 'auto'; rInputs[i].style.height = rInputs[i].scrollHeight+'px'; } });
+  updateCount();
 }
 
 function updateCount(){
