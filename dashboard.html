@@ -339,47 +339,75 @@ function calcStats(){
   }).join('');
 }
 
-/* REDAÇÃO */
+/* REDAÇÃO - LÓGICA RESTAURADA */
+var TOTAL_RED = 30; var EMAIL_DESTINO = 'enemnapratica.lg@gmail.com';
+var TEMAS = ["Impactos da IA na Educação","Saúde Mental no Brasil","Desigualdade Racial no ENEM","Segurança Alimentar","Evasão Escolar"];
+
+function sortearTema(){ document.getElementById('redTema').value = TEMAS[Math.floor(Math.random()*TEMAS.length)]; }
+
 function buildRed(){
-  let tHtml=''; let phs = {1:'Introdução...',7:'Desenvolvimento 1...',15:'Desenvolvimento 2...',23:'Conclusão...'};
-  for(let i=1; i<=30; i++) tHtml += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" placeholder="${phs[i]||''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateCount();"></textarea></div>`;
+  let tHtml='';
+  let phs = {1:'Introdução — Contextualize sua tese...',7:'Desenvolvimento 1 — 1º argumento...',15:'Desenvolvimento 2 — 2º argumento...',23:'Conclusão — Proposta de intervenção.'};
+  for(let i=1; i<=TOTAL_RED; i++) tHtml += `<div class="red-line-wrap"><div class="red-line-num">${i}</div><textarea class="red-line-input" rows="1" placeholder="${phs[i]||''}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateCount();"></textarea></div>`;
   document.getElementById('redacaoBox').innerHTML = tHtml;
 }
-function updateCount(){ document.getElementById('redLinhasCount').textContent = Array.from(document.querySelectorAll('.red-line-input')).filter(i=>i.value.trim().length>0).length + ' / 30 linhas'; }
 
-/* RANKING */
-var ranking = [
-  {pos:1,name:"Julia Martins",score:882,med:"🥇"},
-  {pos:2,name:"Carlos Eduardo",score:845,med:"🥈"},
-  {pos:3,name:"Você (Luan Fernandes)",score:820,me:true,med:"🥉"},
-  {pos:4,name:"Fernanda Lima",score:798},
-  {pos:5,name:"Rafael Costa",score:761},
-  {pos:6,name:"Beatriz Oliveira",score:740}
-];
-function renderRanking(){
-  document.getElementById('rankList').innerHTML = ranking.map(r => `
-    <div class="rank-item reveal ${r.me?'me':''} ${r.pos===1?'top-1':''}">
-      <div class="rank-pos">${r.med || r.pos}</div>
-      <div class="rank-av" style="${r.pos===1?'background:linear-gradient(135deg,#F59E0B,#FFD600);':''}">${r.name[0]}</div>
-      <div class="rank-info">
-        <div class="rank-name">
-          ${r.name} 
-          ${r.me?'<span class="me-badge">VOCÊ</span>':''}
-          ${r.pos<=3?'<span style="font-size:10px;font-weight:bold;color:var(--purple);margin-left:5px;">TOP '+r.pos+'</span>':''}
-        </div>
-      </div>
-      <div class="rank-score">
-        <div class="rank-score-val">${r.score}</div>
-        <div class="rank-score-label">pontos</div>
-      </div>
-    </div>
-  `).join('');
+function updateCount(){
+  let used = Array.from(document.querySelectorAll('.red-line-input')).filter(i=>i.value.trim().length>0).length;
+  document.getElementById('redLinhasCount').textContent = used+' / 30 linhas';
+}
+
+function getRedacoesDoMes(){
+  let raw = localStorage.getItem('redacoes_enviadas');
+  let lista = raw ? JSON.parse(raw) : [];
+  let agora = new Date();
+  return lista.filter(r => { let d = new Date(r.data); return d.getMonth()===agora.getMonth() && d.getFullYear()===agora.getFullYear(); });
+}
+
+function renderLimiteBadge(){
+  let mes = getRedacoesDoMes();
+  let restam = Math.max(0, 2 - mes.length);
+  let badge = document.getElementById('redLimitBadge');
+  if(!badge) return;
+  badge.innerHTML = `<div style="background:${restam>0?'#DCFCE7':'#FEF3C7'};border:2px solid ${restam>0?'#16A34A':'#F59E0B'};border-radius:99px;padding:6px 16px;font-size:12px;font-weight:900;color:${restam>0?'#15803D':'#92400E'};">${restam>0?`✅ ${restam} Envios Restantes` : '⛔ Limite Atingido'}</div>`;
+  document.getElementById('btnEnviar').disabled = restam <= 0;
+  document.getElementById('btnEnviar').style.opacity = restam <= 0 ? '0.5' : '1';
+}
+
+function renderMinhasRedacoes(){
+  let raw = localStorage.getItem('redacoes_enviadas');
+  let lista = raw ? JSON.parse(raw) : [];
+  let el = document.getElementById('minhasRedacoes');
+  if(!el) return;
+  if(lista.length===0){ el.innerHTML = '<div style="text-align:center;padding:20px;color:#aaa;">📭 Nenhuma redação enviada.</div>'; return; }
+  el.innerHTML = lista.slice().reverse().map(r => `<div class="red-enviada"><div class="red-env-icon">✍️</div><div class="red-env-info"><div class="rank-name">${r.tema}</div><div class="rank-score-label">${r.data}</div></div><span class="me-badge" style="background:#DCFCE7;color:#15803D;">✅ Enviado</span></div>`).join('');
+}
+
+function enviarRedacao(){
+  let tema = document.getElementById('redTema').value.trim();
+  let texto = Array.from(document.querySelectorAll('.red-line-input')).map(e=>e.value.trim()).filter(Boolean).join('\n');
+  if(!tema || texto.length < 100){ alert('Escreva a redação (mínimo 100 caracteres) antes de enviar!'); return; }
+  
+  let agora = new Date();
+  let dataStr = agora.toLocaleString();
+  let subject = encodeURIComponent('[ENEM na Prática] Redação: ' + tema);
+  let body = encodeURIComponent('TEMA: ' + tema + '\n\nTEXTO:\n' + texto + '\n\nEnviado em: ' + dataStr);
+  
+  window.open(`mailto:${EMAIL_DESTINO}?subject=${subject}&body=${body}`);
+  
+  let lista = JSON.parse(localStorage.getItem('redacoes_enviadas') || '[]');
+  lista.push({tema:tema, data:dataStr});
+  localStorage.setItem('redacoes_enviadas', JSON.stringify(lista));
+  
+  renderLimiteBadge();
+  renderMinhasRedacoes();
 }
 
 const io = new IntersectionObserver(es => es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}));
 
 window.onload = () => {
   renderSims(); calcStats(); buildRed(); renderRanking();
+  renderLimiteBadge(); renderMinhasRedacoes();
   let h = new Date().getHours(); document.getElementById('greetingTxt').textContent = h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
 };
 </script>
