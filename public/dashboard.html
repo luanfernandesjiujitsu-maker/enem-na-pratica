@@ -278,7 +278,10 @@ img{display:block;max-width:100%;}
     <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
         <div style="font-weight:900;color:var(--purple);">📌 TEMA DA REDAÇÃO</div>
-        <button onclick="sortearTema()" style="background:var(--yellow);border:2px solid var(--dark);border-radius:99px;padding:8px 18px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🎲 SORTEAR TEMA</button>
+        <div style="display:flex; gap:10px;">
+          <button onclick="sortearTema()" style="background:var(--yellow);border:2px solid var(--dark);border-radius:99px;padding:8px 18px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🎲 SORTEAR TEMA</button>
+          <button onclick="limparRedacao()" style="background:#FEE2E2;border:2px solid #EF4444;border-radius:99px;padding:8px 18px;font-weight:900;color:#B91C1C;cursor:pointer;box-shadow:2px 2px 0 #EF4444;">🗑️ LIMPAR TUDO</button>
+        </div>
       </div>
       <textarea id="redTema" rows="2" placeholder="Escolha um tema..." style="width:100%;background:#F3E8FF;border:2px solid #DDD6FE;border-radius:12px;padding:12px 16px;outline:none;resize:vertical;"></textarea>
     </div>
@@ -348,8 +351,16 @@ function filterMat(mat, btn){
 
 function calcStats(){
   let done = simulados.filter(s=>s.status==='done').length;
-  let avg = Math.round(simulados.filter(s=>s.score>0).reduce((a,b)=>a+b.score,0)/done) || 0;
-  document.getElementById('st-sims').textContent = done;
+  let simScores = simulados.filter(s=>s.score>0).map(s=>s.score);
+  
+  // Inclui notas de redação na média (convertendo 1000 para base 100)
+  let rawRed = localStorage.getItem('redacoes_enviadas');
+  let redScores = rawRed ? JSON.parse(rawRed).map(r => r.score / 10) : [];
+  
+  let allScores = [...simScores, ...redScores];
+  let avg = allScores.length ? Math.round(allScores.reduce((a,b)=>a+b,0)/allScores.length) : 0;
+  
+  document.getElementById('st-sims').textContent = done + redScores.length;
   document.getElementById('st-score').textContent = avg + '%';
   let mats = [{l:'Linguagens',k:'port',c:'#BE123C'},{l:'Matemática',k:'mat',c:'#1D4ED8'},{l:'Natureza',k:'cn',c:'#15803D'},{l:'Humanas',k:'ch',c:'#B45309'}];
   document.getElementById('matProgList').innerHTML = mats.map(m => {
@@ -363,13 +374,13 @@ function calcStats(){
 var TOTAL_RED = 30; var EMAIL_DESTINO = 'enemnapratica.lg@gmail.com';
 /* RANKING - LÓGICA RESTAURADA */
 var ranking = [
-  {pos:1,name:"Julia Martins",sims:12,score:882,med:"🥇"},
-  {pos:2,name:"Carlos Eduardo",sims:10,score:845,med:"🥈"},
-  {pos:3,name:"Você (Luan Fernandes)",sims:8,score:820,me:true,med:"🥉"},
-  {pos:4,name:"Fernanda Lima",sims:7,score:798},
-  {pos:5,name:"Rafael Costa",sims:6,score:761},
-  {pos:6,name:"Beatriz Oliveira",score:740}
+  {pos:1,name:"Julia Martins",sims:12,score:820,me:false},
+  {pos:2,name:"Carlos Eduardo",sims:10,score:785,me:false},
+  {pos:3,name:"Você",sims:8,score:720,me:true},
+  {pos:4,name:"Fernanda Lima",sims:7,score:698,me:false},
+  {pos:5,name:"Rafael Costa",sims:6,score:651,me:false},
 ];
+var posClass={1:"gold",2:"silver",3:"bronze"};
 
 function renderRanking(){
   let el = document.getElementById('rankList');
@@ -378,11 +389,11 @@ function renderRanking(){
     let initials = r.name.split(' ').map(w=>w[0]).slice(0,2).join('');
     return `
       <div class="rank-item reveal ${r.me?'me':''} ${r.pos===1?'top-1':''}">
-        <div class="rank-pos">${r.med || r.pos}</div>
-        <div class="rank-av" style="${r.pos===1?'background:linear-gradient(135deg,#F59E0B,#FFD600);':''}">${initials}</div>
+        <div class="rank-pos">${r.pos}</div>
+        <div class="rank-av">${initials}</div>
         <div class="rank-info">
           <div class="rank-name">${r.name} ${r.me?'<span class="me-badge">Você</span>':''}</div>
-          <div class="rank-score-label">${r.sims || r.pos*2} simulados feitos</div>
+          <div class="rank-score-label">${r.sims} simulados feitos</div>
         </div>
         <div class="rank-score">
           <div class="rank-score-val">${r.score}</div>
@@ -394,7 +405,23 @@ function renderRanking(){
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
 
-var TEMAS = ["Impactos da IA na Educação","Saúde Mental no Brasil","Desigualdade Racial no ENEM","Segurança Alimentar","Evasão Escolar"];
+var TEMAS = [
+  "Os desafios para o combate à insegurança alimentar no Brasil contemporâneo",
+  "O impacto das fake news na integridade do processo democrático brasileiro",
+  "Caminhos para a valorização dos povos tradicionais e preservação de suas culturas",
+  "A importância da doação de órgãos e os desafios para a conscientização nacional",
+  "O estigma associado às doenças mentais na sociedade brasileira e o acesso ao tratamento",
+  "Desafios para a inclusão efetiva de pessoas autistas no mercado de trabalho e na educação",
+  "A persistência da violência contra a mulher na sociedade brasileira: causas e soluções",
+  "O papel da educação financeira na formação do jovem cidadão brasileiro",
+  "Impactos da inteligência artificial na privacidade e no mercado de trabalho no Brasil",
+  "Os desafios da alfabetização na idade certa e a qualidade da educação básica",
+  "O combate ao abandono de animais e a responsabilidade social no Brasil",
+  "A democratização do acesso ao esporte como ferramenta de inclusão social",
+  "Os desafios para a preservação do meio ambiente e o combate ao desmatamento ilegal",
+  "O impacto do envelhecimento populacional no sistema de saúde pública brasileiro",
+  "A importância do saneamento básico para a saúde pública e o desenvolvimento nacional"
+];
 
 function sortearTema(){ document.getElementById('redTema').value = TEMAS[Math.floor(Math.random()*TEMAS.length)]; }
 
@@ -410,6 +437,16 @@ function buildRed(){
   document.getElementById('rascunhoBox').innerHTML = rHtml;
   
   redRestaurar();
+}
+
+function limparRedacao(){
+  if(confirm('Tem certeza que deseja apagar toda a redação e o rascunho?')){
+    document.getElementById('redTema').value = '';
+    document.querySelectorAll('.red-line-input').forEach(i => { i.value = ''; i.style.height = '38px'; });
+    document.querySelectorAll('.rasc-line-input').forEach(i => { i.value = ''; i.style.height = '34px'; });
+    localStorage.removeItem('enem_redacao_draft');
+    updateCount();
+  }
 }
 
 function redSalvar(){
@@ -430,6 +467,172 @@ function redRestaurar(){
   updateCount();
 }
 
+function updateCount(){
+  let used = Array.from(document.querySelectorAll('.red-line-input')).filter(i=>i.value.trim().length>0).length;
+  document.getElementById('redLinhasCount').textContent = used+' / 30 linhas';
+}
+
+function getRedacoesDoMes(){
+  let raw = localStorage.getItem('redacoes_enviadas');
+  let lista = raw ? JSON.parse(raw) : [];
+  let agora = new Date();
+  return lista.filter(r => { let d = new Date(r.data); return d.getMonth()===agora.getMonth() && d.getFullYear()===agora.getFullYear(); });
+}
+
+function renderLimiteBadge(){
+  let mes = getRedacoesDoMes();
+  let restam = Math.max(0, 2 - mes.length);
+  let badge = document.getElementById('redLimitBadge');
+  if(!badge) return;
+  badge.innerHTML = `<div style="background:${restam>0?'#DCFCE7':'#FEF3C7'};border:2px solid ${restam>0?'#16A34A':'#F59E0B'};border-radius:99px;padding:6px 16px;font-size:12px;font-weight:900;color:${restam>0?'#15803D':'#92400E'};">${restam>0?`✅ ${restam} Envios Restantes` : '⛔ Limite Atingido'}</div>`;
+  document.getElementById('btnEnviar').disabled = restam <= 0;
+  document.getElementById('btnEnviar').style.opacity = restam <= 0 ? '0.5' : '1';
+}
+
+function renderMinhasRedacoes(){
+  let raw = localStorage.getItem('redacoes_enviadas');
+  let lista = raw ? JSON.parse(raw) : [];
+  let el = document.getElementById('minhasRedacoes');
+  if(!el) return;
+  if(lista.length===0){ el.innerHTML = '<div style="text-align:center;padding:20px;color:#aaa;">📭 Nenhuma redação enviada.</div>'; return; }
+  
+  el.innerHTML = lista.slice().reverse().map((r, idx) => `
+    <div class="red-enviada" style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #eee;transition:.2s;cursor:pointer;" onclick="verDetalhesRed(${lista.length - 1 - idx})">
+      <div class="red-env-icon" style="font-size:24px;">📝</div>
+      <div class="red-env-info" style="flex:1;">
+        <div style="font-weight:800;color:var(--dark);">${r.tema}</div>
+        <div style="font-size:12px;color:var(--gray);">${r.data}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--purple);line-height:1;">${r.score || '---'}</div>
+        <div style="font-size:10px;font-weight:800;color:var(--gray);text-transform:uppercase;">Nota Final</div>
+      </div>
+      <div style="color:var(--purple);font-size:18px;">➔</div>
+    </div>
+  `).join('');
+}
+
+function verDetalhesRed(idx) {
+  let lista = JSON.parse(localStorage.getItem('redacoes_enviadas') || '[]');
+  let red = lista[idx];
+  if(!red || !red.feedback) {
+    alert('Detalhes da correção não disponíveis para esta redação.');
+    return;
+  }
+  
+  const f = red.feedback;
+  let html = `
+    <div style="text-align:left;font-family:'Nunito',sans-serif;">
+      <div style="background:var(--purple);color:#fff;padding:15px;border-radius:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-family:'Black Han Sans',sans-serif;font-size:20px;">NOTA TOTAL: ${f.total}</span>
+        <span style="font-size:12px;font-weight:700;">ENEM 2026</span>
+      </div>
+      
+      <div style="display:grid;gap:12px;margin-bottom:20px;">
+        \${['c1','c2','c3','c4','c5'].map(c => \`
+          <div style="background:#F3E8FF;border:1.5px solid #DDD6FE;border-radius:10px;padding:12px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <strong style="color:var(--purple);font-size:13px;text-transform:uppercase;">\${getCompTitle(c)}</strong>
+              <span style="font-weight:900;color:var(--dark);">\${f[c].score} pts</span>
+            </div>
+            <p style="font-size:13px;color:#444;line-height:1.4;">\${f[c].text}</p>
+          </div>
+        \`).join('')}
+      </div>
+      
+      <div style="background:#FFFBEB;border:2px solid #FEF3C7;border-radius:12px;padding:15px;">
+        <strong style="color:#92400E;display:block;margin-bottom:5px;">💡 COMENTÁRIO GERAL</strong>
+        <p style="font-size:14px;color:#92400E;line-height:1.5;">\${f.general}</p>
+      </div>
+    </div>
+  `;
+  
+  // Usar o mesmo sistema de modal do dashboard
+  document.getElementById('mTag').textContent = '📊 Detalhes da Correção IA';
+  document.getElementById('mTitle').textContent = red.tema;
+  document.getElementById('mSub').textContent = 'Análise baseada nos critérios oficiais do ENEM.';
+  document.getElementById('mInfo').innerHTML = html;
+  document.getElementById('simModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function getCompTitle(c) {
+  const titles = {
+    c1: 'Competência 1: Norma Culta',
+    c2: 'Competência 2: Compreender o Tema',
+    c3: 'Competência 3: Argumentação',
+    c4: 'Competência 4: Coesão',
+    c5: 'Competência 5: Proposta de Intervenção'
+  };
+  return titles[c];
+}
+
+async function enviarRedacao(){
+  let tema = document.getElementById('redTema').value.trim();
+  let texto = Array.from(document.querySelectorAll('.red-line-input')).map(e=>e.value.trim()).filter(Boolean).join('\\n');
+  if(!tema){ 
+    alert('Por favor, selecione ou digite um tema para sua redação.'); 
+    return; 
+  }
+  
+  // Aviso sobre localhost
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    alert('Aviso: Você está rodando localmente. A correção por IA pode falhar se não houver um servidor de backend configurado para /api/ai-correction.');
+  }
+  
+  let btn = document.getElementById('btnEnviar');
+  let originalTxt = btn.innerHTML;
+  
+  try {
+    btn.disabled = true;
+    btn.innerHTML = '🤖 CORRIGINDO VIA IA...';
+    btn.style.opacity = '0.7';
+
+    const response = await fetch('/api/ai-correction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: texto, tema: tema })
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      throw new Error(err.error || 'Erro na correção');
+    }
+
+    const result = await response.json(); // { total, c1, c2, c3, c4, c5, general }
+    
+    let agora = new Date();
+    let dataStr = agora.toLocaleString('pt-BR');
+    
+    let lista = JSON.parse(localStorage.getItem('redacoes_enviadas') || '[]');
+    lista.push({
+      tema: tema, 
+      data: dataStr, 
+      score: result.total,
+      feedback: result
+    });
+    localStorage.setItem('redacoes_enviadas', JSON.stringify(lista));
+    
+    alert('✅ Redação corrigida com sucesso! Nota: ' + result.total);
+    
+    renderLimiteBadge();
+    renderMinhasRedacoes();
+    
+    // Opcional: Limpar campos após envio
+    // document.getElementById('redTema').value = '';
+    // document.querySelectorAll('.red-line-input').forEach(i => i.value = '');
+    // localStorage.removeItem('enem_redacao_draft');
+
+  } catch (error) {
+    console.error(error);
+    alert('❌ Erro ao corrigir redação: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalTxt;
+    btn.style.opacity = '1';
+  }
+}
+
 const io = new IntersectionObserver(es => es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}));
 
 window.onload = () => {
@@ -438,5 +641,36 @@ window.onload = () => {
   let h = new Date().getHours(); document.getElementById('greetingTxt').textContent = h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
 };
 </script>
+<!-- MODAL DE DETALHES (SIMULADO / REDAÇÃO) -->
+<div id="simModal" style="position:fixed;inset:0;background:rgba(10,0,21,.85);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;width:100%;max-width:600px;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);animation:fadeUp .4s ease;">
+    <div style="background:var(--purple);padding:20px;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div id="mTag" style="font-size:10px;font-weight:900;text-transform:uppercase;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:99px;width:fit-content;margin-bottom:4px;"></div>
+        <h3 id="mTitle" style="font-family:'Black Han Sans',sans-serif;font-size:18px;"></h3>
+        <p id="mSub" style="font-size:12px;opacity:.8;"></p>
+      </div>
+      <button onclick="document.getElementById('simModal').style.display='none';document.body.style.overflow='auto';" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-weight:bold;">✕</button>
+    </div>
+    <div id="mInfo" style="padding:24px;max-height:70vh;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<script>
+  // Helper para abrir modal (usado na lista de redações)
+  window.abrirModal = (tag, title, sub, info) => {
+    document.getElementById('mTag').textContent = tag;
+    document.getElementById('mTitle').textContent = title;
+    document.getElementById('mSub').textContent = sub;
+    document.getElementById('mInfo').innerHTML = info;
+    document.getElementById('simModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+</script>
+
+<style>
+  #simModal.open { display: flex !important; }
+</style>
+
 </body>
 </html>
