@@ -529,20 +529,20 @@ function verDetalhesRed(idx) {
       </div>
       
       <div style="display:grid;gap:12px;margin-bottom:20px;">
-        \${['c1','c2','c3','c4','c5'].map(c => \`
+        ${['c1','c2','c3','c4','c5'].map(c => `
           <div style="background:#F3E8FF;border:1.5px solid #DDD6FE;border-radius:10px;padding:12px;">
             <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
-              <strong style="color:var(--purple);font-size:13px;text-transform:uppercase;">\${getCompTitle(c)}</strong>
-              <span style="font-weight:900;color:var(--dark);">\${f[c].score} pts</span>
+              <strong style="color:var(--purple);font-size:13px;text-transform:uppercase;">${getCompTitle(c)}</strong>
+              <span style="font-weight:900;color:var(--dark);">${f[c].score} pts</span>
             </div>
-            <p style="font-size:13px;color:#444;line-height:1.4;">\${f[c].text}</p>
+            <p style="font-size:13px;color:#444;line-height:1.4;">${f[c].text}</p>
           </div>
-        \`).join('')}
+        `).join('')}
       </div>
       
       <div style="background:#FFFBEB;border:2px solid #FEF3C7;border-radius:12px;padding:15px;">
         <strong style="color:#92400E;display:block;margin-bottom:5px;">💡 COMENTÁRIO GERAL</strong>
-        <p style="font-size:14px;color:#92400E;line-height:1.5;">\${f.general}</p>
+        <p style="font-size:14px;color:#92400E;line-height:1.5;">${f.general}</p>
       </div>
     </div>
   `;
@@ -569,7 +569,7 @@ function getCompTitle(c) {
 
 async function enviarRedacao(){
   let tema = document.getElementById('redTema').value.trim();
-  let texto = Array.from(document.querySelectorAll('.red-line-input')).map(e=>e.value.trim()).filter(Boolean).join('\\n');
+  let texto = Array.from(document.querySelectorAll('.red-line-input')).map(e=>e.value.trim()).filter(Boolean).join('\n');
   if(!tema){ 
     alert('Por favor, selecione ou digite um tema para sua redação.'); 
     return; 
