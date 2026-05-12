@@ -278,7 +278,10 @@ img{display:block;max-width:100%;}
     <div class="reveal" style="background:#fff;border:3px solid var(--dark);border-radius:20px;padding:24px;margin-bottom:20px;box-shadow:5px 5px 0 var(--dark);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
         <div style="font-weight:900;color:var(--purple);">📌 TEMA DA REDAÇÃO</div>
-        <button onclick="sortearTema()" style="background:var(--yellow);border:2px solid var(--dark);border-radius:99px;padding:8px 18px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🎲 SORTEAR TEMA</button>
+        <div style="display:flex; gap:10px;">
+          <button onclick="sortearTema()" style="background:var(--yellow);border:2px solid var(--dark);border-radius:99px;padding:8px 18px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--dark);">🎲 SORTEAR TEMA</button>
+          <button onclick="limparRedacao()" style="background:#FEE2E2;border:2px solid #EF4444;border-radius:99px;padding:8px 18px;font-weight:900;color:#B91C1C;cursor:pointer;box-shadow:2px 2px 0 #EF4444;">🗑️ LIMPAR TUDO</button>
+        </div>
       </div>
       <textarea id="redTema" rows="2" placeholder="Escolha um tema..." style="width:100%;background:#F3E8FF;border:2px solid #DDD6FE;border-radius:12px;padding:12px 16px;outline:none;resize:vertical;"></textarea>
     </div>
@@ -434,6 +437,16 @@ function buildRed(){
   document.getElementById('rascunhoBox').innerHTML = rHtml;
   
   redRestaurar();
+}
+
+function limparRedacao(){
+  if(confirm('Tem certeza que deseja apagar toda a redação e o rascunho?')){
+    document.getElementById('redTema').value = '';
+    document.querySelectorAll('.red-line-input').forEach(i => { i.value = ''; i.style.height = '38px'; });
+    document.querySelectorAll('.rasc-line-input').forEach(i => { i.value = ''; i.style.height = '34px'; });
+    localStorage.removeItem('enem_redacao_draft');
+    updateCount();
+  }
 }
 
 function redSalvar(){
