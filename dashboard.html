@@ -402,7 +402,23 @@ function renderRanking(){
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 }
 
-var TEMAS = ["Impactos da IA na Educação","Saúde Mental no Brasil","Desigualdade Racial no ENEM","Segurança Alimentar","Evasão Escolar"];
+var TEMAS = [
+  "Os desafios para o combate à insegurança alimentar no Brasil contemporâneo",
+  "O impacto das fake news na integridade do processo democrático brasileiro",
+  "Caminhos para a valorização dos povos tradicionais e preservação de suas culturas",
+  "A importância da doação de órgãos e os desafios para a conscientização nacional",
+  "O estigma associado às doenças mentais na sociedade brasileira e o acesso ao tratamento",
+  "Desafios para a inclusão efetiva de pessoas autistas no mercado de trabalho e na educação",
+  "A persistência da violência contra a mulher na sociedade brasileira: causas e soluções",
+  "O papel da educação financeira na formação do jovem cidadão brasileiro",
+  "Impactos da inteligência artificial na privacidade e no mercado de trabalho no Brasil",
+  "Os desafios da alfabetização na idade certa e a qualidade da educação básica",
+  "O combate ao abandono de animais e a responsabilidade social no Brasil",
+  "A democratização do acesso ao esporte como ferramenta de inclusão social",
+  "Os desafios para a preservação do meio ambiente e o combate ao desmatamento ilegal",
+  "O impacto do envelhecimento populacional no sistema de saúde pública brasileiro",
+  "A importância do saneamento básico para a saúde pública e o desenvolvimento nacional"
+];
 
 function sortearTema(){ document.getElementById('redTema').value = TEMAS[Math.floor(Math.random()*TEMAS.length)]; }
 
