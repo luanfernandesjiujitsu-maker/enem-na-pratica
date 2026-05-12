@@ -40,15 +40,21 @@ async function handleAICorrection(request, env) {
     Texto da Redação:
     "${text}"
     
+    INSTRUÇÕES IMPORTANTES:
+    1. Seja criterioso e realista na nota.
+    2. Em cada competência, identifique erros específicos encontrados no texto (gramática, estrutura, repertório, etc.).
+    3. Explique CLARAMENTE por que o aluno perdeu pontos em cada competência.
+    4. No comentário geral, dê um plano de ação para o aluno chegar na nota 1000.
+    
     Retorne a análise estritamente em formato JSON com a seguinte estrutura:
     {
       "total": 0 a 1000,
-      "c1": { "score": 0 a 200, "text": "feedback da Competência 1: Domínio da norma culta" },
-      "c2": { "score": 0 a 200, "text": "feedback da Competência 2: Compreensão do tema" },
-      "c3": { "score": 0 a 200, "text": "feedback da Competência 3: Argumentação" },
-      "c4": { "score": 0 a 200, "text": "feedback da Competência 4: Coesão" },
-      "c5": { "score": 0 a 200, "text": "feedback da Competência 5: Proposta de intervenção" },
-      "general": "Comentário geral e dicas de melhoria"
+      "c1": { "score": 0 a 200, "text": "Erros de norma culta encontrados e justificativa da nota" },
+      "c2": { "score": 0 a 200, "text": "Análise da compreensão do tema e repertório" },
+      "c3": { "score": 0 a 200, "text": "Análise da argumentação e organização" },
+      "c4": { "score": 0 a 200, "text": "Erros de coesão e conectivos" },
+      "c5": { "score": 0 a 200, "text": "Análise da proposta de intervenção e o que faltou" },
+      "general": "Resumo dos erros principais e como melhorar"
     }`;
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
