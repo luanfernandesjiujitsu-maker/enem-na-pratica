@@ -557,9 +557,14 @@ function getCompTitle(c) {
 async function enviarRedacao(){
   let tema = document.getElementById('redTema').value.trim();
   let texto = Array.from(document.querySelectorAll('.red-line-input')).map(e=>e.value.trim()).filter(Boolean).join('\n');
-  if(!tema || texto.length < 500){ 
-    alert('Sua redação precisa ter pelo menos 500 caracteres (aprox. 7 linhas) para uma correção precisa do ENEM.'); 
+  if(!tema){ 
+    alert('Por favor, selecione ou digite um tema para sua redação.'); 
     return; 
+  }
+  
+  // Aviso sobre localhost
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    alert('Aviso: Você está rodando localmente. A correção por IA pode falhar se não houver um servidor de backend configurado para /api/ai-correction.');
   }
   
   let btn = document.getElementById('btnEnviar');
@@ -623,5 +628,36 @@ window.onload = () => {
   let h = new Date().getHours(); document.getElementById('greetingTxt').textContent = h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
 };
 </script>
+<!-- MODAL DE DETALHES (SIMULADO / REDAÇÃO) -->
+<div id="simModal" style="position:fixed;inset:0;background:rgba(10,0,21,.85);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;width:100%;max-width:600px;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);animation:fadeUp .4s ease;">
+    <div style="background:var(--purple);padding:20px;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div id="mTag" style="font-size:10px;font-weight:900;text-transform:uppercase;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:99px;width:fit-content;margin-bottom:4px;"></div>
+        <h3 id="mTitle" style="font-family:'Black Han Sans',sans-serif;font-size:18px;"></h3>
+        <p id="mSub" style="font-size:12px;opacity:.8;"></p>
+      </div>
+      <button onclick="document.getElementById('simModal').style.display='none';document.body.style.overflow='auto';" style="background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-weight:bold;">✕</button>
+    </div>
+    <div id="mInfo" style="padding:24px;max-height:70vh;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<script>
+  // Helper para abrir modal (usado na lista de redações)
+  window.abrirModal = (tag, title, sub, info) => {
+    document.getElementById('mTag').textContent = tag;
+    document.getElementById('mTitle').textContent = title;
+    document.getElementById('mSub').textContent = sub;
+    document.getElementById('mInfo').innerHTML = info;
+    document.getElementById('simModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  };
+</script>
+
+<style>
+  #simModal.open { display: flex !important; }
+</style>
+
 </body>
 </html>

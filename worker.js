@@ -28,8 +28,8 @@ async function handleAICorrection(request, env) {
 
   try {
     const { text } = await request.json();
-    if (!text || text.length < 100) {
-      return new Response(JSON.stringify({ error: "O texto é muito curto para uma avaliação do ENEM." }), {
+    if (!text) {
+      return new Response(JSON.stringify({ error: "O texto da redação está vazio." }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
